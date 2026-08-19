@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santiago Cerda | Growth Marketing & Audiovisual Specialist</title>
+  <meta name="description" content="Portafolio de Santiago Cerda. Growth Marketing, Meta Ads y Creación de Contenido Audiovisual de Alta Conversión. Más de 29.5M de vistas generadas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ NAVBAR ═══════════════════════════════════════ -->
+  <header class="navbar navbar-hidden" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-badge">SC</span>
+        <span>Santiago Cerda</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#casos" class="nav-link">Casos de Éxito</a>
+        <a href="#metricas" class="nav-link">Resultados</a>
+        <a href="#sectores" class="nav-link">Industrias</a>
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#sobre-mi" class="nav-link">Sobre Mí</a>
+        <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20quiero%20impulsar%20mi%20marca." target="_blank" rel="noopener noreferrer" class="nav-cta-btn">
+          <span>Agendar Reunión</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════ 1. HERO SECTION (FULLSCREEN CINEMATIC VIDEO) ═══════════════════════════════════════ -->
+  <section class="hero-cinema-section" id="hero" style="height: 200vh;">
+    <div class="hero-cinema-wrapper" id="heroCinemaWrapper">
+
+      <!-- Fullscreen Video (fills 100vw x 100vh from the start) -->
+      <div class="hero-cinema-video-bg">
+        <video class="hero-cinema-video" id="heroCinemaVideo" muted playsinline preload="auto">
+          <source src="hero-scroll-video.mp4" type="video/mp4">
+        </video>
+        <!-- Gradient overlay so left text is readable -->
+        <div class="hero-cinema-gradient" id="heroCinemaGradient"></div>
+      </div>
+
+      <!-- Left-side Text Panel (hidden initially, revealed on scroll) -->
+      <div class="hero-cinema-text" id="heroCinemaText">
+        <span class="hero-cinema-badge">
+          <span class="hero-badge-dot-mint"></span>
+          Growth Marketing &amp; Audiovisual Performance
+        </span>
+        <h1 class="hero-cinema-title">
+          Escalamos tu Marca con Contenido y Meta Ads
+        </h1>
+        <p class="hero-cinema-desc">
+          Transformamos visualizaciones orgánicas y pauta digital en facturación constante y adquisición de clientes medible.
+        </p>
+        <div class="hero-cinema-actions">
+          <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20quiero%20agendar%20una%20reuni%C3%B3n%20estrat%C3%A9gica." target="_blank" rel="noopener noreferrer" class="btn btn-mint-primary">
+            <span>Agendar reunión</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <a href="#casos" class="btn-cinema-ghost">
+            <span>Ver casos de éxito</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19,12 12,19 5,12"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom scroll hint (visible at start) -->
+      <div class="hero-cinema-hint" id="heroCinemaHint">
+        <div class="hero-cinema-hint-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ MARQUEE CLIENT LOGOS (TAMAÑO PROMINENTE) ═══════════════════════════════════════ -->
+  <section class="marquee-wrapper-section">
+    <div class="marquee-header-label">Marcas que confían en nuestra estrategia</div>
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <div class="marquee-item"><img src="logo-hotel-gran-pacifico.jpg" alt="Hotel Gran Pacífico"><span>Hotel Gran Pacífico</span></div>
+        <div class="marquee-item"><img src="logo-maki-acai.jpg" alt="Maki Açaí"><span>Maki Açaí</span></div>
+        <div class="marquee-item"><img src="logo-algo-market.jpg" alt="Algo Market"><span>Algo Market</span></div>
+        <div class="marquee-item"><img src="logo-vitanova.jpg" alt="VitaNovaCL"><span>VitaNovaCL</span></div>
+        <div class="marquee-item"><img src="logo-dimarin.jpg" alt="Dimarín"><span>Dimarín Náutica</span></div>
+        <div class="marquee-item"><img src="logo-volterra.jpg" alt="Volterra"><span>Volterra Equipos</span></div>
+        <div class="marquee-item"><img src="logo-comercial-na.jpg" alt="Comercial NA"><span>Comercial NA</span></div>
+
+        <!-- Duplicado para bucle continuo -->
+        <div class="marquee-item"><img src="logo-hotel-gran-pacifico.jpg" alt="Hotel Gran Pacífico"><span>Hotel Gran Pacífico</span></div>
+        <div class="marquee-item"><img src="logo-maki-acai.jpg" alt="Maki Açaí"><span>Maki Açaí</span></div>
+        <div class="marquee-item"><img src="logo-algo-market.jpg" alt="Algo Market"><span>Algo Market</span></div>
+        <div class="marquee-item"><img src="logo-vitanova.jpg" alt="VitaNovaCL"><span>VitaNovaCL</span></div>
+        <div class="marquee-item"><img src="logo-dimarin.jpg" alt="Dimarín"><span>Dimarín Náutica</span></div>
+        <div class="marquee-item"><img src="logo-volterra.jpg" alt="Volterra"><span>Volterra Equipos</span></div>
+        <div class="marquee-item"><img src="logo-comercial-na.jpg" alt="Comercial NA"><span>Comercial NA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 2. RESULTADOS DE IMPACTO (ACETERNITY UI TIMELINE) ═══════════════════════════════════════ -->
+  <section class="section timeline-section" id="metricas">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 56px;">
+        <span class="section-subtitle">Impacto Medible</span>
+        <h2 class="section-title">Resultados Validados con Datos</h2>
+        <p class="section-description">Estrategias probadas en adquisición orgánica masiva, alcance viral y retorno publicitario medible.</p>
+      </div>
+
+      <!-- Timeline Wrapper -->
+      <div class="timeline-container" id="timelineContainer">
+        <!-- Vertical Beam Progress Bar -->
+        <div class="timeline-beam-track">
+          <div class="timeline-beam-progress" id="timelineBeamProgress"></div>
+        </div>
+
+        <!-- Timeline Items -->
+        <div class="timeline-list">
+          
+          <!-- Node 1: 29.5M Vistas -->
+          <div class="timeline-item" data-node="1">
+            <div class="timeline-left-sticky">
+              <div class="timeline-node-circle"><div class="dot-inner"></div></div>
+              <h3 class="timeline-node-title">29.5M+</h3>
+              <span class="timeline-node-subtitle">Visualizaciones Orgánicas</span>
+            </div>
+            <div class="timeline-right-content">
+              <p class="timeline-desc">
+                Estrategia de posicionamiento masivo en Instagram Reels, TikTok y Shorts. Transformamos el interés de la audiencia en facturación directa sin depender de vistas pagadas.
+              </p>
+              <div class="timeline-grid-cards">
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&auto=format&fit=crop&q=80" alt="Maki Açaí">
+                  <div class="timeline-card-badge">Maki Açaí • 6.7M Vistas</div>
+                </div>
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=80" alt="Hotel Gran Pacífico">
+                  <div class="timeline-card-badge">Gran Pacífico • 4.2M Vistas</div>
+                </div>
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&auto=format&fit=crop&q=80" alt="Algo Market">
+                  <div class="timeline-card-badge">Algo Market • 700K Vistas</div>
+                </div>
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80" alt="Maki Açaí Frecuencia">
+                  <div class="timeline-card-badge">Maki Açaí • 1.6M Vistas</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 2: +257 Contenidos -->
+          <div class="timeline-item" data-node="2">
+            <div class="timeline-left-sticky">
+              <div class="timeline-node-circle"><div class="dot-inner"></div></div>
+              <h3 class="timeline-node-title">+257</h3>
+              <span class="timeline-node-subtitle">Contenidos Audiovisuales</span>
+            </div>
+            <div class="timeline-right-content">
+              <p class="timeline-desc">
+                Producción audiovisual integral: ideación de ganchos virales, rodaje en terreno en formato 4K y edición ágil en vertical 9:16.
+              </p>
+              <div class="timeline-checklist">
+                <div class="checklist-item"><span>✅</span> Retención superior al 65% en los primeros 3 segundos</div>
+                <div class="checklist-item"><span>✅</span> Edición optimizada para la psicología de consumo rápido</div>
+                <div class="checklist-item"><span>✅</span> Guiones probados en más de 5 sectores exigentes</div>
+                <div class="checklist-item"><span>✅</span> Formatos UGC y respuesta directa para anuncios</div>
+              </div>
+              <div class="timeline-grid-cards">
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop&q=80" alt="Producción B2B">
+                  <div class="timeline-card-badge">Producción B2B &amp; Eventos</div>
+                </div>
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80" alt="Retail & Importación">
+                  <div class="timeline-card-badge">Retail &amp; Productos Virales</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 3: ROAS ×5.41 -->
+          <div class="timeline-item" data-node="3">
+            <div class="timeline-left-sticky">
+              <div class="timeline-node-circle"><div class="dot-inner"></div></div>
+              <h3 class="timeline-node-title">ROAS ×5.41</h3>
+              <span class="timeline-node-subtitle">Meta Ads &amp; Performance</span>
+            </div>
+            <div class="timeline-right-content">
+              <p class="timeline-desc">
+                Campañas de tráfico pagado y adquisición de clientes enfocadas exclusivamente en la rentabilidad sobre la inversión publicitaria en Meta Ads.
+              </p>
+              <div class="timeline-grid-cards">
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80" alt="VitaNovaCL Shopify">
+                  <div class="timeline-card-badge">VitaNovaCL • ROAS ×5.41</div>
+                </div>
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=80" alt="Dimarín Náutica">
+                  <div class="timeline-card-badge">Dimarín Náutica • Leads B2B</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 4: +75.000 Seguidores -->
+          <div class="timeline-item" data-node="4">
+            <div class="timeline-left-sticky">
+              <div class="timeline-node-circle"><div class="dot-inner"></div></div>
+              <h3 class="timeline-node-title">+75.000</h3>
+              <span class="timeline-node-subtitle">Comunidad Orgánica</span>
+            </div>
+            <div class="timeline-right-content">
+              <p class="timeline-desc">
+                Crecimiento de marca sólida y comunidades de compradores fieles sin recurrir a bots ni sorteos vacíos.
+              </p>
+              <div class="timeline-grid-cards">
+                <div class="timeline-card-preview">
+                  <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?w=600&auto=format&fit=crop&q=80" alt="Algo Market Comunidad">
+                  <div class="timeline-card-badge">Algo Market • +75K Compradores</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 3. MAYORES CASOS DE ÉXITO (GALERÍA DINÁMICA) ═══════════════════════════════════════ -->
+  <section class="section cases-section" id="casos">
+    <div class="container">
+      
+      <div class="cases-header-row">
+        <div>
+          <span class="section-subtitle">Showcase Audiovisual</span>
+          <h2 class="section-title">Mayores Casos de Éxito</h2>
+          <p class="section-description" style="margin:0;">Galería dinámica de reels con métricas verificadas y retorno en facturación.</p>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="viral">Más Viral</button>
+          <button class="filter-btn" data-filter="informativo">Informativos</button>
+          <button class="filter-btn" data-filter="retorno">Mayor Retorno</button>
+          <button class="filter-btn" data-filter="gastronomia">Gastronomía</button>
+          <button class="filter-btn" data-filter="hoteleria">Hotelería</button>
+          <button class="filter-btn" data-filter="retail">Retail</button>
+          <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+        </div>
+      </div>
+
+      <!-- Grid Renderizado Dinámicamente por JavaScript para PC (Curado y Limpio) -->
+      <div class="cases-grid-desktop" id="casesGridDesktop"></div>
+
+      <!-- Feed Vertical con Scroll-Snap para Móvil (Estilo App TikTok/Reels) -->
+      <div class="cases-mobile-feed" id="casesMobileFeed"></div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ EFECTO 1: EXPLORADOR 3D SCROLL-MORPH (SEAMLESS FULL-WIDTH) ═══════════════════════════════════════ -->
+  <section class="scroll-morph-section" id="galeria-3d">
+    
+    <!-- Texto Intro Central (Fase Círculo) -->
+    <div class="morph-text-intro" id="morphIntroText">
+      <h2>El Futuro del Contenido Audiovisual</h2>
+      <p>Desliza para explorar el universo de reels</p>
+    </div>
+
+    <!-- Texto Activo Superior (Fase Arco Rainbow) -->
+    <div class="morph-text-active" id="morphActiveText">
+      <span class="section-subtitle">Showcase Interactivo 3D</span>
+      <h2>Universo Audiovisual Completo</h2>
+      <p>Gira el arco 3D y pasa el cursor sobre cualquier tarjeta para voltearla y ver detalles.</p>
+    </div>
+
+    <!-- Escenario de Tarjetas 3D -->
+    <div class="morph-cards-stage" id="morphCardsStage"></div>
+
+    <!-- Hint de Navegación -->
+    <div class="morph-overlay-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Haz scroll o desliza el mouse para rotar el arco 3D • Haz clic en un Reel</span>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════ 4. ESPECIALIZACIÓN POR INDUSTRIA ═══════════════════════════════════════ -->
+  <section class="section expanding-section" id="sectores">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-subtitle">Sectores Dominados</span>
+        <h2 class="section-title">Especialización por Industria</h2>
+        <p class="section-description">Estrategias creativas adaptadas a los hábitos de consumo de cada nicho.</p>
+      </div>
+
+      <div class="expanding-cards-container" id="expandingCards">
+        <!-- 1. Gastronomía -->
+        <div class="expanding-card active">
+          <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&auto=format&fit=crop&q=80" alt="Gastronomía">
+          <div class="expanding-overlay"></div>
+          <div class="expanding-content">
+            <span class="expanding-pill">Maki Açaí</span>
+            <h3 class="expanding-title">Gastronomía &amp; Delivery</h3>
+            <p class="expanding-desc">Creación de antojo visual instantáneo y pedidos continuos de delivery con más de 6.7M de vistas.</p>
+          </div>
+        </div>
+
+        <!-- 2. Hotelería -->
+        <div class="expanding-card">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&auto=format&fit=crop&q=80" alt="Hotelería">
+          <div class="expanding-overlay"></div>
+          <div class="expanding-content">
+            <span class="expanding-pill">Gran Pacífico</span>
+            <h3 class="expanding-title">Hotelería &amp; Turismo</h3>
+            <p class="expanding-desc">Videos inmersivos de experiencias para aumentar reservas directas sin pagar comisiones a OTAs.</p>
+          </div>
+        </div>
+
+        <!-- 3. Retail -->
+        <div class="expanding-card">
+          <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=1200&auto=format&fit=crop&q=80" alt="Retail">
+          <div class="expanding-overlay"></div>
+          <div class="expanding-content">
+            <span class="expanding-pill">Algo Market</span>
+            <h3 class="expanding-title">Retail &amp; Supermercados</h3>
+            <p class="expanding-desc">Contenido dinámico en tienda que multiplicó la comunidad a más de 75.000 seguidores orgánicos.</p>
+          </div>
+        </div>
+
+        <!-- 4. E-Commerce -->
+        <div class="expanding-card">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200&auto=format&fit=crop&q=80" alt="E-Commerce">
+          <div class="expanding-overlay"></div>
+          <div class="expanding-content">
+            <span class="expanding-pill">VitaNovaCL</span>
+            <h3 class="expanding-title">E-Commerce &amp; Salud</h3>
+            <p class="expanding-desc">Lanzamiento y escalado de tiendas Shopify con embudos de Meta Ads y ROAS récord de ×5.41.</p>
+          </div>
+        </div>
+
+        <!-- 5. B2B Industrial -->
+        <div class="expanding-card">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&auto=format&fit=crop&q=80" alt="Industria B2B">
+          <div class="expanding-overlay"></div>
+          <div class="expanding-content">
+            <span class="expanding-pill">Dimarín &amp; Volterra</span>
+            <h3 class="expanding-title">Náutica &amp; B2B Industrial</h3>
+            <p class="expanding-desc">Producción audiovisual técnica especializada para captación y cotización de clientes corporativos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 5. SERVICIOS Y METODOLOGÍA (SCROLL-TRIGGERED VIDEO HERO) ═══════════════════════════════════════ -->
+  <section class="cinematic-services-section" id="servicios">
+    <div class="cinematic-sticky-wrapper" id="cinematicStickyWrapper">
+      <div class="cinematic-sticky-viewport">
+        <div class="container">
+          
+          <div class="text-center" style="margin-bottom: 32px;">
+            <span class="section-subtitle">Pilares de Servicio • Cinematic Scroll</span>
+            <h2 class="section-title">Qué Hago para Escalar tu Marca</h2>
+            <p class="section-description">Desliza hacia abajo para recorrer cada etapa de la estrategia audiovisual y publicitaria.</p>
+          </div>
+
+          <div class="cinematic-grid-layout">
+            
+            <!-- Izquierda: Progreso de Capítulos y Tarjeta Activa -->
+            <div class="cinematic-left-panel">
+              <div class="chapter-nav-track">
+                <div class="chapter-nav-item active" data-chapter="0">
+                  <span class="chapter-num">01</span>
+                  <span class="chapter-label">Gestión de Redes</span>
+                </div>
+                <div class="chapter-nav-item" data-chapter="1">
+                  <span class="chapter-num">02</span>
+                  <span class="chapter-label">Producción 9:16</span>
+                </div>
+                <div class="chapter-nav-item" data-chapter="2">
+                  <span class="chapter-num">03</span>
+                  <span class="chapter-label">Meta Ads &amp; ROI</span>
+                </div>
+                <div class="chapter-nav-item" data-chapter="3">
+                  <span class="chapter-num">04</span>
+                  <span class="chapter-label">Estrategia 360°</span>
+                </div>
+              </div>
+
+              <div class="chapter-active-content" id="chapterActiveContent">
+                <span class="chapter-badge-tag" id="chapterBadge">CHAPTER 01</span>
+                <h3 class="chapter-main-title" id="chapterTitle">Gestión Estratégica de Redes Sociales</h3>
+                <p class="chapter-main-desc" id="chapterDesc">
+                  Manejo integral de Instagram y TikTok con foco en arquitectura de marca, posicionamiento de autoridad y construcción de audiencia compradora.
+                </p>
+                <div class="chapter-features-chips" id="chapterChips">
+                  <span class="chip-item">✅ Auditoría de Cuenta</span>
+                  <span class="chip-item">✅ Calendario Editorial</span>
+                  <span class="chip-item">✅ Copywriting Persuasivo</span>
+                  <span class="chip-item">✅ Optimización de Perfil</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Derecha: Player Cinematográfico -->
+            <div class="cinematic-right-panel">
+              <div class="cinematic-screen-frame">
+                
+                <!-- Capa 0: Gestión -->
+                <div class="cinematic-media-layer active" data-layer="0">
+                  <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1000&auto=format&fit=crop&q=80" alt="Gestión de Redes">
+                  <div class="screen-overlay-gradient"></div>
+                  <div class="screen-caption-badge">
+                    <div class="live-dot"></div>
+                    <span>01. Gestión &amp; Marca</span>
+                  </div>
+                </div>
+
+                <!-- Capa 1: Producción 9:16 -->
+                <div class="cinematic-media-layer" data-layer="1">
+                  <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1000&auto=format&fit=crop&q=80" alt="Producción 9:16">
+                  <div class="screen-overlay-gradient"></div>
+                  <div class="screen-caption-badge">
+                    <div class="live-dot"></div>
+                    <span>02. Rodaje &amp; Edición 9:16</span>
+                  </div>
+                </div>
+
+                <!-- Capa 2: Meta Ads -->
+                <div class="cinematic-media-layer" data-layer="2">
+                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&auto=format&fit=crop&q=80" alt="Meta Ads & ROI">
+                  <div class="screen-overlay-gradient"></div>
+                  <div class="screen-caption-badge">
+                    <div class="live-dot"></div>
+                    <span>03. Meta Ads &amp; ROAS</span>
+                  </div>
+                </div>
+
+                <!-- Capa 3: Estrategia 360 -->
+                <div class="cinematic-media-layer" data-layer="3">
+                  <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1000&auto=format&fit=crop&q=80" alt="Estrategia 360">
+                  <div class="screen-overlay-gradient"></div>
+                  <div class="screen-caption-badge">
+                    <div class="live-dot"></div>
+                    <span>04. Analítica &amp; Escalado</span>
+                  </div>
+                </div>
+
+                <!-- Barra de Control -->
+                <div class="screen-controls-footer">
+                  <div class="chapter-progress-bar">
+                    <div class="chapter-progress-fill" id="chapterProgressFill"></div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:0.75rem;color:rgba(255,255,255,0.85);">
+                    <span>Control de Capítulo en Scroll</span>
+                    <span id="chapterCountText">Capítulo 1 / 4</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metodología -->
+  <section class="section" id="proceso" style="background:#FFFFFF;">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-subtitle">Metodología Comprobada</span>
+        <h2 class="section-title">Flujo de Trabajo Estructurado</h2>
+        <p class="section-description">Un proceso claro en 6 etapas para asegurar comunicación continua y resultados consistentes.</p>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Reunión Inicial</h3>
+          <p class="step-desc">Alineación de metas comerciales y expectativas.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Auditoría</h3>
+          <p class="step-desc">Análisis de la cuenta y oportunidades del sector.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Estrategia</h3>
+          <p class="step-desc">Definición de guiones y embudos de conversión.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04</span>
+          <h3 class="step-title">Producción</h3>
+          <p class="step-desc">Grabación en terreno y edición dinámica 9:16.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">05</span>
+          <h3 class="step-title">Publicidad</h3>
+          <p class="step-desc">Segmentación y pauta en Meta Ads con foco en ROI.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">06</span>
+          <h3 class="step-title">Optimización</h3>
+          <p class="step-desc">Lectura de métricas y escalado de rendimiento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 6. SECCIÓN "SOBRE MÍ" (ULTRA MINIMALISTA) ═══════════════════════════════════════ -->
+  <section class="section about-section" id="sobre-mi">
+    <div class="container">
+      <div class="about-clean-grid">
+        
+        <!-- Izquierda: Foto Silueteada -->
+        <div class="about-photo-wrap">
+          <img src="imaen santiago-Photoroom.png" alt="Santiago Cerda" class="about-photo-img">
+        </div>
+
+        <!-- Derecha: Texto Limpio de 3 Líneas + Botón Azul -->
+        <div class="about-text-wrap">
+          <span class="section-subtitle">Santiago Cerda</span>
+          <h2 class="about-heading">El motor detrás del crecimiento</h2>
+          <p class="about-summary">
+            Especialista en Growth Marketing y producción audiovisual de alto rendimiento. Combino ganchos narrativos virales con estrategias avanzadas en Meta Ads para convertir visualizaciones en facturación real para marcas.
+          </p>
+          <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20vi%20tu%20perfil%20y%20quiero%20conversar." target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <span>Hablemos</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ TESTIMONIOS ═══════════════════════════════════════ -->
+  <section class="section testimonials-section" id="testimonios">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-subtitle">Testimonios</span>
+        <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <p class="testimonial-text">"Santiago transformó nuestra presencia en redes. Pasamos de 4.200 a 8.100 seguidores y nuestras visualizaciones se multiplicaron ×40 con un retorno sostenido en pedidos."</p>
+          <div class="testimonial-author">
+            <img src="logo-maki-acai.jpg" alt="Maki Açaí" class="author-avatar">
+            <div>
+              <div class="author-name">Maki Açaí</div>
+              <div class="author-role">@makiacai.cl • Gastronomía</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <p class="testimonial-text">"Profesional, riguroso y con resultados directos. Nos ayudó a posicionar el hotel y generar reservas directas evitando altas comisiones de plataformas."</p>
+          <div class="testimonial-author">
+            <img src="logo-hotel-gran-pacifico.jpg" alt="Hotel Gran Pacífico" class="author-avatar">
+            <div>
+              <div class="author-name">Gran Pacífico Hotel</div>
+              <div class="author-role">@granpacificohotel • Hotelería</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <p class="testimonial-text">"Lanzamiento de tienda Shopify con embudos de conversión y un ROAS de ×5.41 sostenido en Meta Ads. Ejecución técnica impecable."</p>
+          <div class="testimonial-author">
+            <img src="logo-vitanova.jpg" alt="VitaNovaCL" class="author-avatar">
+            <div>
+              <div class="author-name">VitaNovaCL</div>
+              <div class="author-role">@vitanovacl • E-Commerce</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ EFECTO 2: ROBOT 3D COMPANION ═══════════════════════════════════════ -->
+  <section class="section robot-section" id="asistente-3d">
+    <div class="container">
+      <div class="robot-card-layout">
+        
+        <!-- Canvas 3D Interactivo -->
+        <div class="robot-canvas-container" id="robotCanvasContainer">
+          <div class="robot-click-hint">¡Haz clic sobre el Robot!</div>
+        </div>
+
+        <!-- Info Corporativa -->
+        <div>
+          <span class="section-subtitle">Innovación 3D &amp; Tecnología</span>
+          <h2 class="section-title" style="font-size:1.875rem;margin-bottom:12px;">Marketing Audiovisual con Precisión</h2>
+          <p class="section-description" style="font-size:0.9375rem;margin-bottom:20px;text-align:left;">
+            Combinamos producción cinematográfica en terreno con analítica de datos en tiempo real y optimización publicitaria para maximizar el retorno de inversión en cada campaña.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20quiero%20cotizar%20un%20proyecto." target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <span>Agendar Reunión</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 7. FOOTER / CONTACTO ═══════════════════════════════════════ -->
+  <footer class="footer-section" id="contacto">
+    <div class="container">
+      <div class="footer-grid-layout">
+        
+        <!-- Columna Izquierda -->
+        <div>
+          <div class="hero-badge" style="margin-bottom:14px;">
+            <span class="hero-badge-dot"></span>
+            <span>Cupos disponibles para nuevos proyectos</span>
+          </div>
+
+          <h2 class="footer-title">Impulsemos el crecimiento de tu marca</h2>
+          <p class="footer-desc">Conversemos sobre tus objetivos comerciales y diseñemos una estrategia audiovisual y publicitaria a la medida de tu negocio.</p>
+
+          <div class="footer-buttons">
+            <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20quiero%20cotizar%20un%20proyecto." target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <span>Escríbeme por WhatsApp</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a href="mailto:scerda.scerda@gmail.com" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>scerda.scerda@gmail.com</span>
+            </a>
+          </div>
+
+          <div class="footer-contact-links">
+            <a href="tel:+56999967272" class="contact-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <span>+56 9 9996 7272</span>
+            </a>
+            <a href="https://instagram.com/santicerda_w" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <span>@santicerda_w</span>
+            </a>
+            <a href="https://linkedin.com/in/santiagocerda" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>/santiagocerda</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Chat Widget -->
+        <div>
+          <div class="chat-widget-card" id="chatWidget">
+            <div class="chat-header">
+              <div class="chat-header-user">
+                <img src="imaen santiago.jpg" alt="Santiago" class="chat-avatar">
+                <div>
+                  <div class="chat-name">Santiago Cerda</div>
+                  <div class="chat-status">En línea • Growth Specialist</div>
+                </div>
+              </div>
+              <button class="chat-replay-btn" id="chatReplayBtn" type="button" title="Reiniciar chat">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                <span>Replay</span>
+              </button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <div class="chat-input-row">
+              <input type="text" id="chatInput" placeholder="Escribe un mensaje..." autocomplete="off">
+              <button type="button" id="chatSendBtn" class="chat-send-btn" aria-label="Enviar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Santiago Cerda. Todos los derechos reservados.</p>
+        <p>Growth Marketing &amp; Audiovisual Performance</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ MODAL REEL 9:16 ═══════════════════════════════════════ -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Caso de éxito">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="modal-media-box" id="modalMediaBox"></div>
+
+      <div class="modal-details">
+        <div>
+          <span class="modal-category" id="modalCategory">Gastronomía</span>
+          <h3 class="modal-title" id="modalTitle">Maki Açaí</h3>
+          <p class="modal-handle" id="modalHandle">@makiacai.cl</p>
+
+          <div class="modal-stats-row">
+            <div class="modal-stat-pill">
+              <span class="modal-stat-label">Alcance</span>
+              <span class="modal-stat-val" id="modalStat1">6.7M</span>
+            </div>
+            <div class="modal-stat-pill">
+              <span class="modal-stat-label">Rendimiento</span>
+              <span class="modal-stat-val" id="modalStat2">Top Viral</span>
+            </div>
+          </div>
+
+          <div style="padding:12px;background:#F8FAFC;border-left:3px solid var(--blue-primary);border-radius:4px;font-size:0.8125rem;color:#4B5563;line-height:1.45;margin-bottom:20px;">
+            <p id="modalQuote">"..."</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width:100%;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Ver Reel en Instagram</span>
+          </a>
+          <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20vi%20tu%20caso%20de%20exito%20y%20quiero%20un%20resultado%20similar." target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;">
+            <span>Cotizar un resultado similar</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
