@@ -549,11 +549,12 @@ function initScrollMorphGallery() {
 
     const circleRadius = isMobile ? Math.min(w, h) * 0.32 : Math.min(w, h) * 0.36;
     const baseRadius = Math.min(w, h * 1.5);
-    const arcRadius = baseRadius * (isMobile ? 1.3 : 1.1);
-    const arcApexY = h * (isMobile ? 0.38 : 0.28);
+    const arcRadius = baseRadius * (isMobile ? 1.2 : 1.0);
+    // Move apex higher so the arc bottom doesn't get clipped
+    const arcApexY = h * (isMobile ? 0.30 : 0.20);
     const arcCenterY = arcApexY + arcRadius;
 
-    const spreadAngle = isMobile ? 110 : 140;
+    const spreadAngle = isMobile ? 100 : 130;
     const startAngle = -90 - spreadAngle / 2;
     const step = spreadAngle / (totalCards - 1);
     const rotationOffset = -rotationProgress * spreadAngle * 0.7;
