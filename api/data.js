@@ -1,9 +1,16 @@
 const { Redis } = require('@upstash/redis');
 
-const kv = new Redis({
-  url: process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN,
-});
+function getRedisClient() {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  
+  if (!url || !token) {
+    console.error("Missing Redis environment variables.");
+    return null;
+  }
+  
+  return new Redis({ url, token });
+}
 
 const KV_KEY = 'site_data';
 
@@ -99,6 +106,11 @@ module.exports = async function handler(req, res) {
   // ── GET: Devolver datos públicos ──
   if (req.method === 'GET') {
     try {
+      const kv = getRedisClient();
+      if (!kv) {
+        return res.status(200).json(DEFAULT_DATA);
+      }
+      
       let data = await kv.get(KV_KEY);
       if (!data) {
         // Primera vez: sembrar datos por defecto
@@ -119,10 +131,15 @@ module.exports = async function handler(req, res) {
     const expected = process.env.ADMIN_PASSWORD;
 
     if (!expected || password !== expected) {
-      return res.status(401).json({ error: 'Contraseña incorrecta' });
+      return res.status(401).json({ error: 'Contraseña incorrecta. Asegúrate de configurar ADMIN_PASSWORD en Vercel.' });
     }
 
     try {
+      const kv = getRedisClient();
+      if (!kv) {
+        return res.status(500).json({ error: 'Base de datos Redis no configurada en Vercel.' });
+      }
+
       const newData = req.body;
       if (!newData || typeof newData !== 'object') {
         return res.status(400).json({ error: 'Datos inválidos' });
