@@ -58,7 +58,7 @@
       </div>
     </nav>
 
-    <div class="container py-4" style="padding-bottom: 120px;">
+    <div class="container py-4" style="padding-bottom: 160px !important;">
 
       <!-- BRAND / CONTACTO -->
       <div class="section-card">
@@ -69,6 +69,15 @@
         <div id="brandSection" class="collapse show">
           <div class="card-body">
             <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Foto Perfil (Archivo o Subir)</label>
+                <div class="input-group">
+                  <input type="text" id="profileImageInput" class="form-control" data-bind="profile.image">
+                  <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('profileImageInput').value = base64; setNestedValue(siteData, 'profile.image', base64); markChanged(); })">
+                    <i class="bi bi-upload"></i> Subir
+                  </button>
+                </div>
+              </div>
               <div class="col-md-6">
                 <label class="form-label fw-semibold">Nombre</label>
                 <input type="text" class="form-control" data-bind="brand.name">
@@ -324,6 +333,45 @@
       setTimeout(() => { const el = document.getElementById(id); if (el) el.remove(); }, 4000);
     }
 
+    // ── Utilidad para Subir y Comprimir Imágenes a Base64 ──
+    function handleImageUpload(callback) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            // Redimensionar para no sobrecargar la base de datos (Max 600px ancho o alto)
+            const MAX_SIZE = 600;
+            if (width > height && width > MAX_SIZE) {
+              height *= MAX_SIZE / width;
+              width = MAX_SIZE;
+            } else if (height > MAX_SIZE) {
+              width *= MAX_SIZE / height;
+              height = MAX_SIZE;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            // Comprimir a WebP o JPEG
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.65);
+            callback(dataUrl);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
+
     function markChanged() {
       hasChanges = true;
       document.getElementById('saveStatus').textContent = '⚠️ Cambios sin guardar';
@@ -517,7 +565,13 @@
             <div class="col-md-6"><label class="form-label small">Título del Reel</label><input type="text" class="form-control form-control-sm" value="${r.titulo || ''}" data-r-idx="${idx}" data-r-field="titulo"></div>
             <div class="col-md-6"><label class="form-label small">Descripción</label><input type="text" class="form-control form-control-sm" value="${r.descripcion || ''}" data-r-idx="${idx}" data-r-field="descripcion"></div>
             <div class="col-md-3"><label class="form-label small">Vistas (ej. 6.7M)</label><input type="text" class="form-control form-control-sm" value="${r.vistas || ''}" data-r-idx="${idx}" data-r-field="vistas"></div>
-            <div class="col-md-3"><label class="form-label small">Poster (archivo)</label><input type="text" class="form-control form-control-sm" value="${r.poster || ''}" data-r-idx="${idx}" data-r-field="poster"></div>
+            <div class="col-md-3">
+              <label class="form-label small">Poster (archivo/subir)</label>
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="${r.poster || ''}" data-r-idx="${idx}" data-r-field="poster" id="reelPoster_${idx}">
+                <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('reelPoster_${idx}').value = base64; siteData.reels[${idx}].poster = base64; markChanged(); })"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
             <div class="col-md-3"><label class="form-label small">Categoría (ID)</label><input type="text" class="form-control form-control-sm" value="${r.categoria || ''}" data-r-idx="${idx}" data-r-field="categoria"></div>
             <div class="col-md-3"><label class="form-label small">Label Categoría</label><input type="text" class="form-control form-control-sm" value="${r.categoriaLabel || ''}" data-r-idx="${idx}" data-r-field="categoriaLabel"></div>
             <div class="col-12 mt-1">
@@ -567,7 +621,13 @@
             <div class="col-md-3"><label class="form-label small">Badge/Etiqueta</label><input type="text" class="form-control form-control-sm" value="${s.badge || ''}" data-s-idx="${idx}" data-s-field="badge"></div>
             <div class="col-md-6"><label class="form-label small">Título Principal</label><input type="text" class="form-control form-control-sm" value="${s.title || ''}" data-s-idx="${idx}" data-s-field="title"></div>
             <div class="col-12"><label class="form-label small">Descripción</label><textarea class="form-control form-control-sm" rows="2" data-s-idx="${idx}" data-s-field="desc">${s.desc || ''}</textarea></div>
-            <div class="col-md-6"><label class="form-label small">Imagen/Video (URL)</label><input type="text" class="form-control form-control-sm" value="${s.img || ''}" data-s-idx="${idx}" data-s-field="img"></div>
+            <div class="col-md-6">
+              <label class="form-label small">Imagen/Video (URL o Subir)</label>
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="${s.img || ''}" data-s-idx="${idx}" data-s-field="img" id="serviceImg_${idx}">
+                <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('serviceImg_${idx}').value = base64; siteData.services[${idx}].img = base64; markChanged(); })"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
             <div class="col-md-6"><label class="form-label small">Texto sobre imagen</label><input type="text" class="form-control form-control-sm" value="${s.imgBadge || ''}" data-s-idx="${idx}" data-s-field="imgBadge"></div>
             <div class="col-12"><label class="form-label small">Chips (separados por coma)</label><input type="text" class="form-control form-control-sm" value="${(s.chips || []).join(', ')}" data-s-idx="${idx}" data-s-field="chips"></div>
           </div>`;
@@ -600,11 +660,24 @@
             <h6 class="mb-1 fw-bold">Caso: ${m.client || 'Nuevo'}</h6>
             <div class="col-md-4"><label class="form-label small">Cliente</label><input type="text" class="form-control form-control-sm" value="${m.client || ''}" data-m-idx="${idx}" data-m-field="client"></div>
             <div class="col-md-4"><label class="form-label small">Handle/Rango</label><input type="text" class="form-control form-control-sm" value="${m.handle || ''}" data-m-idx="${idx}" data-m-field="handle"></div>
-            <div class="col-md-4"><label class="form-label small">Logo (archivo)</label><input type="text" class="form-control form-control-sm" value="${m.logo || ''}" data-m-idx="${idx}" data-m-field="logo"></div>
+            <div class="col-md-4">
+              <label class="form-label small">Logo (archivo/subir)</label>
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="${m.logo || ''}" data-m-idx="${idx}" data-m-field="logo" id="metricLogo_${idx}">
+                <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('metricLogo_${idx}').value = base64; siteData.metrics[${idx}].logo = base64; markChanged(); })"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
             <div class="col-md-3"><label class="form-label small">Antes (Núm)</label><input type="text" class="form-control form-control-sm" value="${m.beforeNum || ''}" data-m-idx="${idx}" data-m-field="beforeNum"></div>
             <div class="col-md-3"><label class="form-label small">Antes (Label)</label><input type="text" class="form-control form-control-sm" value="${m.beforeLabel || ''}" data-m-idx="${idx}" data-m-field="beforeLabel"></div>
             <div class="col-md-3"><label class="form-label small">Después (Núm)</label><input type="text" class="form-control form-control-sm" value="${m.afterNum || ''}" data-m-idx="${idx}" data-m-field="afterNum"></div>
             <div class="col-md-3"><label class="form-label small">Después (Label)</label><input type="text" class="form-control form-control-sm" value="${m.afterLabel || ''}" data-m-idx="${idx}" data-m-field="afterLabel"></div>
+            <div class="col-12 mt-2">
+              <label class="form-label small fw-bold text-primary">Evidencia / Gráfico (URL o Subir)</label>
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="${m.evidenceUrl || ''}" data-m-idx="${idx}" data-m-field="evidenceUrl" id="metricEvid_${idx}">
+                <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('metricEvid_${idx}').value = base64; siteData.metrics[${idx}].evidenceUrl = base64; markChanged(); })"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
             <div class="col-md-12"><label class="form-label small">Texto Footer</label><textarea class="form-control form-control-sm" rows="2" data-m-idx="${idx}" data-m-field="footerText">${m.footerText || ''}</textarea></div>
             <div class="col-12 mt-2"><label class="form-label small fw-bold">Tarjetas (3 recomendadas)</label></div>
             <div class="row g-2" id="cards-container-${idx}"></div>
