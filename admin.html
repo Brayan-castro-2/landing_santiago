@@ -58,7 +58,7 @@
       </div>
     </nav>
 
-    <div class="container py-4" style="padding-bottom: 80px;">
+    <div class="container py-4" style="padding-bottom: 120px;">
 
       <!-- BRAND / CONTACTO -->
       <div class="section-card">
@@ -167,10 +167,56 @@
         <div id="aboutSection" class="collapse">
           <div class="card-body">
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Subtítulo</label><input type="text" class="form-control" data-bind="about.subtitle"></div>
-              <div class="col-md-6"><label class="form-label">Título</label><input type="text" class="form-control" data-bind="about.heading"></div>
+              <div class="col-md-4"><label class="form-label">Subtítulo</label><input type="text" class="form-control" data-bind="about.subtitle"></div>
+              <div class="col-md-4"><label class="form-label">Título</label><input type="text" class="form-control" data-bind="about.heading"></div>
+              <div class="col-md-4"><label class="form-label">Foto Perfil (Archivo)</label><input type="text" class="form-control" data-bind="profile.image"></div>
               <div class="col-12"><label class="form-label">Resumen</label><textarea class="form-control" rows="3" data-bind="about.summary"></textarea></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REELS (CASOS DE ÉXITO) -->
+      <div class="section-card">
+        <div class="card-header p-3 d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#reelsSection">
+          <span><i class="bi bi-play-btn me-2"></i>Casos de Éxito (Reels)</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div id="reelsSection" class="collapse">
+          <div class="card-body">
+            <div id="reelsContainer"></div>
+            <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="addReelBtn">
+              <i class="bi bi-plus-circle me-1"></i>Añadir Reel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICIOS (CINEMATIC SCROLL) -->
+      <div class="section-card">
+        <div class="card-header p-3 d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#servicesSection">
+          <span><i class="bi bi-layers me-2"></i>Pilares de Servicio (Cinematic Scroll)</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div id="servicesSection" class="collapse">
+          <div class="card-body">
+            <div id="servicesContainer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÉTRICAS REALES -->
+      <div class="section-card">
+        <div class="card-header p-3 d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#metricsSection">
+          <span><i class="bi bi-graph-up-arrow me-2"></i>Métricas Reales (Casos de Estudio)</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div id="metricsSection" class="collapse">
+          <div class="card-body">
+            <div id="metricsContainer"></div>
+            <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="addMetricBtn">
+              <i class="bi bi-plus-circle me-1"></i>Añadir Caso Métrico
+            </button>
           </div>
         </div>
       </div>
@@ -335,6 +381,15 @@
 
       // 3. Testimonials
       renderTestimonials();
+
+      // 4. Reels
+      renderReels();
+
+      // 5. Services
+      renderServices();
+
+      // 6. Metrics
+      renderMetrics();
     }
 
     // ── Reveal Cards (Hero) ──
@@ -426,6 +481,167 @@
       siteData.testimonials.push({ text: '', name: '', role: '', avatar: '' });
       markChanged();
       renderTestimonials();
+    });
+
+    // ── REELS ──
+    function renderReels() {
+      const container = document.getElementById('reelsContainer');
+      const items = siteData.reels || [];
+      container.innerHTML = '';
+      items.forEach((r, idx) => {
+        const div = document.createElement('div');
+        div.className = 'testimonial-entry'; // reuse styling
+        div.innerHTML = `
+          <button type="button" class="btn btn-outline-danger btn-sm testimonial-remove" data-idx="${idx}"><i class="bi bi-trash"></i></button>
+          <div class="row g-2">
+            <div class="col-md-3"><label class="form-label small fw-semibold">Cliente</label><input type="text" class="form-control form-control-sm" value="${r.cliente || ''}" data-r-idx="${idx}" data-r-field="cliente"></div>
+            <div class="col-md-3"><label class="form-label small fw-semibold">Logo (archivo)</label><input type="text" class="form-control form-control-sm" value="${r.logo || ''}" data-r-idx="${idx}" data-r-field="logo"></div>
+            <div class="col-md-3"><label class="form-label small fw-semibold">Handle</label><input type="text" class="form-control form-control-sm" value="${r.handle || ''}" data-r-idx="${idx}" data-r-field="handle"></div>
+            <div class="col-md-3"><label class="form-label small fw-semibold">Shortcode IG</label><input type="text" class="form-control form-control-sm" value="${r.shortcode || ''}" data-r-idx="${idx}" data-r-field="shortcode"></div>
+            <div class="col-md-6"><label class="form-label small">Título del Reel</label><input type="text" class="form-control form-control-sm" value="${r.titulo || ''}" data-r-idx="${idx}" data-r-field="titulo"></div>
+            <div class="col-md-6"><label class="form-label small">Descripción</label><input type="text" class="form-control form-control-sm" value="${r.descripcion || ''}" data-r-idx="${idx}" data-r-field="descripcion"></div>
+            <div class="col-md-3"><label class="form-label small">Vistas (ej. 6.7M)</label><input type="text" class="form-control form-control-sm" value="${r.vistas || ''}" data-r-idx="${idx}" data-r-field="vistas"></div>
+            <div class="col-md-3"><label class="form-label small">Poster (archivo)</label><input type="text" class="form-control form-control-sm" value="${r.poster || ''}" data-r-idx="${idx}" data-r-field="poster"></div>
+            <div class="col-md-3"><label class="form-label small">Categoría (ID)</label><input type="text" class="form-control form-control-sm" value="${r.categoria || ''}" data-r-idx="${idx}" data-r-field="categoria"></div>
+            <div class="col-md-3"><label class="form-label small">Label Categoría</label><input type="text" class="form-control form-control-sm" value="${r.categoriaLabel || ''}" data-r-idx="${idx}" data-r-field="categoriaLabel"></div>
+            <div class="col-12 mt-1">
+              <button type="button" class="btn btn-outline-secondary btn-sm me-1 move-up-r" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''}><i class="bi bi-arrow-up"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm move-down-r" data-idx="${idx}" ${idx === items.length - 1 ? 'disabled' : ''}><i class="bi bi-arrow-down"></i></button>
+            </div>
+          </div>`;
+        
+        div.querySelectorAll('input').forEach(inp => {
+          inp.addEventListener('input', () => {
+            siteData.reels[parseInt(inp.dataset.rIdx)][inp.dataset.rField] = inp.value;
+            markChanged();
+          });
+        });
+        div.querySelector('.testimonial-remove').addEventListener('click', () => {
+          siteData.reels.splice(idx, 1);
+          markChanged(); renderReels();
+        });
+        div.querySelector('.move-up-r')?.addEventListener('click', () => {
+          if (idx > 0) { [siteData.reels[idx-1], siteData.reels[idx]] = [siteData.reels[idx], siteData.reels[idx-1]]; markChanged(); renderReels(); }
+        });
+        div.querySelector('.move-down-r')?.addEventListener('click', () => {
+          if (idx < siteData.reels.length - 1) { [siteData.reels[idx], siteData.reels[idx+1]] = [siteData.reels[idx+1], siteData.reels[idx]]; markChanged(); renderReels(); }
+        });
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById('addReelBtn').addEventListener('click', () => {
+      if (!siteData.reels) siteData.reels = [];
+      siteData.reels.push({ id: Date.now(), cliente: 'Nuevo', logo: '', handle: '', shortcode: '', titulo: '', descripcion: '', vistas: '', poster: '', fallbackPoster: '', categoria: '', categoriaLabel: '', tipo: 'viral' });
+      markChanged(); renderReels();
+    });
+
+    // ── SERVICIOS (CINEMATIC SCROLL) ──
+    function renderServices() {
+      const container = document.getElementById('servicesContainer');
+      const items = siteData.services || [];
+      container.innerHTML = '';
+      items.forEach((s, idx) => {
+        const div = document.createElement('div');
+        div.className = 'testimonial-entry';
+        div.innerHTML = `
+          <div class="row g-2">
+            <h6 class="mb-1 fw-bold">Capítulo ${idx + 1}</h6>
+            <div class="col-md-3"><label class="form-label small">Título en Menú</label><input type="text" class="form-control form-control-sm" value="${s.menuTitle || ''}" data-s-idx="${idx}" data-s-field="menuTitle"></div>
+            <div class="col-md-3"><label class="form-label small">Badge/Etiqueta</label><input type="text" class="form-control form-control-sm" value="${s.badge || ''}" data-s-idx="${idx}" data-s-field="badge"></div>
+            <div class="col-md-6"><label class="form-label small">Título Principal</label><input type="text" class="form-control form-control-sm" value="${s.title || ''}" data-s-idx="${idx}" data-s-field="title"></div>
+            <div class="col-12"><label class="form-label small">Descripción</label><textarea class="form-control form-control-sm" rows="2" data-s-idx="${idx}" data-s-field="desc">${s.desc || ''}</textarea></div>
+            <div class="col-md-6"><label class="form-label small">Imagen/Video (URL)</label><input type="text" class="form-control form-control-sm" value="${s.img || ''}" data-s-idx="${idx}" data-s-field="img"></div>
+            <div class="col-md-6"><label class="form-label small">Texto sobre imagen</label><input type="text" class="form-control form-control-sm" value="${s.imgBadge || ''}" data-s-idx="${idx}" data-s-field="imgBadge"></div>
+            <div class="col-12"><label class="form-label small">Chips (separados por coma)</label><input type="text" class="form-control form-control-sm" value="${(s.chips || []).join(', ')}" data-s-idx="${idx}" data-s-field="chips"></div>
+          </div>`;
+        div.querySelectorAll('input, textarea').forEach(inp => {
+          inp.addEventListener('input', () => {
+            const field = inp.dataset.sField;
+            if (field === 'chips') {
+              siteData.services[idx][field] = inp.value.split(',').map(v => v.trim()).filter(v => v);
+            } else {
+              siteData.services[idx][field] = inp.value;
+            }
+            markChanged();
+          });
+        });
+        container.appendChild(div);
+      });
+    }
+
+    // ── MÉTRICAS REALES ──
+    function renderMetrics() {
+      const container = document.getElementById('metricsContainer');
+      const items = siteData.metrics || [];
+      container.innerHTML = '';
+      items.forEach((m, idx) => {
+        const div = document.createElement('div');
+        div.className = 'testimonial-entry';
+        div.innerHTML = `
+          <button type="button" class="btn btn-outline-danger btn-sm testimonial-remove" data-idx="${idx}"><i class="bi bi-trash"></i></button>
+          <div class="row g-2">
+            <h6 class="mb-1 fw-bold">Caso: ${m.client || 'Nuevo'}</h6>
+            <div class="col-md-4"><label class="form-label small">Cliente</label><input type="text" class="form-control form-control-sm" value="${m.client || ''}" data-m-idx="${idx}" data-m-field="client"></div>
+            <div class="col-md-4"><label class="form-label small">Handle/Rango</label><input type="text" class="form-control form-control-sm" value="${m.handle || ''}" data-m-idx="${idx}" data-m-field="handle"></div>
+            <div class="col-md-4"><label class="form-label small">Logo (archivo)</label><input type="text" class="form-control form-control-sm" value="${m.logo || ''}" data-m-idx="${idx}" data-m-field="logo"></div>
+            <div class="col-md-3"><label class="form-label small">Antes (Núm)</label><input type="text" class="form-control form-control-sm" value="${m.beforeNum || ''}" data-m-idx="${idx}" data-m-field="beforeNum"></div>
+            <div class="col-md-3"><label class="form-label small">Antes (Label)</label><input type="text" class="form-control form-control-sm" value="${m.beforeLabel || ''}" data-m-idx="${idx}" data-m-field="beforeLabel"></div>
+            <div class="col-md-3"><label class="form-label small">Después (Núm)</label><input type="text" class="form-control form-control-sm" value="${m.afterNum || ''}" data-m-idx="${idx}" data-m-field="afterNum"></div>
+            <div class="col-md-3"><label class="form-label small">Después (Label)</label><input type="text" class="form-control form-control-sm" value="${m.afterLabel || ''}" data-m-idx="${idx}" data-m-field="afterLabel"></div>
+            <div class="col-md-12"><label class="form-label small">Texto Footer</label><textarea class="form-control form-control-sm" rows="2" data-m-idx="${idx}" data-m-field="footerText">${m.footerText || ''}</textarea></div>
+            <div class="col-12 mt-2"><label class="form-label small fw-bold">Tarjetas (3 recomendadas)</label></div>
+            <div class="row g-2" id="cards-container-${idx}"></div>
+            <div class="col-12 mt-1">
+              <button type="button" class="btn btn-outline-secondary btn-sm me-1 move-up-m" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''}><i class="bi bi-arrow-up"></i></button>
+              <button type="button" class="btn btn-outline-secondary btn-sm move-down-m" data-idx="${idx}" ${idx === items.length - 1 ? 'disabled' : ''}><i class="bi bi-arrow-down"></i></button>
+            </div>
+          </div>`;
+        
+        const cardsCont = div.querySelector(`#cards-container-${idx}`);
+        (m.cards || []).forEach((c, cIdx) => {
+          const cDiv = document.createElement('div');
+          cDiv.className = 'col-md-4 border p-2 rounded bg-light';
+          cDiv.innerHTML = `
+            <label class="form-label small mb-0">Núm/Dato</label><input type="text" class="form-control form-control-sm mb-1" value="${c.num || ''}" data-c-idx="${cIdx}" data-c-field="num">
+            <label class="form-label small mb-0">Título</label><input type="text" class="form-control form-control-sm mb-1" value="${c.title || ''}" data-c-idx="${cIdx}" data-c-field="title">
+            <label class="form-label small mb-0">Descripción</label><textarea class="form-control form-control-sm" rows="2" data-c-idx="${cIdx}" data-c-field="desc">${c.desc || ''}</textarea>
+          `;
+          cDiv.querySelectorAll('input, textarea').forEach(inp => {
+            inp.addEventListener('input', () => {
+              siteData.metrics[idx].cards[cIdx][inp.dataset.cField] = inp.value;
+              markChanged();
+            });
+          });
+          cardsCont.appendChild(cDiv);
+        });
+
+        div.querySelectorAll('input:not([data-c-field]), textarea:not([data-c-field])').forEach(inp => {
+          inp.addEventListener('input', () => {
+            siteData.metrics[idx][inp.dataset.mField] = inp.value;
+            markChanged();
+          });
+        });
+        
+        div.querySelector('.testimonial-remove').addEventListener('click', () => {
+          siteData.metrics.splice(idx, 1);
+          markChanged(); renderMetrics();
+        });
+        div.querySelector('.move-up-m')?.addEventListener('click', () => {
+          if (idx > 0) { [siteData.metrics[idx-1], siteData.metrics[idx]] = [siteData.metrics[idx], siteData.metrics[idx-1]]; markChanged(); renderMetrics(); }
+        });
+        div.querySelector('.move-down-m')?.addEventListener('click', () => {
+          if (idx < siteData.metrics.length - 1) { [siteData.metrics[idx], siteData.metrics[idx+1]] = [siteData.metrics[idx+1], siteData.metrics[idx]]; markChanged(); renderMetrics(); }
+        });
+        
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById('addMetricBtn').addEventListener('click', () => {
+      if (!siteData.metrics) siteData.metrics = [];
+      siteData.metrics.push({ client: 'Nueva Empresa', logo: '', handle: '', beforeNum: '0', beforeLabel: '', afterNum: '0', afterLabel: '', footerText: '', evidenceUrl: '', cards: [{num:'',title:'',desc:''},{num:'',title:'',desc:''},{num:'',title:'',desc:''}] });
+      markChanged(); renderMetrics();
     });
 
     // ── SAVE ──

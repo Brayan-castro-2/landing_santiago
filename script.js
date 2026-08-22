@@ -498,6 +498,12 @@ async function loadSiteData() {
       if (val && typeof val === 'string') el.textContent = val;
     });
 
+    // Inyectar imágenes simples via data-cms-img
+    document.querySelectorAll('[data-cms-img]').forEach(el => {
+      const val = cmsGetNested(data, el.dataset.cmsImg);
+      if (val && typeof val === 'string') el.src = val;
+    });
+
     // Inyectar reveal cards del hero
     if (data.hero && data.hero.reveal_cards) {
       const cards = document.querySelectorAll('.prisma-reveal-card');
@@ -532,16 +538,113 @@ async function loadSiteData() {
       }
     }
 
+    // Inyectar Reels dinámicamente
+    if (data.reels && Array.isArray(data.reels)) {
+      window.videosPortafolio = data.reels;
+    }
+
+    // Inyectar Servicios (Cinematic Scroll) dinámicamente
+    if (data.services && data.services.length > 0) {
+      const navTrack = document.querySelector('.chapter-nav-track');
+      const frame = document.querySelector('.cinematic-screen-frame');
+      
+      if (navTrack && frame) {
+        navTrack.innerHTML = '';
+        
+        // Mantener barra de control existente
+        const footer = frame.querySelector('.screen-controls-footer');
+        frame.innerHTML = '';
+
+        data.services.forEach((s, i) => {
+          // Nav Items
+          navTrack.innerHTML += `
+            <div class="chapter-nav-item ${i === 0 ? 'active' : ''}" data-chapter="${i}">
+              <span class="chapter-num">0${i + 1}</span>
+              <span class="chapter-label">${s.menuTitle}</span>
+            </div>`;
+            
+          // Media Layers
+          frame.innerHTML += `
+            <div class="cinematic-media-layer ${i === 0 ? 'active' : ''}" data-layer="${i}">
+              <img src="${s.img}" alt="${s.menuTitle}">
+              <div class="screen-overlay-gradient"></div>
+              <div class="screen-caption-badge">
+                <span>${s.imgBadge}</span>
+              </div>
+            </div>`;
+        });
+        
+        if (footer) frame.appendChild(footer);
+        
+        // Export data for initCinematicScroll to use
+        window.dynamicChaptersData = data.services;
+      }
+    }
+
+    // Inyectar Métricas Reales dinámicamente
+    if (data.metrics && data.metrics.length > 0) {
+      const grid = document.querySelector('.evidence-full-grid');
+      if (grid) {
+        grid.innerHTML = data.metrics.map(m => `
+          <div class="evidence-full-card">
+            <div class="evidence-left-col">
+              <div class="e-card-header">
+                <div class="e-brand-info">
+                  <img src="${m.logo}" alt="${m.client}" class="e-brand-logo">
+                  <div>
+                    <h3 class="e-brand-title">${m.client}</h3>
+                    <span class="e-brand-handle">${m.handle}</span>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="filterByCompany('${m.client}')" style="border-radius:9999px;font-size:0.75rem;padding:6px 14px;">
+                  <span>Ver Reels</span>
+                </button>
+              </div>
+
+              <div class="e-metric-comparison">
+                <div class="e-stat-box before">
+                  <span class="e-stat-lbl">Antes</span>
+                  <span class="e-stat-num">${m.beforeNum}</span>
+                  <span class="e-stat-sub">${m.beforeLabel}</span>
+                </div>
+                <div class="e-stat-arrow">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <div class="e-stat-box after">
+                  <span class="e-stat-lbl">Después</span>
+                  <span class="e-stat-num">${m.afterNum}</span>
+                  <span class="e-stat-sub">${m.afterLabel}</span>
+                </div>
+              </div>
+
+              <p class="e-card-desc">${m.footerText}</p>
+            </div>
+
+            <div class="evidence-kpi-grid">
+              ${(m.cards || []).map(c => `
+                <div class="evidence-kpi-card">
+                  <span class="evidence-kpi-num">${c.num}</span>
+                  <span class="evidence-kpi-title">${c.title}</span>
+                  <span class="evidence-kpi-desc">${c.desc}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
     console.log('CMS: Datos cargados correctamente');
   } catch (e) {
     console.warn('CMS: API no disponible, usando datos estáticos del HTML.', e);
   }
 }
 
-const initApp = () => {
+const initApp = async () => {
   const safeInit = (fn, name) => { try { fn(); } catch(e) { console.warn('Init error in ' + name + ':', e); } };
-  // CMS: cargar datos remotos (no bloquea si falla)
-  loadSiteData();
+  // CMS: cargar datos remotos (esperamos a que termine para inyectar DOM dinámico)
+  await loadSiteData();
+  
   safeInit(initPrismHero, 'PrismHero');
   safeInit(initStickyNavbar, 'StickyNavbar');
   safeInit(initScrollMorphGallery, 'ScrollMorphGallery');
@@ -1999,7 +2102,7 @@ function initCinematicScroll() {
   const controlFill = document.getElementById('screenControlFill');
   const controlLabel = document.getElementById('screenControlLabel');
 
-  const chaptersData = [
+  const chaptersData = window.dynamicChaptersData || [
     {
       badge: 'CAPÍTULO 01',
       title: 'Gestión Estratégica de Redes Sociales',
