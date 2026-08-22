@@ -1395,43 +1395,63 @@ function initScrollMorphGallery() {
   updateCardTransforms();
 }
 
-/* ── 3.1 EFECTO TIMELINE HÍBRIDO (Vertical Nodes 1-2 + Fullscreen Lateral 3-4) ── */
+/* ── 3.1 EFECTO TIMELINE VERTICAL ── */
 function initTimelineProgress() {
   const container = document.getElementById('timelineContainer');
   const beam = document.getElementById('timelineBeamProgress');
-  const hPin = document.getElementById('timelineHorizontalPin');
-  const hSlider = document.getElementById('timelineHorizontalSlider');
+  const track = document.querySelector('.timeline-beam-track');
+
+  if (!container || !beam || !track) return;
+
+  const updateTrackPos = () => {
+    const items = container.querySelectorAll('.timeline-item');
+    if (items.length === 0) return;
+    const firstCircle = items[0].querySelector('.timeline-node-circle');
+    const lastCircle = items[items.length - 1].querySelector('.timeline-node-circle');
+    
+    if (firstCircle && lastCircle) {
+      const containerRect = container.getBoundingClientRect();
+      const firstRect = firstCircle.getBoundingClientRect();
+      const lastRect = lastCircle.getBoundingClientRect();
+      
+      const topOffset = firstRect.top - containerRect.top + (firstRect.height / 2);
+      const bottomOffset = containerRect.bottom - lastRect.bottom + (lastRect.height / 2);
+      
+      track.style.top = topOffset + 'px';
+      track.style.bottom = bottomOffset + 'px';
+    }
+  };
 
   const handleScroll = () => {
-    // 1. Haz de progreso vertical para Nodes 1 y 2
-    if (container && beam) {
-      const rect = container.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const totalHeight = rect.height;
-      const startY = vh * 0.55;
-      const scrolled = startY - rect.top;
-      let progress = Math.min(Math.max(scrolled / totalHeight, 0), 1);
-      beam.style.height = (progress * 100).toFixed(1) + '%';
+    updateTrackPos(); 
+    
+    const trackRect = track.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const startY = vh * 0.65; 
+    
+    const totalHeight = trackRect.height;
+    const scrolled = startY - trackRect.top;
+    
+    let progress = Math.min(Math.max(scrolled / totalHeight, 0), 1);
+    beam.style.height = (progress * 100).toFixed(1) + '%';
 
-      const items = container.querySelectorAll('.timeline-item');
-      items.forEach(item => {
-        const nodeCircle = item.querySelector('.timeline-node-circle');
-        const itemRect = item.getBoundingClientRect();
-        if (itemRect.top < vh * 0.65) {
-          if (nodeCircle) nodeCircle.classList.add('active');
-          item.style.opacity = '1';
-        } else {
-          if (nodeCircle) nodeCircle.classList.remove('active');
-          item.style.opacity = '0.45';
-        }
-      });
-    }
-    // El desplazamiento horizontal ha sido eliminado.
+    const items = container.querySelectorAll('.timeline-item');
+    items.forEach(item => {
+      const nodeCircle = item.querySelector('.timeline-node-circle');
+      const itemRect = item.getBoundingClientRect();
+      if (itemRect.top < vh * 0.65) {
+        if (nodeCircle) nodeCircle.classList.add('active');
+        item.style.opacity = '1';
+      } else {
+        if (nodeCircle) nodeCircle.classList.remove('active');
+        item.style.opacity = '0.45';
+      }
+    });
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   window.addEventListener('resize', handleScroll, { passive: true });
-  handleScroll();
+  setTimeout(handleScroll, 50);
 }
 
 
