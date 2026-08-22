@@ -1447,25 +1447,25 @@ function initCinematicScroll() {
 
   const chapterData = [
     {
-      badge: 'CHAPTER 01',
+      badge: 'CAPÍTULO 01',
       title: 'Gestión Estratégica de Redes Sociales',
       desc: 'Manejo integral de Instagram y TikTok con foco en arquitectura de marca, posicionamiento de autoridad y construcción de audiencia compradora.',
       chips: ['Auditoría de Cuenta', 'Calendario Editorial', 'Copywriting Persuasivo', 'Optimización de Perfil']
     },
     {
-      badge: 'CHAPTER 02',
+      badge: 'CAPÍTULO 02',
       title: 'Producción Audiovisual 9:16 (Reels/TikTok)',
       desc: 'Creación de contenido de alto impacto: ganchos narrativos virales en los primeros 2 segundos, rodaje profesional en terreno y edición de ritmo ágil.',
       chips: ['Ganchos Narrativos Virales', 'Rodaje 4K en Terreno', 'Subtítulos Dinámicos', 'Formatos UGC']
     },
     {
-      badge: 'CHAPTER 03',
+      badge: 'CAPÍTULO 03',
       title: 'Meta Ads & Tráfico de Alto Retorno',
       desc: 'Campañas de adquisición directa, retargeting avanzado y embudos en Shopify diseñados para maximizar el ROAS y rentabilidad comercial.',
       chips: ['Embudos de Conversión', 'Creativos de Respuesta Directa', 'Optimización de ROAS', 'A/B Testing Continuo']
     },
     {
-      badge: 'CHAPTER 04',
+      badge: 'CAPÍTULO 04',
       title: 'Estrategia 360° & Analítica de ROI',
       desc: 'Auditoría continua de métricas comerciales y optimización en tiempo real para tomar decisiones fundamentadas en facturación y crecimiento sostenible.',
       chips: ['Reportes de Facturación', 'Atribución de Ventas', 'Escalado de Presupuesto', 'Acompañamiento Directo']
@@ -1689,7 +1689,7 @@ function openReelModal(id) {
   document.getElementById('modalTitle').textContent = item.cliente;
   document.getElementById('modalHandle').textContent = item.handle;
   document.getElementById('modalStat1').textContent = item.vistas;
-  document.getElementById('modalStat2').textContent = item.isTopViral ? 'Top Viral' : (item.tipo === 'retorno' ? 'Alto Retorno' : 'Informativo');
+  document.getElementById('modalStat2').textContent = item.isTopViral ? 'Más Viral' : (item.tipo === 'retorno' ? 'Alto Retorno' : 'Informativo');
   document.getElementById('modalQuote').textContent = `"${item.descripcion}"`;
 
   const externalBtn = document.getElementById('modalExternalLink');

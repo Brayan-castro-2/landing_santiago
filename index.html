@@ -48,9 +48,7 @@
       <!-- Layer 1: Background Canvas + Video Source with Apple-grade 60/120fps Frame Sequence -->
       <div class="prisma-video-container">
         <canvas class="prisma-canvas" id="prismaCanvas"></canvas>
-        <video class="prisma-video" id="prismaVideo" muted playsinline preload="auto" style="display:none;">
-          <source src="hero-prisma-video.mp4" type="video/mp4">
-        </video>
+        <video class="prisma-video" id="prismaVideo" src="hero-prisma-video.mp4" autoplay loop muted playsinline preload="auto" style="display:none;"></video>
         <!-- Deep Obsidian Ambient Vignette -->
         <div class="prisma-video-overlay"></div>
       </div>
@@ -74,10 +72,10 @@
       <!-- Layer 2: Phase 1 Display Typography (0s -> 3s) -->
       <div class="prisma-content-phase-1" id="prismaPhase1">
         <div class="prisma-eyebrow">
-          <span>CREATIVE PERFORMANCE &amp; AUDIOVISUAL DIRECTION</span>
+          <span>RENDIMIENTO CREATIVO &amp; DIRECCIÓN AUDIOVISUAL</span>
         </div>
         <h1 class="prisma-main-headline">
-          <span class="prisma-headline-sub">We are</span>
+          <span class="prisma-headline-sub">Somos</span>
           <span class="prisma-headline-brand">Prisma.</span>
         </h1>
         <p class="prisma-main-subtitle">
@@ -631,57 +629,19 @@
             </p>
           </div>
 
-          <div class="evidence-images-row">
+          <div class="evidence-images-row" style="grid-template-columns: 1fr; gap: 16px;">
             <div class="evidence-image-item">
-              <span class="evidence-img-label">Campaña Meta Ads ROAS ×5.41</span>
-              <img src="CAMPAÑA_VITANOVA.png" alt="VitaNovaCL ROAS" class="evidence-large-img" loading="lazy">
-            </div>
-            <div class="evidence-image-item">
-              <span class="evidence-img-label">Métricas de Retorno y Facturación</span>
-              <img src="VITANOVA 3.png" alt="VitaNovaCL Retorno" class="evidence-large-img" loading="lazy">
+              <span class="evidence-img-label">Campaña Oficial Meta Ads • ROAS ×5.41 ($656 USD Invertidos)</span>
+              <img src="CAMPAÑA_VITANOVA.png" alt="VitaNovaCL ROAS" class="evidence-large-img" style="max-height: 280px; width: 100%; object-fit: contain;" loading="lazy">
             </div>
             <div class="evidence-image-item">
-              <span class="evidence-img-label">Especificaciones de Campaña</span>
-              <img src="VITANOVA_ESPECIFICACIONES.png" alt="VitaNovaCL Especificaciones" class="evidence-large-img" loading="lazy">
+              <span class="evidence-img-label">Desglose de Campañas: ROAS 5.41 • 4.03 • 3.27</span>
+              <img src="VITANOVA 3.png" alt="VitaNovaCL Retorno" class="evidence-large-img" style="max-height: 280px; width: 100%; object-fit: contain;" loading="lazy">
             </div>
-          </div>
-        </div>
-
-        <!-- Bloque 4: Hotel Gran Pacífico -->
-        <div class="evidence-full-card">
-          <div class="evidence-left-col">
-            <div class="e-card-header">
-              <div class="e-brand-info">
-                <img src="logo-hotel-gran-pacifico.jpg" alt="Hotel Gran Pacífico" class="e-brand-logo">
-                <div>
-                  <h3 class="e-brand-title">Hotel Gran Pacífico</h3>
-                  <span class="e-brand-handle">@granpacificohotel • Hotelería &amp; Turismo</span>
-                </div>
-              </div>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="filterByCompany('Hotel Gran Pacífico')" style="border-radius:9999px;font-size:0.75rem;padding:6px 14px;">
-                <span>Ver Reels</span>
-              </button>
+            <div class="evidence-image-item">
+              <span class="evidence-img-label">Especificaciones Técnicas de Pauta &amp; Conversión</span>
+              <img src="VITANOVA_ESPECIFICACIONES.png" alt="VitaNovaCL Especificaciones" class="evidence-large-img" style="max-height: 280px; width: 100%; object-fit: contain;" loading="lazy">
             </div>
-
-            <div class="e-metric-comparison">
-              <div class="e-stat-box before">
-                <span class="e-stat-lbl">Antes</span>
-                <span class="e-stat-num">30.000</span>
-                <span class="e-stat-sub">Seguidores</span>
-              </div>
-              <div class="e-stat-arrow">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-              </div>
-              <div class="e-stat-box after">
-                <span class="e-stat-lbl">Después</span>
-                <span class="e-stat-num">46.000</span>
-                <span class="e-stat-sub">98% Ocupación Directa</span>
-              </div>
-            </div>
-
-            <p class="e-card-desc">
-              Producción audiovisual inmersiva de experiencias turísticas que acumuló más de <strong>4.2M de reproducciones</strong> y posicionó al hotel como referente con reservas directas.
-            </p>
           </div>
         </div>
 
@@ -726,7 +686,7 @@
               </div>
 
               <div class="chapter-active-content" id="chapterActiveContent">
-                <span class="chapter-badge-tag" id="chapterBadge">CHAPTER 01</span>
+                <span class="chapter-badge-tag" id="chapterBadge">CAPÍTULO 01</span>
                 <h3 class="chapter-main-title" id="chapterTitle">Gestión Estratégica de Redes Sociales</h3>
                 <p class="chapter-main-desc" id="chapterDesc">
                   Manejo integral de Instagram y TikTok con foco en arquitectura de marca, posicionamiento de autoridad y construcción de audiencia compradora.
@@ -956,7 +916,7 @@
               </div>
               <button class="chat-replay-btn" id="chatReplayBtn" type="button" title="Reiniciar chat">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                <span>Replay</span>
+                <span>Reiniciar</span>
               </button>
             </div>
 
