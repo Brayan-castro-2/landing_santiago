@@ -1844,36 +1844,139 @@ function initVideoModal() {
   });
 }
 
-/* ── 6. Contadores de Métricas ──────────────────────────────────────────── */
+/* ── 6. Contadores de Métricas Dinámicos (Animación 0 -> Meta con Loop cada 10s) ── */
 function initCounters() {
-  const els = document.querySelectorAll('.counter');
-  const io = new IntersectionObserver((entries, obs) => {
+  // Selectores de todas las métricas y números clave en la landing page
+  const selectors = [
+    '.e-stat-num',
+    '.evidence-kpi-num',
+    '.timeline-node-title',
+    '.prisma-reveal-num'
+  ];
+
+  const targetElements = document.querySelectorAll(selectors.join(', '));
+  if (targetElements.length === 0) return;
+
+  function parseMetric(text) {
+    const trimmed = text.trim();
+    if (!trimmed) return null;
+
+    // Detectar números con formato de miles con punto (ej: "220.000", "16.500", "11.000", "2.800")
+    const thousandsMatch = trimmed.match(/^([^\d]*)(\d{1,3}(?:\.\d{3})+)([^\d]*)$/);
+    if (thousandsMatch) {
+      const prefix = thousandsMatch[1] || '';
+      const rawDigits = thousandsMatch[2].replace(/\./g, '');
+      const num = parseFloat(rawDigits);
+      const suffix = thousandsMatch[3] || '';
+      return {
+        prefix,
+        num,
+        suffix,
+        decimals: 0,
+        format: 'thousands-dot'
+      };
+    }
+
+    // Estándar: decimales, enteros, porcentajes, multiplicadores (ej: "+29.5M", "5.4x", "×5.41", "100%", "-45%", "+127K", "6.7M")
+    const match = trimmed.match(/^([^\d.]*)(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return null;
+
+    const prefix = match[1] || '';
+    const numStr = match[2];
+    const num = parseFloat(numStr);
+    const suffix = match[3] || '';
+    const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+
+    return {
+      prefix,
+      num,
+      suffix,
+      decimals,
+      format: 'standard'
+    };
+  }
+
+  function animateValue(el, meta, duration = 1500) {
+    if (el._isAnimating) return;
+    el._isAnimating = true;
+
+    const startTime = performance.now();
+    const target = meta.num;
+
+    function formatVal(current) {
+      if (meta.format === 'thousands-dot') {
+        const rounded = Math.round(current);
+        return meta.prefix + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + meta.suffix;
+      } else {
+        const roundedStr = meta.decimals > 0
+          ? current.toFixed(meta.decimals)
+          : Math.round(current).toString();
+        return meta.prefix + roundedStr + meta.suffix;
+      }
+    }
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutExpo suave para sensación premium
+      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = target * ease;
+
+      el.textContent = formatVal(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = formatVal(target);
+        el._isAnimating = false;
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  const items = [];
+
+  targetElements.forEach(el => {
+    // Si no tiene guardado el valor original, lo guardamos
+    const originalText = el.dataset.counterOriginal || el.textContent.trim();
+    el.dataset.counterOriginal = originalText;
+
+    const meta = parseMetric(originalText);
+    if (meta && !isNaN(meta.num) && meta.num > 0) {
+      items.push({ el, meta, isVisible: false });
+    }
+  });
+
+  // IntersectionObserver para detectar cuando entran en pantalla
+  const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = parseFloat(el.dataset.target);
-      const decimals = parseInt(el.dataset.decimals || '0');
-      const duration = 1600;
-      const steps = 50;
-      let step = 0;
+      const found = items.find(item => item.el === entry.target);
+      if (!found) return;
 
-      const interval = setInterval(() => {
-        step++;
-        const t = step / steps;
-        const ease = 1 - Math.pow(1 - t, 3);
-        const val = target * ease;
-        el.textContent = decimals > 0 ? val.toFixed(decimals) : Math.floor(val).toLocaleString();
-        if (step >= steps) {
-          clearInterval(interval);
-          el.textContent = decimals > 0 ? target.toFixed(decimals) : target.toLocaleString();
-        }
-      }, duration / steps);
-
-      obs.unobserve(el);
+      if (entry.isIntersecting) {
+        found.isVisible = true;
+        animateValue(found.el, found.meta);
+      } else {
+        found.isVisible = false;
+      }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.25 });
 
-  els.forEach(el => io.observe(el));
+  items.forEach(item => io.observe(item.el));
+
+  // Loop cada 10 segundos para los elementos que están visibles en pantalla
+  if (window._counterLoopInterval) {
+    clearInterval(window._counterLoopInterval);
+  }
+
+  window._counterLoopInterval = setInterval(() => {
+    items.forEach(item => {
+      if (item.isVisible) {
+        animateValue(item.el, item.meta, 1300);
+      }
+    });
+  }, 10000);
 }
 
 /* ── 7. Expanding Cards ─────────────────────────────────────────────────── */
