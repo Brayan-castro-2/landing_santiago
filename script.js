@@ -1426,22 +1426,7 @@ function initTimelineProgress() {
         }
       });
     }
-
-    // 2. Desplazamiento Lateral a Pantalla Completa para Node 2 (+257), Node 3 (ROAS) y Node 4 (+75K)
-    if (hPin && hSlider) {
-      if (window.innerWidth <= 768) {
-        hSlider.style.transform = 'none';
-        return;
-      }
-      const pinRect = hPin.getBoundingClientRect();
-      const scrollableDist = hPin.offsetHeight - window.innerHeight;
-      if (scrollableDist > 0) {
-        const hProgress = Math.min(Math.max(-pinRect.top / scrollableDist, 0), 1);
-        // Desplaza 2 pantallas completas (de Node 2 a Node 3 y a Node 4)
-        const translateX = -hProgress * (window.innerWidth * 2);
-        hSlider.style.transform = `translate3d(${translateX}px, 0, 0)`;
-      }
-    }
+    // El desplazamiento horizontal ha sido eliminado.
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
