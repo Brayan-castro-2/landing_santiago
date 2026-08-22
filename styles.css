@@ -3476,7 +3476,7 @@ img, video, iframe {
   z-index: 10;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
+/* ── Responsive Mobile & Tablet Engineering ────────────────────────────── */
 @media (max-width: 1024px) {
   .metrics-grid { grid-template-columns: repeat(3, 1fr); }
   .cases-grid-desktop { grid-template-columns: repeat(2, 1fr); }
@@ -3486,25 +3486,289 @@ img, video, iframe {
 }
 
 @media (max-width: 768px) {
+  /* Global / Typography */
+  .section-title {
+    font-size: clamp(1.75rem, 6.5vw, 2.3rem);
+    line-height: 1.15;
+    word-break: break-word;
+  }
+
+  .section-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .section-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Fixed Top Navbar */
+  .navbar { height: 68px; }
+  .nav-container { padding: 0 16px; }
   .nav-menu { display: none; }
   .mobile-toggle { display: flex; }
-  .hero-title { font-size: 2.25rem; }
-  .section-title { font-size: 1.875rem; }
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
-  .process-timeline { grid-template-columns: 1fr 1fr; }
-  .testimonials-grid { grid-template-columns: 1fr; }
-  .about-clean-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .logo { font-size: 1.15rem; }
+
+  /* 0. Prisma Hero Mobile */
+  .prisma-hero-section { height: 200vh; }
+  .prisma-top-nav {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .prisma-nav-menu { display: none !important; }
+  .prisma-brand-name { font-size: 1.1rem; }
+  .prisma-btn-contact { padding: 6px 14px; font-size: 12px; }
+
+  .prisma-content-phase-1,
+  .prisma-content-phase-2 {
+    left: 18px;
+    right: 18px;
+    max-width: calc(100vw - 36px);
+    top: 52%;
+    transform: translateY(-50%);
+  }
+
+  .prisma-main-headline {
+    font-size: clamp(2.3rem, 10.5vw, 3.5rem);
+    line-height: 1.02;
+    margin-bottom: 12px;
+  }
+
+  .prisma-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+
+  .prisma-main-subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    max-width: 100%;
+    opacity: 0.9;
+  }
+
+  .prisma-content-phase-3 {
+    left: 18px;
+    right: 18px;
+    bottom: 24px;
+    max-width: calc(100vw - 36px);
+    text-align: left;
+  }
+
+  .prisma-content-phase-3 .prisma-main-headline {
+    font-size: clamp(2.1rem, 9.5vw, 3.2rem);
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .prisma-content-phase-3 .prisma-main-subtitle {
+    font-size: 0.875rem;
+    margin-left: 0;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .prisma-reveal-stage .prisma-masked-content {
+    padding: 20px 14px;
+    justify-content: center;
+  }
+
+  .prisma-reveal-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .prisma-reveal-card {
+    padding: 14px 12px;
+    border-radius: 10px;
+  }
+
+  .prisma-reveal-num {
+    font-size: 1.35rem;
+    margin-bottom: 2px;
+  }
+
+  .prisma-reveal-title {
+    font-size: 0.8125rem;
+    margin-bottom: 3px;
+  }
+
+  .prisma-reveal-desc {
+    font-size: 0.70rem;
+    line-height: 1.3;
+  }
+
+  .prisma-reveal-brands-strip {
+    margin-top: 14px;
+    gap: 8px;
+  }
+
+  .prisma-reveal-brands-label {
+    font-size: 9.5px;
+  }
+
+  .prisma-reveal-brands-list {
+    gap: 6px;
+  }
+
+  .prisma-brand-badge {
+    padding: 5px 8px;
+    font-size: 0.6875rem;
+    gap: 6px;
+  }
+
+  .prisma-brand-badge img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .prisma-reveal-instruction {
+    display: none;
+  }
+
+  /* Marquee Header & Strip Mobile */
+  .marquee-wrapper-section { padding: 24px 0; }
+  .marquee-header-label { font-size: 0.75rem; padding: 0 16px; margin-bottom: 12px; }
+  .marquee-item { padding: 6px 12px; gap: 8px; font-size: 0.8125rem; }
+  .marquee-item img { width: 24px; height: 24px; }
+
+  /* 2. Resultados / Timeline Mobile */
+  .timeline-intro-header { min-height: auto; margin-bottom: 28px; }
+  .timeline-container { padding: 0 16px; }
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    min-height: auto;
+  }
+  .timeline-node-title { font-size: clamp(2.3rem, 10vw, 3rem); }
+  .timeline-right-content { padding: 20px 16px; border-radius: 16px; }
+  .timeline-grid-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .timeline-card-preview { height: 100px; }
+  .timeline-card-badge { font-size: 0.65rem; padding: 3px 6px; }
+
+  .timeline-horizontal-fullscreen-pin { height: auto; margin-top: 0; }
+  .timeline-horizontal-sticky-view {
+    position: relative;
+    height: auto;
+    width: 100%;
+    overflow: visible;
+    flex-direction: column;
+  }
+  .timeline-horizontal-slider {
+    width: 100%;
+    flex-direction: column;
+    transform: none !important;
+  }
+  .timeline-fullscreen-slide {
+    width: 100%;
+    height: auto;
+    padding: 24px 16px;
+    min-height: auto;
+  }
+
+  /* 3. Casos de Éxito / Filtros Mobile */
+  .case-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 16px 12px;
+    gap: 8px;
+    scrollbar-width: none;
+  }
+  .case-filters::-webkit-scrollbar { display: none; }
+  .case-filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.8125rem;
+    padding: 8px 14px;
+    border-radius: 9999px;
+  }
+  .case-grid { grid-template-columns: 1fr; gap: 16px; padding: 0 16px; }
+  .btn-toggle-all-container { padding: 0 16px; }
+  .btn-toggle-all-videos { width: 100%; justify-content: center; }
+
+  /* 4. Evidencias Antes -> Después Mobile */
+  .evidence-full-grid { padding: 0 16px; gap: 18px; }
+  .evidence-full-card {
+    grid-template-columns: 1fr;
+    padding: 18px 14px;
+    gap: 16px;
+    border-radius: 16px;
+  }
+  .e-card-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .e-brand-logo {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    border-radius: 50%;
+  }
+  .e-brand-title { font-size: 1.15rem; }
+  .e-brand-handle { font-size: 0.75rem; }
+  .e-metric-comparison {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .e-stat-box.before .e-stat-num,
+  .e-stat-box.after .e-stat-num {
+    font-size: 1.2rem;
+  }
+  .e-stat-sub { font-size: 0.70rem; }
+  .e-card-desc { font-size: 0.875rem; }
+  .evidence-images-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .evidence-large-img {
+    max-height: 200px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  /* 5. Servicios / Cinematic Scroll Mobile */
+  .cinematic-services-section { height: auto; }
+  .cinematic-sticky-wrapper { position: relative; height: auto; }
+  .cinematic-sticky-viewport { height: auto; padding: 40px 0; }
+  .cinematic-grid-layout { grid-template-columns: 1fr; gap: 20px; }
+  .chapter-nav-track {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 6px;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .chapter-nav-track::-webkit-scrollbar { display: none; }
+  .chapter-nav-item { flex-shrink: 0; padding: 6px 12px; }
+  .cinematic-screen-frame { aspect-ratio: 16/9; max-height: 240px; }
+
+  /* 6. Sobre Mí & Chat Mobile */
+  .about-clean-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; }
   .about-text-wrap { align-items: center; }
-  .footer-grid-layout { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid-layout { grid-template-columns: 1fr; gap: 24px; }
+  .chat-widget-card { width: 100%; }
+
+  /* Modal Mobile */
   .modal-content { grid-template-columns: 1fr; }
-  .modal-media-box { min-height: 300px; }
-  .scroll-morph-viewport { height: 420px; }
-  .robot-canvas-container { height: 300px; }
+  .modal-media-box { min-height: 280px; }
+  .scroll-morph-viewport { height: 380px; }
+  .robot-canvas-container { height: 260px; }
 }
 
 @media (max-width: 480px) {
-  .metrics-grid { grid-template-columns: 1fr; }
-  .process-timeline { grid-template-columns: 1fr; }
+  .prisma-main-headline { font-size: 2.2rem; }
+  .timeline-grid-cards { grid-template-columns: 1fr 1fr; }
+  .evidence-full-card { padding: 16px 12px; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

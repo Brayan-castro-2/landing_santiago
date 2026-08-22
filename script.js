@@ -529,9 +529,24 @@ function initPrismHero() {
   const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
 
   // 1. Setup Canvas Sizing with Retina Resolution
+  const isMobileView = () => window.innerWidth <= 768;
+
+  const getVideoSource = () => isMobileView() ? 'hero-prisma-video-mobile.mp4' : 'hero-prisma-video.mp4';
+
+  const updateVideoSource = () => {
+    const desiredSrc = getVideoSource();
+    if (!video.src.includes(desiredSrc)) {
+      video.src = desiredSrc;
+      video.load();
+    }
+  };
+
+  updateVideoSource();
+
   const resizeCanvas = () => {
     canvas.width  = window.innerWidth * Math.min(window.devicePixelRatio, 1.5);
     canvas.height = window.innerHeight * Math.min(window.devicePixelRatio, 1.5);
+    updateVideoSource();
   };
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
@@ -549,7 +564,6 @@ function initPrismHero() {
   let currentTimeSec = 0;
   let isSeeking = false;
   let pendingTime = null;
-  let stage2AutoTime = 3.0;
 
   // Ghost Video Extractor in Background Thread (Does NOT block main video)
   const extractIdleFrames = async () => {
@@ -557,7 +571,7 @@ function initPrismHero() {
     isExtracting = true;
 
     const ghost = document.createElement('video');
-    ghost.src = 'hero-prisma-video.mp4';
+    ghost.src = getVideoSource();
     ghost.muted = true;
     ghost.playsInline = true;
     ghost.preload = 'auto';
@@ -671,21 +685,6 @@ function initPrismHero() {
     }
   };
 
-  // Direct Instant GPU Canvas Drawing (Live Playing Video without seek overhead)
-  const drawCurrentVideoDirect = () => {
-    currentTimeSec = video.currentTime;
-    if (video.readyState >= 2) {
-      const hRatio = canvas.width / (video.videoWidth || 1920);
-      const vRatio = canvas.height / (video.videoHeight || 1080);
-      const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
-      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
-    }
-  };
-
-  let stage2State = 'idle'; // 'idle' | 'playing' | 'done'
-
   // 4. Scroll Progress Loop (Natural Responsive Scroll)
   let scrollP = 0;
   let smoothP = 0;
@@ -699,25 +698,10 @@ function initPrismHero() {
     scrollP = clamp(relative / maxScroll, 0, 1);
   };
 
-  // Solo bloquea si el video está reproduciéndose activamente en Fase 2
-  window.addEventListener('wheel', (e) => {
-    const heroBottom = section.offsetTop + section.offsetHeight;
-    if (window.scrollY < heroBottom && stage2State === 'playing' && e.deltaY > 0) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  window.addEventListener('touchmove', (e) => {
-    const heroBottom = section.offsetTop + section.offsetHeight;
-    if (window.scrollY < heroBottom && stage2State === 'playing') {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   window.addEventListener('resize', updateScrollProgress, { passive: true });
 
-  // 5. Mouse Reveal Lantern Tracking
+  // 5. Mouse & Touch Reveal Lantern Tracking
   let targetMouseX = window.innerWidth / 2;
   let targetMouseY = window.innerHeight / 2;
   let currentMouseX = targetMouseX;
@@ -736,6 +720,16 @@ function initPrismHero() {
     }
   }, { passive: true });
 
+  window.addEventListener('touchmove', (e) => {
+    if (!pinned || e.touches.length === 0) return;
+    const rect = pinned.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      mouseInHero = true;
+      targetMouseX = e.touches[0].clientX;
+      targetMouseY = e.touches[0].clientY - rect.top;
+    }
+  }, { passive: true });
+
   // 6. Main 60/120 FPS Animation Loop
   const renderPrisma = () => {
     requestAnimationFrame(renderPrisma);
@@ -748,74 +742,32 @@ function initPrismHero() {
     }
 
     // Natural fast-reacting scroll interpolation
-    smoothP += (scrollP - smoothP) * 0.16;
-
-    // ── GESTIÓN DE ESTADOS Y RESET BIDIRECCIONAL ──
-    if (smoothP < 0.18) {
-      // Si el usuario regresa arriba, reinicia el estado para poder reproducir de nuevo
-      if (stage2State !== 'idle') {
-        stage2State = 'idle';
-        if (!video.paused) video.pause();
-      }
-    }
+    smoothP += (scrollP - smoothP) * 0.14;
 
     let targetEffectiveP = smoothP;
 
-    // ── A. 120FPS CANVAS RENDERING
+    // ── A. 120FPS CANVAS RENDERING (Deterministic Bidirectional Uniform Speed)
     if (cfg.userManualSeek !== null) {
-      if (!video.paused) video.pause();
       renderFrameToCanvas(cfg.userManualSeek);
       targetEffectiveP = smoothP;
-    } else if (smoothP < 0.03) {
+    } else if (smoothP < 0.02) {
       // REPOSO: Búfer de memoria a 120 FPS (0.0s -> 1.2s -> 0.0s)
-      if (!video.paused) video.pause();
       idleClock += (cfg.loopSpeed * 0.52);
       const rawSin = Math.sin(idleClock) * 0.5 + 0.5;
       const smoothFactor = rawSin * rawSin * (3 - 2 * rawSin);
       const targetTime = cfg.loopMin + smoothFactor * (cfg.loopMax - cfg.loopMin);
       renderFrameToCanvas(targetTime, true);
       targetEffectiveP = 0;
-    } else if (smoothP <= 0.22) {
-      // ETAPA 1 SCROLL: Avance de 0.0s a 3.0s
-      if (!video.paused) video.pause();
-      const norm = (smoothP - 0.03) / (0.22 - 0.03);
-      const targetTime = clamp(norm * 3.0, 0, 3.0);
-      renderFrameToCanvas(targetTime);
-      targetEffectiveP = smoothP;
-    } else if (stage2State !== 'done') {
-      // ETAPA 2: "Refracción que Multiplica" (Auto-reproducción nativa 3.0s -> 8.2s)
-      if (stage2State === 'idle') {
-        stage2State = 'playing';
-        video.currentTime = 3.0;
-        video.play().catch(() => {});
-      }
-
-      if (video.currentTime >= 8.18) {
-        video.pause();
-        stage2State = 'done';
-      }
-
-      drawCurrentVideoDirect();
-
-      // Sincroniza el progreso visual de forma continua con la reproducción del video
-      const videoProgress = clamp((video.currentTime - 3.0) / (8.2 - 3.0), 0, 1);
-      targetEffectiveP = 0.22 + videoProgress * (0.48 - 0.22);
-    } else if (smoothP <= 0.70) {
-      // ETAPA 3: Dispersión de Arcoíris (8.2s -> 10.0s)
-      if (!video.paused) video.pause();
-      const norm = (smoothP - 0.48) / (0.70 - 0.48);
-      const targetTime = clamp(8.2 + norm * (duration - 8.2), 8.2, duration);
-      renderFrameToCanvas(targetTime);
-      targetEffectiveP = smoothP;
     } else {
-      // ETAPA 4: Negro Absoluto para Linterna Interactiva
-      if (!video.paused) video.pause();
-      renderFrameToCanvas(duration);
+      // SCROLL ACTIVO (0.02 -> 0.70): Scrubbing fluido y constante tanto al bajar como al subir
+      const norm = clamp((smoothP - 0.02) / (0.70 - 0.02), 0, 1);
+      const targetTime = clamp(norm * duration, 0, duration);
+      renderFrameToCanvas(targetTime);
       targetEffectiveP = smoothP;
     }
 
     // Suavizado del progreso efectivo sin saltos
-    displayP += (targetEffectiveP - displayP) * 0.12;
+    displayP += (targetEffectiveP - displayP) * 0.14;
 
     // Fade to Black a partir de 0.68
     const fadeToBlackStart = 0.68;
