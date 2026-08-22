@@ -482,17 +482,19 @@ window.closeEvidenceModal = closeEvidenceModal;
 window.filterByCompany = filterByCompany;
 
 const initApp = () => {
-  initPrismHero();
-  initStickyNavbar();
-  renderScalableGallery('all', false);
-  initGalleryFilters();
-  initCounters();
-  initExpandingCards();
-  initVideoModal();
-  initMobileMenu();
-  initChatWidget();
-  initTimelineProgress();
-  initCinematicScroll();
+  const safeInit = (fn, name) => { try { fn(); } catch(e) { console.warn('Init error in ' + name + ':', e); } };
+  safeInit(initPrismHero, 'PrismHero');
+  safeInit(initStickyNavbar, 'StickyNavbar');
+  safeInit(initScrollMorphGallery, 'ScrollMorphGallery');
+  safeInit(() => renderScalableGallery('all', false), 'ScalableGallery');
+  safeInit(initGalleryFilters, 'GalleryFilters');
+  safeInit(initCounters, 'Counters');
+  safeInit(initExpandingCards, 'ExpandingCards');
+  safeInit(initVideoModal, 'VideoModal');
+  safeInit(initMobileMenu, 'MobileMenu');
+  safeInit(initChatWidget, 'ChatWidget');
+  safeInit(initTimelineProgress, 'TimelineProgress');
+  safeInit(initCinematicScroll, 'CinematicScroll');
 };
 
 if (document.readyState === 'loading') {
@@ -542,8 +544,11 @@ function initPrismHero() {
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
+  // Utility: detect mobile viewport
+  const isMobileView = () => window.innerWidth <= 768;
+
   // 2. Setup Video & In-Memory Instant Idle Cache with Isolated Ghost Extractor
-  const currentVideoSrc = 'hero-prisma-video.mp4';
+  const currentVideoSrc = isMobileView() ? 'hero-prisma-video-mobile.mp4' : 'hero-prisma-video.mp4';
   if (!video.src || !video.src.includes(currentVideoSrc)) {
     video.src = currentVideoSrc;
   }
@@ -551,6 +556,7 @@ function initPrismHero() {
   video.muted       = true;
   video.playsInline = true;
   video.preload     = 'auto';
+  video.play().catch(e => console.warn("Autoplay blocked, waiting for interaction", e));
 
   const TOTAL_FRAMES_COUNT = 48;
   const videoFrames = [];
@@ -560,9 +566,6 @@ function initPrismHero() {
   let currentTimeSec = 0;
   let isSeeking = false;
   let pendingTime = null;
-
-  // Utility: detect mobile viewport
-  const isMobileView = () => window.innerWidth <= 768;
 
   // Background In-Memory Frame Extraction for 120 FPS Instant Scroll on Mobile & PC
   const extractAllVideoFrames = async () => {
@@ -702,7 +705,12 @@ function initPrismHero() {
       const centerShiftX = (canvas.width - destW) / 2;
       const centerShiftY = (canvas.height - destH) / 2;
       ctx.drawImage(video, centerShiftX, centerShiftY, destW, destH);
+      return;
     }
+
+    // C. Fallback Static Color if both fail (prevents black screen)
+    ctx.fillStyle = '#0f172a'; // Deep slate
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
   // Direct Instant GPU Canvas Drawing (Live Playing Video without seek overhead)

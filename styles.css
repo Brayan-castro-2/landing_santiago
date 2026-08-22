@@ -49,7 +49,7 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -58,6 +58,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -3634,7 +3635,6 @@ img, video, iframe {
 
 @media (max-width: 768px) {
   html, body {
-    overflow-x: hidden !important;
     width: 100% !important;
     max-width: 100vw !important;
     position: relative;
@@ -3664,9 +3664,13 @@ img, video, iframe {
 
   /* ── Pure Mobile Hero Optimization ── */
   .prisma-hero-pinned {
+    position: sticky !important;
+    top: 0 !important;
     width: 100% !important;
     max-width: 100vw !important;
     height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
   }
 
   .prisma-canvas {
@@ -3800,43 +3804,6 @@ img, video, iframe {
     flex-shrink: 0 !important;
   }
 
-  /* ── Cases Grid / Mobile Feed ── */
-  .cases-mobile-feed {
-    display: none !important;
-  }
-
-  .cases-grid-desktop {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    width: 100% !important;
-  }
-
-  .reel-card-item {
-    width: 100% !important;
-    border-radius: 16px !important;
-    overflow: hidden !important;
-    background: #FFFFFF !important;
-    border: 1px solid var(--border) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  .reel-media-box {
-    height: 380px !important;
-    width: 100% !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-
-  .reel-cover-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  .reel-info-bar {
-    padding: 16px !important;
-  }
 
   /* ── Expanding Cards Mobile ── */
   .expanding-cards-container {
@@ -3886,12 +3853,29 @@ img, video, iframe {
     padding: 20px 16px !important;
   }
 
+  .timeline-container {
+    padding: 0 16px !important;
+  }
+
   .timeline-item {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
     width: 100% !important;
     max-width: 100% !important;
     padding: 10px 0 !important;
+  }
+
+  .timeline-beam-track,
+  .timeline-node-circle {
+    display: none !important;
+  }
+
+  .timeline-left-sticky {
+    padding-left: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
   }
 
   .timeline-node-title {
@@ -3907,32 +3891,39 @@ img, video, iframe {
   }
 
   /* ── Cinematic Services Mobile ── */
-  .cinematic-sticky-wrapper {
-    height: auto !important;
-  }
-
   .cinematic-sticky-viewport {
-    position: relative !important;
-    height: auto !important;
-    padding: 30px 16px !important;
+    padding: 20px 16px !important;
   }
 
   .cinematic-grid-layout {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .cinematic-left-panel, .cinematic-right-panel {
+    min-width: 0 !important;
+    width: 100% !important;
   }
 
   .chapter-active-content {
     padding: 20px 16px !important;
     min-height: auto !important;
   }
+  
+  .chapter-main-title {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    font-size: 1.35rem !important;
+  }
 
   .chapter-nav-track {
-    overflow-x: auto !important;
-    flex-wrap: nowrap !important;
+    overflow-x: visible !important;
+    flex-wrap: wrap !important;
     padding-bottom: 8px !important;
-    gap: 6px !important;
-    scrollbar-width: none !important;
+    gap: 8px !important;
+    justify-content: center !important;
   }
 
   .chapter-nav-track::-webkit-scrollbar {
@@ -3940,8 +3931,10 @@ img, video, iframe {
   }
 
   .chapter-nav-item {
-    white-space: nowrap !important;
+    white-space: normal !important;
     flex-shrink: 0 !important;
+    font-size: 0.85rem !important;
+    padding: 6px 12px !important;
   }
 
   .cinematic-screen-frame {
@@ -3983,7 +3976,8 @@ img, video, iframe {
 
   /* ── Footer & Contact Mobile ── */
   .footer-grid-layout {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
     gap: 32px !important;
   }
 
