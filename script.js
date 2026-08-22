@@ -503,7 +503,7 @@ if (document.readyState === 'loading') {
 
 /* ── 0.0 PRISMA CONFIGURATION & CALIBRATION ENGINE ───────────────────────── */
 window.PRISMA_CFG = {
-  scrollHeight: 220,  // vh
+  scrollHeight: 320,  // vh
   loopMin: 0.01,      // seg
   loopMax: 1.20,      // seg
   loopSpeed: 0.024,   // velocidad senoidal
@@ -560,7 +560,9 @@ function initPrismHero() {
   let currentTimeSec = 0;
   let isSeeking = false;
   let pendingTime = null;
-  let stage2AutoTime = 3.0;
+
+  // Utility: detect mobile viewport
+  const isMobileView = () => window.innerWidth <= 768;
 
   // Background In-Memory Frame Extraction for 120 FPS Instant Scroll on Mobile & PC
   const extractAllVideoFrames = async () => {
@@ -719,8 +721,6 @@ function initPrismHero() {
     }
   };
 
-  let stage2State = 'idle'; // 'idle' | 'playing' | 'done'
-
   // 4. Scroll Progress Loop (Natural Responsive Scroll)
   let scrollP = 0;
   let smoothP = 0;
@@ -770,25 +770,17 @@ function initPrismHero() {
     // Natural fast-reacting scroll interpolation
     smoothP += (scrollP - smoothP) * 0.16;
 
-    // ── GESTIÓN DE ESTADOS Y RESET BIDIRECCIONAL ──
-    if (smoothP < 0.18) {
-      // Si el usuario regresa arriba, reinicia el estado para poder reproducir de nuevo
-      if (stage2State !== 'idle') {
-        stage2State = 'idle';
-        if (!video.paused) video.pause();
-      }
-    }
+    // Ensure video is always paused — we NEVER use video.play()
+    if (!video.paused) video.pause();
 
     let targetEffectiveP = smoothP;
 
-    // ── A. 120FPS CANVAS RENDERING
+    // ── A. 100% DETERMINISTIC SCROLL-DRIVEN CANVAS RENDERING (NO video.play()) ──
     if (cfg.userManualSeek !== null) {
-      if (!video.paused) video.pause();
       renderFrameToCanvas(cfg.userManualSeek);
       targetEffectiveP = smoothP;
     } else if (smoothP < 0.03) {
       // REPOSO: Búfer de memoria a 120 FPS (0.0s -> 1.2s -> 0.0s)
-      if (!video.paused) video.pause();
       idleClock += (cfg.loopSpeed * 0.52);
       const rawSin = Math.sin(idleClock) * 0.5 + 0.5;
       const smoothFactor = rawSin * rawSin * (3 - 2 * rawSin);
@@ -797,39 +789,24 @@ function initPrismHero() {
       targetEffectiveP = 0;
     } else if (smoothP <= 0.22) {
       // ETAPA 1 SCROLL: Avance de 0.0s a 3.0s
-      if (!video.paused) video.pause();
       const norm = (smoothP - 0.03) / (0.22 - 0.03);
       const targetTime = clamp(norm * 3.0, 0, 3.0);
       renderFrameToCanvas(targetTime);
       targetEffectiveP = smoothP;
-    } else if (stage2State !== 'done') {
-      // ETAPA 2: "Refracción que Multiplica" (Auto-reproducción nativa 3.0s -> 8.2s)
-      if (stage2State === 'idle') {
-        stage2State = 'playing';
-        video.currentTime = 3.0;
-        video.play().catch(() => {});
-      }
-
-      if (video.currentTime >= 8.18) {
-        video.pause();
-        stage2State = 'done';
-      }
-
-      drawCurrentVideoDirect();
-
-      // Sincroniza el progreso visual de forma continua con la reproducción del video
-      const videoProgress = clamp((video.currentTime - 3.0) / (8.2 - 3.0), 0, 1);
-      targetEffectiveP = 0.22 + videoProgress * (0.48 - 0.22);
+    } else if (smoothP <= 0.48) {
+      // ETAPA 2: "Refracción que Multiplica" (3.0s -> 8.2s) — PURO SCROLL
+      const norm = (smoothP - 0.22) / (0.48 - 0.22);
+      const targetTime = clamp(3.0 + norm * (8.2 - 3.0), 3.0, 8.2);
+      renderFrameToCanvas(targetTime);
+      targetEffectiveP = smoothP;
     } else if (smoothP <= 0.70) {
       // ETAPA 3: Dispersión de Arcoíris (8.2s -> 10.0s)
-      if (!video.paused) video.pause();
       const norm = (smoothP - 0.48) / (0.70 - 0.48);
       const targetTime = clamp(8.2 + norm * (duration - 8.2), 8.2, duration);
       renderFrameToCanvas(targetTime);
       targetEffectiveP = smoothP;
     } else {
       // ETAPA 4: Negro Absoluto para Linterna Interactiva
-      if (!video.paused) video.pause();
       renderFrameToCanvas(duration);
       targetEffectiveP = smoothP;
     }
@@ -872,8 +849,8 @@ function initPrismHero() {
         p2Opacity = 0;
       } else if (displayP <= 0.26) {
         p2Opacity = smoothstep(0.18, 0.26, displayP);
-      } else if (stage2State === 'playing' || displayP <= 0.48) {
-        p2Opacity = 1; // 100% nítida y visible sin parpadeos mientras corre el video
+      } else if (displayP <= 0.48) {
+        p2Opacity = 1; // 100% nítida y visible sin parpadeos
       } else if (displayP <= 0.58) {
         p2Opacity = 1 - smoothstep(0.48, 0.58, displayP); // Desvanecimiento suave y unidireccional
       } else {
@@ -907,7 +884,7 @@ function initPrismHero() {
 
     // ── E. FASE 4 REVEAL STAGE (NEGRO TOTAL + LINTERNA ARCOÍRIS CON MARCAS - PEGAJOSO)
     if (revealStage) {
-      const p4Progress = (stage2State === 'done' || displayP > 0.68) ? smoothstep(0.70, 0.80, displayP) : 0;
+      const p4Progress = displayP > 0.68 ? smoothstep(0.70, 0.80, displayP) : 0;
       revealStage.style.opacity = p4Progress.toFixed(3);
       revealStage.style.transform = `translate3d(0, ${((1 - p4Progress) * 16).toFixed(1)}px, 0) scale(${(0.97 + p4Progress * 0.03).toFixed(3)})`;
       revealStage.style.filter = `blur(${((1 - p4Progress) * 4).toFixed(1)}px)`;
