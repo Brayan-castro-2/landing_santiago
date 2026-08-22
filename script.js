@@ -543,6 +543,12 @@ function initPrismHero() {
   resizeCanvas();
 
   // 2. Setup Video & In-Memory Instant Idle Cache with Isolated Ghost Extractor
+  const isMobileView = () => window.innerWidth <= 768;
+  const currentVideoSrc = isMobileView() ? 'hero-prisma-video-mobile.mp4' : 'hero-prisma-video.mp4';
+  if (!video.src || !video.src.includes(currentVideoSrc)) {
+    video.src = currentVideoSrc;
+  }
+
   video.muted       = true;
   video.playsInline = true;
   video.preload     = 'auto';
@@ -563,7 +569,7 @@ function initPrismHero() {
     isExtracting = true;
 
     const ghost = document.createElement('video');
-    ghost.src = 'hero-prisma-video.mp4';
+    ghost.src = currentVideoSrc;
     ghost.muted = true;
     ghost.playsInline = true;
     ghost.preload = 'auto';
@@ -574,8 +580,9 @@ function initPrismHero() {
     });
 
     const offCanvas = document.createElement('canvas');
-    offCanvas.width = 960;
-    offCanvas.height = 540;
+    const isMob = isMobileView();
+    offCanvas.width = isMob ? 540 : 960;
+    offCanvas.height = isMob ? 960 : 540;
     const offCtx = offCanvas.getContext('2d', { alpha: false });
 
     const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
@@ -666,27 +673,33 @@ function initPrismHero() {
     }
 
     // Direct Video Seek Draw
-    if (video.readyState >= 2) {
+    if (video.readyState >= 1) {
       requestVideoTime(sec);
-      const hRatio = canvas.width / (video.videoWidth || 1920);
-      const vRatio = canvas.height / (video.videoHeight || 1080);
+      const isMob = isMobileView();
+      const vW = video.videoWidth > 0 ? video.videoWidth : (isMob ? 1080 : 1920);
+      const vH = video.videoHeight > 0 ? video.videoHeight : (isMob ? 1920 : 1080);
+      const hRatio = canvas.width / vW;
+      const vRatio = canvas.height / vH;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
-      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+      const centerShiftX = (canvas.width - vW * ratio) / 2;
+      const centerShiftY = (canvas.height - vH * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, vW * ratio, vH * ratio);
     }
   };
 
   // Direct Instant GPU Canvas Drawing (Live Playing Video without seek overhead)
   const drawCurrentVideoDirect = () => {
     currentTimeSec = video.currentTime;
-    if (video.readyState >= 2) {
-      const hRatio = canvas.width / (video.videoWidth || 1920);
-      const vRatio = canvas.height / (video.videoHeight || 1080);
+    if (video.readyState >= 1) {
+      const isMob = isMobileView();
+      const vW = video.videoWidth > 0 ? video.videoWidth : (isMob ? 1080 : 1920);
+      const vH = video.videoHeight > 0 ? video.videoHeight : (isMob ? 1920 : 1080);
+      const hRatio = canvas.width / vW;
+      const vRatio = canvas.height / vH;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
-      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+      const centerShiftX = (canvas.width - vW * ratio) / 2;
+      const centerShiftY = (canvas.height - vH * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, vW * ratio, vH * ratio);
     }
   };
 

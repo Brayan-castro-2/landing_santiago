@@ -3632,6 +3632,12 @@ img, video, iframe {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
   .nav-menu { display: none; }
   .mobile-toggle { display: flex; }
   .hero-title { font-size: 2.25rem; }
@@ -3646,11 +3652,155 @@ img, video, iframe {
   .modal-media-box { min-height: 300px; }
   .scroll-morph-viewport { height: 420px; }
   .robot-canvas-container { height: 300px; }
+
+  /* ── Pure Mobile Hero Optimization ── */
+  .prisma-top-nav {
+    padding: 14px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .prisma-nav-menu {
+    display: none;
+  }
+
+  .prisma-content-phase-1,
+  .prisma-content-phase-2,
+  .prisma-content-phase-3 {
+    left: 20px;
+    right: 20px;
+    width: auto;
+    max-width: calc(100vw - 40px);
+    box-sizing: border-box;
+  }
+
+  .prisma-main-headline {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .prisma-main-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    max-width: 100%;
+  }
+
+  .prisma-reveal-stage {
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .prisma-masked-content {
+    padding: 0 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .prisma-reveal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+
+  .prisma-reveal-card {
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  .prisma-reveal-num {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+  }
+
+  .prisma-reveal-title {
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+  }
+
+  .prisma-reveal-desc {
+    font-size: 0.65rem;
+    line-height: 1.35;
+  }
+
+  .prisma-reveal-brands-strip {
+    margin-top: 18px;
+    gap: 10px;
+  }
+
+  .prisma-reveal-brands-label {
+    font-size: 9px;
+  }
+
+  .prisma-reveal-brands-list {
+    gap: 6px;
+  }
+
+  .prisma-brand-badge {
+    padding: 5px 10px;
+    font-size: 0.6875rem;
+  }
+
+  .prisma-brand-badge img {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ── Filter Bar Touch Scroll ── */
+  .filter-bar {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    gap: 8px;
+    width: 100%;
+    scrollbar-width: none;
+  }
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Cinematic Services Mobile ── */
+  .cinematic-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .chapter-nav-track {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+
+  .chapter-nav-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chapter-nav-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cinematic-screen-frame {
+    height: 240px;
+  }
 }
 
 @media (max-width: 480px) {
   .metrics-grid { grid-template-columns: 1fr; }
   .process-timeline { grid-template-columns: 1fr; }
+  .prisma-reveal-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .prisma-reveal-card { padding: 12px 10px; }
+  .prisma-reveal-num { font-size: 1.35rem; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
