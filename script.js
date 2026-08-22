@@ -1,11 +1,11 @@
 /**
  * Santiago Cerda — Portfolio Engine (SaaS Clean + 3D Scroll Morph + 3D Robot)
- * Portadas con Método 2 (Instagram Direct Media & Shortcodes)
+ * Base de Datos Oficial de Reels Intercalada por Variedad y Selector de Empresa
  */
 
-/* ── BASE DE DATOS DE REELS CON SHORTCODES OFICIALES (MÉTODO 2) ─────────── */
+/* ── BASE DE DATOS DE REELS CON SHORTCODES OFICIALES & MINIATURAS REALES ─────────── */
 const videosPortafolio = [
-  /* 1. MÁS VIRALES (SPOTLIGHT CASOS ESTRELLA) */
+  /* ── 1. MAKI AÇAÍ #1 (Top Viral 6.7M) ── */
   {
     id: 1,
     cliente: "Maki Açaí",
@@ -15,15 +15,77 @@ const videosPortafolio = [
     categoria: "gastronomia",
     tipo: "viral",
     categoriaLabel: "Gastronomía",
-    titulo: "Estrategia Viral de Delivery",
-    descripcion: "Antojo visual y conversión directa a menú digital con récord histórico de reproducciones.",
+    titulo: "Estrategia Viral de Delivery (6.7M Vistas)",
+    descripcion: "Récord histórico de reproducciones y retención promedio. Clave en el salto de 0 a 220K seguidores.",
     vistas: "6.7M Vistas",
     url: "https://www.instagram.com/reel/DZU8b7Fx95j/",
-    poster: "https://www.instagram.com/p/DZU8b7Fx95j/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&auto=format&fit=crop&q=80",
+    poster: "thumb_DZU8b7Fx95j.jpg",
+    fallbackPoster: "thumb_DZU8b7Fx95j.jpg",
     isTopViral: true,
     isHeroSpotlight: true
   },
+
+  /* ── 2. ALGO MARKET #1 (Reel Estrella +40K Fans / 700K Vistas) ── */
+  {
+    id: 6,
+    cliente: "Algo Market",
+    logo: "logo-algo-market.jpg",
+    handle: "@algo_market_chile",
+    shortcode: "DbV-JTdMa9t",
+    categoria: "retail",
+    tipo: "retorno",
+    categoriaLabel: "Retail",
+    titulo: "Reel Estrella (+40K Nuevos Seguidores)",
+    descripcion: "700.000 visitas y 19s de retención promedio. El video que escaló la cuenta de 11K a 75K seguidores.",
+    vistas: "700K • +40K Fans",
+    url: "https://www.instagram.com/reel/DbV-JTdMa9t/",
+    poster: "thumb_DbV-JTdMa9t.jpg",
+    fallbackPoster: "thumb_DbV-JTdMa9t.jpg",
+    isTopViral: true,
+    isHeroSpotlight: true
+  },
+
+  /* ── 3. HOTEL GRAN PACÍFICO #1 (Top Viral 4.2M Vistas) ── */
+  {
+    id: 14,
+    cliente: "Hotel Gran Pacífico",
+    logo: "logo-hotel-gran-pacifico.jpg",
+    handle: "@granpacificohotel",
+    shortcode: "DZ-LYP7uPvo",
+    categoria: "hoteleria",
+    tipo: "viral",
+    categoriaLabel: "Hotelería",
+    titulo: "Experiencia Turística Inmersiva",
+    descripcion: "Alcanzó más de 4.2M de reproducciones e impulsó un 98% de ocupación en reservas directas.",
+    vistas: "4.2M Vistas",
+    url: "https://www.instagram.com/reel/DZ-LYP7uPvo/",
+    poster: "thumb_DZ-LYP7uPvo.jpg",
+    fallbackPoster: "thumb_DZ-LYP7uPvo.jpg",
+    isTopViral: true,
+    isHeroSpotlight: true
+  },
+
+  /* ── 4. VITANOVA CL #1 (Meta Ads ROAS ×5.41) ── */
+  {
+    id: 21,
+    cliente: "VitaNovaCL",
+    logo: "logo-vitanova.jpg",
+    handle: "@vitanovacl",
+    shortcode: "DW_2QCrjg55",
+    categoria: "ecommerce",
+    tipo: "retorno",
+    categoriaLabel: "E-Commerce",
+    titulo: "Campaña Meta Ads ROAS ×5.41",
+    descripcion: "Inversión de $656,36 USD con pautas de ROAS 5.41, 4.03 y 3.27 en Shopify.",
+    vistas: "ROAS ×5.41",
+    url: "https://www.instagram.com/reel/DW_2QCrjg55/",
+    poster: "thumb_DW_2QCrjg55.jpg",
+    fallbackPoster: "thumb_DW_2QCrjg55.jpg",
+    isTopViral: true,
+    isHeroSpotlight: true
+  },
+
+  /* ── 5. MAKI AÇAÍ #2 (1.6M Vistas Mayor Retorno) ── */
   {
     id: 2,
     cliente: "Maki Açaí",
@@ -33,35 +95,18 @@ const videosPortafolio = [
     categoria: "gastronomia",
     tipo: "retorno",
     categoriaLabel: "Gastronomía",
-    titulo: "Campaña de Frecuencia de Compra",
-    descripcion: "Campaña de producto estrella para aumentar la recurrencia de pedidos en Santiago.",
+    titulo: "Campaña de Frecuencia & Retorno Directo",
+    descripcion: "Destacado por el volumen de nuevos seguidores y pedidos directos en Santiago sin pauta.",
     vistas: "1.6M Vistas",
     url: "https://www.instagram.com/reel/DZ-WKQdRLce/",
-    poster: "https://www.instagram.com/p/DZ-WKQdRLce/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80",
-    isTopViral: true,
-    isHeroSpotlight: true
+    poster: "thumb_DZ-WKQdRLce.jpg",
+    fallbackPoster: "thumb_DZ-WKQdRLce.jpg",
+    isTopViral: true
   },
+
+  /* ── 6. ALGO MARKET #2 (700K Vistas Pasillos) ── */
   {
-    id: 3,
-    cliente: "Hotel Gran Pacífico",
-    logo: "logo-hotel-gran-pacifico.jpg",
-    handle: "@granpacificohotel",
-    shortcode: "DZ-LYP7uPvo",
-    categoria: "hoteleria",
-    tipo: "viral",
-    categoriaLabel: "Hotelería",
-    titulo: "Experiencia Turística Inmersiva",
-    descripcion: "Reel viral que alcanzó millones de vistas y generó 98% de ocupación en reservas directas.",
-    vistas: "4.2M Vistas",
-    url: "https://www.instagram.com/reel/DZ-LYP7uPvo/",
-    poster: "https://www.instagram.com/p/DZ-LYP7uPvo/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=80",
-    isTopViral: true,
-    isHeroSpotlight: true
-  },
-  {
-    id: 4,
+    id: 7,
     cliente: "Algo Market",
     logo: "logo-algo-market.jpg",
     handle: "@algo_market_chile",
@@ -69,37 +114,18 @@ const videosPortafolio = [
     categoria: "retail",
     tipo: "viral",
     categoriaLabel: "Retail",
-    titulo: "Crecimiento Orgánico en Tiendas",
-    descripcion: "Contenido humorístico y dinámico en pasillos que impulsó la cuenta a +75K seguidores.",
+    titulo: "Crecimiento Orgánico en Pasillos",
+    descripcion: "Humor y tendencias en góndolas con alta conversión a tienda física.",
     vistas: "700K Vistas",
     url: "https://www.instagram.com/reel/DY2ZiR8uC24/",
-    poster: "https://www.instagram.com/p/DY2ZiR8uC24/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&auto=format&fit=crop&q=80",
-    isTopViral: true,
-    isHeroSpotlight: true
-  },
-  {
-    id: 5,
-    cliente: "VitaNovaCL",
-    logo: "logo-vitanova.jpg",
-    handle: "@vitanovacl",
-    shortcode: "DW_2QCrjg55",
-    categoria: "ecommerce",
-    tipo: "retorno",
-    categoriaLabel: "E-Commerce",
-    titulo: "Escalado de Tienda Shopify & Meta Ads",
-    descripcion: "Creativos UGC de respuesta directa y embudos de Meta Ads con ROAS récord de ×5.41.",
-    vistas: "ROAS ×5.41",
-    url: "https://www.instagram.com/reel/DW_2QCrjg55/",
-    poster: "https://www.instagram.com/p/DW_2QCrjg55/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80",
-    isTopViral: true,
-    isHeroSpotlight: true
+    poster: "thumb_DY2ZiR8uC24.jpg",
+    fallbackPoster: "thumb_DY2ZiR8uC24.jpg",
+    isTopViral: true
   },
 
-  /* 2. CATÁLOGO COMPLETO PARA EL EXPLORADOR 3D SCROLL-MORPH */
+  /* ── 7. HOTEL GRAN PACÍFICO #2 (1.2M Vistas Gastronomía) ── */
   {
-    id: 6,
+    id: 15,
     cliente: "Hotel Gran Pacífico",
     logo: "logo-hotel-gran-pacifico.jpg",
     handle: "@granpacificohotel",
@@ -111,25 +137,48 @@ const videosPortafolio = [
     descripcion: "Recorrido dinámico por las instalaciones y carta culinaria del hotel.",
     vistas: "1.2M Vistas",
     url: "https://www.instagram.com/reel/DRz4mDHD9ej/",
-    poster: "https://www.instagram.com/p/DRz4mDHD9ej/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&auto=format&fit=crop&q=80"
+    poster: "thumb_DRz4mDHD9ej.jpg",
+    fallbackPoster: "thumb_DRz4mDHD9ej.jpg",
+    isTopViral: true
   },
+
+  /* ── 8. VITANOVA CL #2 (Informativo Tutorial) ── */
   {
-    id: 7,
-    cliente: "Hotel Gran Pacífico",
-    logo: "logo-hotel-gran-pacifico.jpg",
-    handle: "@granpacificohotel",
-    shortcode: "DP6zAVDjDHE",
-    categoria: "hoteleria",
-    tipo: "viral",
-    categoriaLabel: "Hotelería",
-    titulo: "Habitaciones con Vista Panorámica",
-    descripcion: "Gancho visual en los primeros 2 segundos para captar turistas.",
-    vistas: "890K Vistas",
-    url: "https://www.instagram.com/reel/DP6zAVDjDHE/",
-    poster: "https://www.instagram.com/p/DP6zAVDjDHE/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&auto=format&fit=crop&q=80"
+    id: 22,
+    cliente: "VitaNovaCL",
+    logo: "logo-vitanova.jpg",
+    handle: "@vitanovacl",
+    shortcode: "DXKhHPPCSAX",
+    categoria: "ecommerce",
+    tipo: "informativo",
+    categoriaLabel: "E-Commerce",
+    titulo: "¿Cómo usar tu producto paso a paso?",
+    descripcion: "Tutorial de uso y eliminación de dudas antes de la compra.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DXKhHPPCSAX/",
+    poster: "thumb_DXKhHPPCSAX.jpg",
+    fallbackPoster: "thumb_DXKhHPPCSAX.jpg"
   },
+
+  /* ── 9. MAKI AÇAÍ #3 (Informativo Preparación) ── */
+  {
+    id: 3,
+    cliente: "Maki Açaí",
+    logo: "logo-maki-acai.jpg",
+    handle: "@makiacai.cl",
+    shortcode: "DZm9WIlRGzp",
+    categoria: "gastronomia",
+    tipo: "informativo",
+    categoriaLabel: "Gastronomía",
+    titulo: "¿Cómo se prepara el auténtico Açaí?",
+    descripcion: "Contenido educativo de alta retención sobre ingredientes y elaboración artesanal.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DZm9WIlRGzp/",
+    poster: "thumb_DZm9WIlRGzp.jpg",
+    fallbackPoster: "thumb_DZm9WIlRGzp.jpg"
+  },
+
+  /* ── 10. ALGO MARKET #3 (540K Vistas Snacks) ── */
   {
     id: 8,
     cliente: "Algo Market",
@@ -139,13 +188,70 @@ const videosPortafolio = [
     categoria: "retail",
     tipo: "viral",
     categoriaLabel: "Retail",
-    titulo: "Tendencias & Snacks Virales",
-    descripcion: "Presentación rápida de novedades de importación.",
+    titulo: "Tendencias & Snacks Virales de Importación",
+    descripcion: "Presentación de novedades de Japón y USA con alto ratio de compartidos.",
     vistas: "540K Vistas",
     url: "https://www.instagram.com/reel/DWy6d51jqJX/",
-    poster: "https://www.instagram.com/p/DWy6d51jqJX/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80"
+    poster: "thumb_DWy6d51jqJX.jpg",
+    fallbackPoster: "thumb_DWy6d51jqJX.jpg",
+    isTopViral: true
   },
+
+  /* ── 11. HOTEL GRAN PACÍFICO #3 (890K Vistas Habitaciones) ── */
+  {
+    id: 16,
+    cliente: "Hotel Gran Pacífico",
+    logo: "logo-hotel-gran-pacifico.jpg",
+    handle: "@granpacificohotel",
+    shortcode: "DP6zAVDjDHE",
+    categoria: "hoteleria",
+    tipo: "viral",
+    categoriaLabel: "Hotelería",
+    titulo: "Habitaciones con Vista Panorámica",
+    descripcion: "Gancho visual en los primeros 2 segundos para captar turistas en el sur.",
+    vistas: "890K Vistas",
+    url: "https://www.instagram.com/reel/DP6zAVDjDHE/",
+    poster: "thumb_DP6zAVDjDHE.jpg",
+    fallbackPoster: "thumb_DP6zAVDjDHE.jpg"
+  },
+
+  /* ── 12. VITANOVA CL #3 (Informativo Despachos) ── */
+  {
+    id: 23,
+    cliente: "VitaNovaCL",
+    logo: "logo-vitanova.jpg",
+    handle: "@vitanovacl",
+    shortcode: "DXWpF8-EXap",
+    categoria: "ecommerce",
+    tipo: "informativo",
+    categoriaLabel: "E-Commerce",
+    titulo: "Preguntas Frecuentes & Despachos",
+    descripcion: "Eliminación de objeciones de compra en la pauta digital.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DXWpF8-EXap/",
+    poster: "thumb_DXWpF8-EXap.jpg",
+    fallbackPoster: "thumb_DXWpF8-EXap.jpg"
+  },
+
+  /* ── 13. MAKI AÇAÍ #4 (Informativo Nutricional) ── */
+  {
+    id: 4,
+    cliente: "Maki Açaí",
+    logo: "logo-maki-acai.jpg",
+    handle: "@makiacai.cl",
+    shortcode: "DZFjKP1Rn8o",
+    categoria: "gastronomia",
+    tipo: "informativo",
+    categoriaLabel: "Gastronomía",
+    titulo: "Beneficios Nutricionales del Açaí Puro",
+    descripcion: "Educación de producto para clientes fitness y posicionamiento saludable.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DZFjKP1Rn8o/",
+    poster: "thumb_DZFjKP1Rn8o.jpg",
+    fallbackPoster: "thumb_DZFjKP1Rn8o.jpg"
+  },
+
+  /* ── 14. ALGO MARKET #4 (410K Vistas Storytelling) ── */
   {
     id: 9,
     cliente: "Algo Market",
@@ -155,125 +261,16 @@ const videosPortafolio = [
     categoria: "retail",
     tipo: "viral",
     categoriaLabel: "Retail",
-    titulo: "Experiencia de Compra en Local",
-    descripcion: "Storytelling visual que conecta con el público juvenil de Santiago.",
+    titulo: "Experiencia de Compra & Storytelling",
+    descripcion: "Storytelling visual que conecta con el público joven de Santiago.",
     vistas: "410K Vistas",
     url: "https://www.instagram.com/reel/DUiW75ODle8/",
-    poster: "https://www.instagram.com/p/DUiW75ODle8/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?w=600&auto=format&fit=crop&q=80"
+    poster: "thumb_DUiW75ODle8.jpg",
+    fallbackPoster: "thumb_DUiW75ODle8.jpg",
+    isTopViral: true
   },
-  {
-    id: 10,
-    cliente: "Maki Açaí",
-    logo: "logo-maki-acai.jpg",
-    handle: "@makiacai.cl",
-    shortcode: "DZm9WIlRGzp",
-    categoria: "gastronomia",
-    tipo: "informativo",
-    categoriaLabel: "Gastronomía",
-    titulo: "¿Cómo se prepara el auténtico Açaí?",
-    descripcion: "Video educativo sobre ingredientes y proceso artesanal.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DZm9WIlRGzp/",
-    poster: "https://www.instagram.com/p/DZm9WIlRGzp/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&auto=format&fit=crop&q=80"
-  },
-  {
-    id: 11,
-    cliente: "Maki Açaí",
-    logo: "logo-maki-acai.jpg",
-    handle: "@makiacai.cl",
-    shortcode: "DZFjKP1Rn8o",
-    categoria: "gastronomia",
-    tipo: "informativo",
-    categoriaLabel: "Gastronomía",
-    titulo: "Beneficios Nutricionales del Açaí Puro",
-    descripcion: "Educación de producto para clientes fitness y vida sana.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DZFjKP1Rn8o/",
-    poster: "https://www.instagram.com/p/DZFjKP1Rn8o/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80"
-  },
-  {
-    id: 12,
-    cliente: "Maki Açaí",
-    logo: "logo-maki-acai.jpg",
-    handle: "@makiacai.cl",
-    shortcode: "DavYt7gOV--",
-    categoria: "gastronomia",
-    tipo: "informativo",
-    categoriaLabel: "Gastronomía",
-    titulo: "Guía de Toppings y Combinaciones",
-    descripcion: "Contenido interactivo para personalizar bowls.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DavYt7gOV--/",
-    poster: "https://www.instagram.com/p/DavYt7gOV--/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=600&auto=format&fit=crop&q=80"
-  },
-  {
-    id: 13,
-    cliente: "Algo Market",
-    logo: "logo-algo-market.jpg",
-    handle: "@algo_market_chile",
-    shortcode: "DaQTEwOOUAy",
-    categoria: "retail",
-    tipo: "informativo",
-    categoriaLabel: "Retail",
-    titulo: "Tour de Novedades Semanales",
-    descripcion: "Recorrido dinámico por las nuevas llegadas de stock.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DaQTEwOOUAy/",
-    poster: "https://www.instagram.com/p/DaQTEwOOUAy/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&auto=format&fit=crop&q=80"
-  },
-  {
-    id: 14,
-    cliente: "Algo Market",
-    logo: "logo-algo-market.jpg",
-    handle: "@algo_market_chile",
-    shortcode: "DNbJb_0sWXt",
-    categoria: "retail",
-    tipo: "informativo",
-    categoriaLabel: "Retail",
-    titulo: "Productos Importados que no conocías",
-    descripcion: "Descubrimiento de productos virales de Japón y USA.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DNbJb_0sWXt/",
-    poster: "https://www.instagram.com/p/DNbJb_0sWXt/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80"
-  },
-  {
-    id: 15,
-    cliente: "Algo Market",
-    logo: "logo-algo-market.jpg",
-    handle: "@algo_market_chile",
-    shortcode: "DTA8dFwDMd1",
-    categoria: "retail",
-    tipo: "informativo",
-    categoriaLabel: "Retail",
-    titulo: "Cómo llegar a nuestras sucursales",
-    descripcion: "Geolocalización visual para tráfico a tiendas físicas.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DTA8dFwDMd1/",
-    poster: "https://www.instagram.com/p/DTA8dFwDMd1/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?w=600&auto=format&fit=crop&q=80"
-  },
-  {
-    id: 16,
-    cliente: "Algo Market",
-    logo: "logo-algo-market.jpg",
-    handle: "@algo_market_chile",
-    shortcode: "DWCbg8bkf4T",
-    categoria: "retail",
-    tipo: "informativo",
-    categoriaLabel: "Retail",
-    titulo: "Top 5 Bebidas Virales",
-    descripcion: "Formato ranking de alta retención.",
-    vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DWCbg8bkf4T/",
-    poster: "https://www.instagram.com/p/DWCbg8bkf4T/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=600&auto=format&fit=crop&q=80"
-  },
+
+  /* ── 15. HOTEL GRAN PACÍFICO #4 (Informativo Actividades) ── */
   {
     id: 17,
     cliente: "Hotel Gran Pacífico",
@@ -284,12 +281,50 @@ const videosPortafolio = [
     tipo: "informativo",
     categoriaLabel: "Hotelería",
     titulo: "Guía de Actividades en Puerto Montt",
-    descripcion: "Recomendaciones turísticas locales.",
+    descripcion: "Recomendaciones turísticas locales para huéspedes.",
     vistas: "Informativo",
     url: "https://www.instagram.com/reel/DWhWtBvjxef/",
-    poster: "https://www.instagram.com/p/DWhWtBvjxef/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=80"
+    poster: "thumb_DWhWtBvjxef.jpg",
+    fallbackPoster: "thumb_DWhWtBvjxef.jpg"
   },
+
+  /* ── 16. MAKI AÇAÍ #5 (Informativo Toppings) ── */
+  {
+    id: 5,
+    cliente: "Maki Açaí",
+    logo: "logo-maki-acai.jpg",
+    handle: "@makiacai.cl",
+    shortcode: "DavYt7gOV--",
+    categoria: "gastronomia",
+    tipo: "informativo",
+    categoriaLabel: "Gastronomía",
+    titulo: "Guía de Toppings y Combinaciones",
+    descripcion: "Formato dinámico para personalizar bowls e incentivar la compra cruzada.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DavYt7gOV--/",
+    poster: "thumb_DavYt7gOV__.jpg",
+    fallbackPoster: "thumb_DavYt7gOV__.jpg"
+  },
+
+  /* ── 17. ALGO MARKET #5 (Informativo Novedades) ── */
+  {
+    id: 10,
+    cliente: "Algo Market",
+    logo: "logo-algo-market.jpg",
+    handle: "@algo_market_chile",
+    shortcode: "DaQTEwOOUAy",
+    categoria: "retail",
+    tipo: "informativo",
+    categoriaLabel: "Retail",
+    titulo: "Tour de Novedades Semanales",
+    descripcion: "Recorrido dinámico por las nuevas llegadas de stock importado.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DaQTEwOOUAy/",
+    poster: "thumb_DaQTEwOOUAy.jpg",
+    fallbackPoster: "thumb_DaQTEwOOUAy.jpg"
+  },
+
+  /* ── 18. HOTEL GRAN PACÍFICO #5 (Informativo Salones B2B) ── */
   {
     id: 18,
     cliente: "Hotel Gran Pacífico",
@@ -303,132 +338,622 @@ const videosPortafolio = [
     descripcion: "Video corporativo para arriendos B2B y congresos.",
     vistas: "Informativo",
     url: "https://www.instagram.com/reel/DTdk_bIDJI4/",
-    poster: "https://www.instagram.com/p/DTdk_bIDJI4/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop&q=80"
+    poster: "thumb_DTdk_bIDJI4.jpg",
+    fallbackPoster: "thumb_DTdk_bIDJI4.jpg"
   },
+
+  /* ── 19. ALGO MARKET #6 (Informativo Importados) ── */
+  {
+    id: 11,
+    cliente: "Algo Market",
+    logo: "logo-algo-market.jpg",
+    handle: "@algo_market_chile",
+    shortcode: "DNbJb_0sWXt",
+    categoria: "retail",
+    tipo: "informativo",
+    categoriaLabel: "Retail",
+    titulo: "Productos Importados que no conocías",
+    descripcion: "Descubrimiento de productos virales de alta rotación.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DNbJb_0sWXt/",
+    poster: "thumb_DNbJb_0sWXt.jpg",
+    fallbackPoster: "thumb_DNbJb_0sWXt.jpg"
+  },
+
+  /* ── 20. HOTEL GRAN PACÍFICO #6 (Informativo Restaurante Gourmet) ── */
   {
     id: 19,
-    cliente: "VitaNovaCL",
-    logo: "logo-vitanova.jpg",
-    handle: "@vitanovacl",
-    shortcode: "DXKhHPPCSAX",
-    categoria: "ecommerce",
+    cliente: "Hotel Gran Pacífico",
+    logo: "logo-hotel-gran-pacifico.jpg",
+    handle: "@granpacificohotel",
+    shortcode: "DTa0_NRjlVM",
+    categoria: "hoteleria",
     tipo: "informativo",
-    categoriaLabel: "E-Commerce",
-    titulo: "¿Cómo usar tu producto paso a paso?",
-    descripcion: "Tutorial de uso y eliminación de dudas de compra.",
+    categoriaLabel: "Hotelería",
+    titulo: "Experiencia Gourmet Frente al Mar",
+    descripcion: "Gastronomía marina y coctelería de autor del restaurante del hotel.",
     vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DXKhHPPCSAX/",
-    poster: "https://www.instagram.com/p/DXKhHPPCSAX/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=80"
+    url: "https://www.instagram.com/reel/DTa0_NRjlVM/",
+    poster: "thumb_DTa0_NRjlVM.jpg",
+    fallbackPoster: "thumb_DTa0_NRjlVM.jpg"
   },
+
+  /* ── 21. ALGO MARKET #7 (Informativo Sucursales) ── */
+  {
+    id: 12,
+    cliente: "Algo Market",
+    logo: "logo-algo-market.jpg",
+    handle: "@algo_market_chile",
+    shortcode: "DTA8dFwDMd1",
+    categoria: "retail",
+    tipo: "informativo",
+    categoriaLabel: "Retail",
+    titulo: "Cómo llegar a nuestras sucursales",
+    descripcion: "Geolocalización visual para tráfico directo a tiendas físicas.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DTA8dFwDMd1/",
+    poster: "thumb_DTA8dFwDMd1.jpg",
+    fallbackPoster: "thumb_DTA8dFwDMd1.jpg"
+  },
+
+  /* ── 22. HOTEL GRAN PACÍFICO #7 (Informativo Escape de Fin de Semana) ── */
   {
     id: 20,
-    cliente: "VitaNovaCL",
-    logo: "logo-vitanova.jpg",
-    handle: "@vitanovacl",
-    shortcode: "DXWpF8-EXap",
-    categoria: "ecommerce",
+    cliente: "Hotel Gran Pacífico",
+    logo: "logo-hotel-gran-pacifico.jpg",
+    handle: "@granpacificohotel",
+    shortcode: "DRAVS8cjxof",
+    categoria: "hoteleria",
     tipo: "informativo",
-    categoriaLabel: "E-Commerce",
-    titulo: "Preguntas Frecuentes & Envíos",
-    descripcion: "Eliminación de objeciones de compra en la pauta digital.",
+    categoriaLabel: "Hotelería",
+    titulo: "Escape de Fin de Semana en el Sur",
+    descripcion: "Propuesta de valor para turismo regional y escapadas en pareja.",
     vistas: "Informativo",
-    url: "https://www.instagram.com/reel/DXWpF8-EXap/",
-    poster: "https://www.instagram.com/p/DXWpF8-EXap/media/?size=l",
-    fallbackPoster: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80"
+    url: "https://www.instagram.com/reel/DRAVS8cjxof/",
+    poster: "thumb_DRAVS8cjxof.jpg",
+    fallbackPoster: "thumb_DRAVS8cjxof.jpg"
+  },
+
+  /* ── 23. ALGO MARKET #8 (Informativo Ranking Bebidas) ── */
+  {
+    id: 13,
+    cliente: "Algo Market",
+    logo: "logo-algo-market.jpg",
+    handle: "@algo_market_chile",
+    shortcode: "DWCbg8bkf4T",
+    categoria: "retail",
+    tipo: "informativo",
+    categoriaLabel: "Retail",
+    titulo: "Top 5 Bebidas Virales",
+    descripcion: "Formato ranking de alta retención para público joven.",
+    vistas: "Informativo",
+    url: "https://www.instagram.com/reel/DWCbg8bkf4T/",
+    poster: "thumb_DWCbg8bkf4T.jpg",
+    fallbackPoster: "thumb_DWCbg8bkf4T.jpg"
   }
 ];
 
+/* ── MODAL VISOR DE EVIDENCIA EN ALTA RESOLUCIÓN ─────────────────────────── */
+function openEvidenceModal(imgSrc, title) {
+  const modal = document.getElementById('evidenceModal');
+  const imgEl = document.getElementById('evidenceModalImg');
+  const titleEl = document.getElementById('evidenceModalTitle');
+  if (!modal || !imgEl) return;
+
+  imgEl.src = imgSrc;
+  if (titleEl) titleEl.textContent = title || 'Evidencia de Métricas Verificadas';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEvidenceModal() {
+  const modal = document.getElementById('evidenceModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* ── FILTRO RÁPIDO POR EMPRESA ───────────────────────────────────────────── */
+function filterByCompany(companyName) {
+  const filterBtns = document.querySelectorAll('#casesFilterBar .filter-btn');
+  filterBtns.forEach(btn => {
+    if (btn.dataset.filter.toLowerCase() === companyName.toLowerCase()) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  renderScalableGallery(companyName, true);
+  
+  const modal = document.getElementById('videoModal');
+  if (modal && modal.classList.contains('active')) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  const casesSection = document.getElementById('casos');
+  if (casesSection) {
+    casesSection.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+window.openEvidenceModal = openEvidenceModal;
+window.closeEvidenceModal = closeEvidenceModal;
+window.filterByCompany = filterByCompany;
+
 document.addEventListener('DOMContentLoaded', () => {
-  initHeroCinema();
-  renderScalableGallery('all');
+  initPrismHero();
+  initStickyNavbar();
+  renderScalableGallery('all', false);
   initGalleryFilters();
   initCounters();
   initExpandingCards();
   initVideoModal();
   initMobileMenu();
   initChatWidget();
-  initScrollMorphGallery();
-  initRobotCompanion();
   initTimelineProgress();
   initCinematicScroll();
 });
 
-/* ── 0. HERO CINEMA: Scroll-Scrubbed Video + Nav & Left Text Reveal ───────── */
-function initHeroCinema() {
-  const navbar    = document.getElementById('navbar');
-  const section   = document.getElementById('hero');
-  const gradient  = document.getElementById('heroCinemaGradient');
-  const textPanel = document.getElementById('heroCinemaText');
-  const hint      = document.getElementById('heroCinemaHint');
-  const video     = document.getElementById('heroCinemaVideo');
+/* ── 0.0 PRISMA CONFIGURATION & CALIBRATION ENGINE ───────────────────────── */
+window.PRISMA_CFG = {
+  scrollHeight: 220,  // vh
+  loopMin: 0.01,      // seg
+  loopMax: 1.20,      // seg
+  loopSpeed: 0.024,   // velocidad senoidal
+  stage2Time: 3.00,   // seg de cambio de titular
+  revealStart: 0.88,  // ratio de scroll (0-1)
+  lanternSize: 520,   // px ampliado y suave
+  darkOverlay: 0.40,  // opacidad 0-1
+  userManualSeek: null // si el usuario arrastra el slider manual de tiempo
+};
 
-  if (!section || !video) return;
+/* ── 0.0 PRISMA HERO: 60/120FPS CANVAS FRAME BUFFER & MOUSE REVEAL ENGINE ─ */
+function initPrismHero() {
+  const section     = document.getElementById('hero-prisma');
+  const pinned      = document.getElementById('prismaHeroPinned');
+  const video       = document.getElementById('prismaVideo');
+  const canvas      = document.getElementById('prismaCanvas');
+  const overlay     = document.querySelector('.prisma-video-overlay');
+  const phase1      = document.getElementById('prismaPhase1');
+  const phase2      = document.getElementById('prismaPhase2');
+  const phase3      = document.getElementById('prismaPhase3');
+  const revealStage = document.getElementById('prismaRevealStage');
+  const mouseLight  = document.getElementById('prismaMouseLight');
+  const maskedCont  = document.getElementById('prismaMaskedContent');
+  const scrollFill  = document.getElementById('prismaScrollFill');
+  const scrollLabel = document.getElementById('prismaScrollLabel');
 
-  // Prepare video for frame-accurate scrubbing
-  video.muted   = true;
-  video.loop    = false;
-  video.preload = 'auto';
-  video.pause();
-  video.currentTime = 0;
+  if (!section || !video || !canvas) return;
 
-  let duration = 0;
-  const onMeta = () => { duration = video.duration || 0; };
+  const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+
+  // 1. Setup Canvas Sizing with Retina Resolution
+  const resizeCanvas = () => {
+    canvas.width  = window.innerWidth * Math.min(window.devicePixelRatio, 1.5);
+    canvas.height = window.innerHeight * Math.min(window.devicePixelRatio, 1.5);
+  };
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  // 2. Setup Video & In-Memory Instant Idle Cache with Isolated Ghost Extractor
+  video.muted       = true;
+  video.playsInline = true;
+  video.preload     = 'auto';
+
+  const IDLE_FRAMES_COUNT = 32;
+  const idleFrames = [];
+  let duration = 10.0;
+  let isExtracting = false;
+  let idleClock = 0;
+  let currentTimeSec = 0;
+  let isSeeking = false;
+  let pendingTime = null;
+  let stage2AutoTime = 3.0;
+
+  // Ghost Video Extractor in Background Thread (Does NOT block main video)
+  const extractIdleFrames = async () => {
+    if (isExtracting) return;
+    isExtracting = true;
+
+    const ghost = document.createElement('video');
+    ghost.src = 'hero-prisma-video.mp4';
+    ghost.muted = true;
+    ghost.playsInline = true;
+    ghost.preload = 'auto';
+
+    await new Promise((res) => {
+      ghost.addEventListener('loadeddata', res, { once: true });
+      ghost.load();
+    });
+
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = 960;
+    offCanvas.height = 540;
+    const offCtx = offCanvas.getContext('2d', { alpha: false });
+
+    const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
+
+    for (let i = 0; i < IDLE_FRAMES_COUNT; i++) {
+      const time = (i / (IDLE_FRAMES_COUNT - 1)) * bufferMaxSec;
+      ghost.currentTime = time;
+
+      await new Promise((resolve) => {
+        const onSeek = () => {
+          ghost.removeEventListener('seeked', onSeek);
+          offCtx.drawImage(ghost, 0, 0, offCanvas.width, offCanvas.height);
+          if ('createImageBitmap' in window) {
+            createImageBitmap(offCanvas).then(bmp => {
+              idleFrames[i] = bmp;
+              resolve();
+            });
+          } else {
+            const img = new Image();
+            img.src = offCanvas.toDataURL('image/jpeg', 0.85);
+            idleFrames[i] = img;
+            resolve();
+          }
+        };
+        ghost.addEventListener('seeked', onSeek);
+      });
+    }
+  };
+
+  const onMeta = () => {
+    duration = video.duration || 10.0;
+    extractIdleFrames();
+  };
   video.addEventListener('loadedmetadata', onMeta);
   if (video.readyState >= 1) onMeta();
 
-  // Raw scroll progress (0 → 1) — no lerp, direct mapping
-  let scrollP  = 0;
-  // Smoothed progress for UI animations only
-  let uiP      = 0;
-
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
-  const updateScrollP = () => {
+  const smoothstep = (min, max, value) => {
+    const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+    return x * x * (3 - 2 * x);
+  };
+
+  // Direct High-Performance Seek for Main Video
+  const requestVideoTime = (targetSec) => {
+    if (Math.abs(video.currentTime - targetSec) < 0.02) return;
+    if (isSeeking) {
+      pendingTime = targetSec;
+      return;
+    }
+    isSeeking = true;
+    if ('fastSeek' in video) {
+      video.fastSeek(targetSec);
+    } else {
+      video.currentTime = targetSec;
+    }
+  };
+
+  video.addEventListener('seeked', () => {
+    isSeeking = false;
+    if (pendingTime !== null) {
+      const nextTime = pendingTime;
+      pendingTime = null;
+      requestVideoTime(nextTime);
+    }
+  });
+
+  // 3. Draw Frame to Canvas with Full Cover Fit
+  const renderFrameToCanvas = (sec, isIdleLoop = false) => {
+    currentTimeSec = sec;
+
+    if (isIdleLoop && idleFrames.length >= (IDLE_FRAMES_COUNT - 4)) {
+      const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
+      const factor = clamp(sec / bufferMaxSec, 0, 1);
+      const frameIdx = clamp(Math.round(factor * (idleFrames.length - 1)), 0, idleFrames.length - 1);
+
+      if (idleFrames[frameIdx]) {
+        const img = idleFrames[frameIdx];
+        const hRatio = canvas.width / img.width;
+        const vRatio = canvas.height / img.height;
+        const ratio  = Math.max(hRatio, vRatio);
+        const centerShiftX = (canvas.width - img.width * ratio) / 2;
+        const centerShiftY = (canvas.height - img.height * ratio) / 2;
+
+        ctx.drawImage(img, 0, 0, img.width, img.height, centerShiftX, centerShiftY, img.width * ratio, img.height * ratio);
+        return;
+      }
+    }
+
+    // Direct Video Seek Draw
+    if (video.readyState >= 2) {
+      requestVideoTime(sec);
+      const hRatio = canvas.width / (video.videoWidth || 1920);
+      const vRatio = canvas.height / (video.videoHeight || 1080);
+      const ratio  = Math.max(hRatio, vRatio);
+      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
+      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+    }
+  };
+
+  // Direct Instant GPU Canvas Drawing (Live Playing Video without seek overhead)
+  const drawCurrentVideoDirect = () => {
+    currentTimeSec = video.currentTime;
+    if (video.readyState >= 2) {
+      const hRatio = canvas.width / (video.videoWidth || 1920);
+      const vRatio = canvas.height / (video.videoHeight || 1080);
+      const ratio  = Math.max(hRatio, vRatio);
+      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
+      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+    }
+  };
+
+  let stage2State = 'idle'; // 'idle' | 'playing' | 'done'
+
+  // 4. Scroll Progress Loop (Natural Responsive Scroll)
+  let scrollP = 0;
+  let smoothP = 0;
+  let displayP = 0;
+
+  const updateScrollProgress = () => {
+    const sectionTop = section.offsetTop;
     const maxScroll = section.offsetHeight - window.innerHeight;
-    scrollP = clamp(window.scrollY / maxScroll, 0, 1);
+    if (maxScroll <= 0) return;
+    const relative = window.scrollY - sectionTop;
+    scrollP = clamp(relative / maxScroll, 0, 1);
   };
 
-  let rafId = null;
-  const render = () => {
-    // UI lerp — snappy (0.18 = fast but smooth)
-    uiP += (scrollP - uiP) * 0.18;
+  // Solo bloquea si el video está reproduciéndose activamente en Fase 2
+  window.addEventListener('wheel', (e) => {
+    const heroBottom = section.offsetTop + section.offsetHeight;
+    if (window.scrollY < heroBottom && stage2State === 'playing' && e.deltaY > 0) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 
-    // ── VIDEO: direct seek — no lerp, frame-accurate sync with scroll
-    if (duration > 0) {
-      video.currentTime = scrollP * duration;
+  window.addEventListener('touchmove', (e) => {
+    const heroBottom = section.offsetTop + section.offsetHeight;
+    if (window.scrollY < heroBottom && stage2State === 'playing') {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+
+  // 5. Mouse Reveal Lantern Tracking
+  let targetMouseX = window.innerWidth / 2;
+  let targetMouseY = window.innerHeight / 2;
+  let currentMouseX = targetMouseX;
+  let currentMouseY = targetMouseY;
+  let mouseInHero = true;
+
+  window.addEventListener('mousemove', (e) => {
+    if (!pinned) return;
+    const rect = pinned.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      mouseInHero = true;
+      targetMouseX = e.clientX;
+      targetMouseY = e.clientY - rect.top;
+    } else {
+      mouseInHero = false;
+    }
+  }, { passive: true });
+
+  // 6. Main 60/120 FPS Animation Loop
+  const renderPrisma = () => {
+    requestAnimationFrame(renderPrisma);
+
+    const cfg = window.PRISMA_CFG;
+
+    // Apply live dynamic properties
+    if (overlay) {
+      overlay.style.background = `radial-gradient(circle at 65% 50%, rgba(0, 0, 0, ${(cfg.darkOverlay * 0.2).toFixed(2)}) 0%, rgba(0, 0, 0, ${cfg.darkOverlay.toFixed(2)}) 100%)`;
     }
 
-    // ── Navbar: slide in top — starts at uiP=0.10, full at uiP=0.28
-    const navP = clamp((uiP - 0.10) / 0.18, 0, 1);
-    if (navbar) {
-      navbar.style.transform = `translateY(${((1 - navP) * -100).toFixed(1)}%)`;
-      navbar.style.opacity   = navP.toFixed(3);
+    // Natural fast-reacting scroll interpolation
+    smoothP += (scrollP - smoothP) * 0.16;
+
+    // ── GESTIÓN DE ESTADOS Y RESET BIDIRECCIONAL ──
+    if (smoothP < 0.18) {
+      // Si el usuario regresa arriba, reinicia el estado para poder reproducir de nuevo
+      if (stage2State !== 'idle') {
+        stage2State = 'idle';
+        if (!video.paused) video.pause();
+      }
     }
 
-    // ── Gradient: fade in at 0.12 → 0.45
-    if (gradient) {
-      gradient.style.opacity = clamp((uiP - 0.12) / 0.33, 0, 1).toFixed(3);
+    let targetEffectiveP = smoothP;
+
+    // ── A. 120FPS CANVAS RENDERING
+    if (cfg.userManualSeek !== null) {
+      if (!video.paused) video.pause();
+      renderFrameToCanvas(cfg.userManualSeek);
+      targetEffectiveP = smoothP;
+    } else if (smoothP < 0.03) {
+      // REPOSO: Búfer de memoria a 120 FPS (0.0s -> 1.2s -> 0.0s)
+      if (!video.paused) video.pause();
+      idleClock += (cfg.loopSpeed * 0.52);
+      const rawSin = Math.sin(idleClock) * 0.5 + 0.5;
+      const smoothFactor = rawSin * rawSin * (3 - 2 * rawSin);
+      const targetTime = cfg.loopMin + smoothFactor * (cfg.loopMax - cfg.loopMin);
+      renderFrameToCanvas(targetTime, true);
+      targetEffectiveP = 0;
+    } else if (smoothP <= 0.22) {
+      // ETAPA 1 SCROLL: Avance de 0.0s a 3.0s
+      if (!video.paused) video.pause();
+      const norm = (smoothP - 0.03) / (0.22 - 0.03);
+      const targetTime = clamp(norm * 3.0, 0, 3.0);
+      renderFrameToCanvas(targetTime);
+      targetEffectiveP = smoothP;
+    } else if (stage2State !== 'done') {
+      // ETAPA 2: "Refracción que Multiplica" (Auto-reproducción nativa 3.0s -> 8.2s)
+      if (stage2State === 'idle') {
+        stage2State = 'playing';
+        video.currentTime = 3.0;
+        video.play().catch(() => {});
+      }
+
+      if (video.currentTime >= 8.18) {
+        video.pause();
+        stage2State = 'done';
+      }
+
+      drawCurrentVideoDirect();
+
+      // Sincroniza el progreso visual de forma continua con la reproducción del video
+      const videoProgress = clamp((video.currentTime - 3.0) / (8.2 - 3.0), 0, 1);
+      targetEffectiveP = 0.22 + videoProgress * (0.48 - 0.22);
+    } else if (smoothP <= 0.70) {
+      // ETAPA 3: Dispersión de Arcoíris (8.2s -> 10.0s)
+      if (!video.paused) video.pause();
+      const norm = (smoothP - 0.48) / (0.70 - 0.48);
+      const targetTime = clamp(8.2 + norm * (duration - 8.2), 8.2, duration);
+      renderFrameToCanvas(targetTime);
+      targetEffectiveP = smoothP;
+    } else {
+      // ETAPA 4: Negro Absoluto para Linterna Interactiva
+      if (!video.paused) video.pause();
+      renderFrameToCanvas(duration);
+      targetEffectiveP = smoothP;
     }
 
-    // ── Left text: slide from left at 0.22 → 0.58
-    const textP = clamp((uiP - 0.22) / 0.36, 0, 1);
-    if (textPanel) {
-      textPanel.style.opacity   = textP.toFixed(3);
-      textPanel.style.transform = `translateY(-50%) translateX(${((1 - textP) * -70).toFixed(1)}px)`;
+    // Suavizado del progreso efectivo sin saltos
+    displayP += (targetEffectiveP - displayP) * 0.12;
+
+    // Fade to Black a partir de 0.68
+    const fadeToBlackStart = 0.68;
+    let canvasOpacity = 1;
+    if (displayP > fadeToBlackStart) {
+      canvasOpacity = clamp(1 - (displayP - fadeToBlackStart) / 0.08, 0, 1);
+    }
+    canvas.style.opacity = canvasOpacity.toFixed(3);
+
+    // Monitor video time on UI
+    const valVideoTime = document.getElementById('valVideoTime');
+    if (valVideoTime) valVideoTime.textContent = `${currentTimeSec.toFixed(2)}s`;
+
+    // ── B. FASE 1 TYPOGRAPHY (0s -> 3s, Left)
+    if (phase1) {
+      let p1Opacity = 0;
+      if (displayP <= 0.03) {
+        p1Opacity = 1;
+      } else if (displayP <= 0.20) {
+        p1Opacity = 1 - smoothstep(0.03, 0.20, displayP);
+      } else {
+        p1Opacity = 0;
+      }
+      phase1.style.opacity = p1Opacity.toFixed(3);
+      phase1.style.transform = `translateY(calc(-50% - ${(displayP * 30).toFixed(1)}px)) scale(${(1 - displayP * 0.04).toFixed(3)})`;
+      phase1.style.filter = `blur(${((1 - p1Opacity) * 5).toFixed(1)}px)`;
+      phase1.style.pointerEvents = p1Opacity < 0.1 ? 'none' : 'auto';
     }
 
-    // ── Hint: fade out fast
-    if (hint) hint.style.opacity = clamp(1 - scrollP * 12, 0, 1).toFixed(3);
+    // ── C. FASE 2 TYPOGRAPHY (3s -> 8s, Left)
+    if (phase2) {
+      let p2Opacity = 0;
+      if (displayP < 0.18) {
+        p2Opacity = 0;
+      } else if (displayP <= 0.26) {
+        p2Opacity = smoothstep(0.18, 0.26, displayP);
+      } else if (stage2State === 'playing' || displayP <= 0.48) {
+        p2Opacity = 1; // 100% nítida y visible sin parpadeos mientras corre el video
+      } else if (displayP <= 0.58) {
+        p2Opacity = 1 - smoothstep(0.48, 0.58, displayP); // Desvanecimiento suave y unidireccional
+      } else {
+        p2Opacity = 0;
+      }
+      phase2.style.opacity = p2Opacity.toFixed(3);
+      phase2.style.transform = `translateY(calc(-50% - ${((displayP - 0.26) * 16).toFixed(1)}px)) scale(${(0.97 + p2Opacity * 0.03).toFixed(3)})`;
+      phase2.style.filter = `blur(${((1 - p2Opacity) * 4).toFixed(1)}px)`;
+      phase2.style.pointerEvents = p2Opacity < 0.1 ? 'none' : 'auto';
+    }
 
-    rafId = requestAnimationFrame(render);
+    // ── D. FASE 3 TYPOGRAPHY (8.5s -> 10s, Bottom-Right Rainbow Phase)
+    if (phase3) {
+      let p3Opacity = 0;
+      if (displayP < 0.48) {
+        p3Opacity = 0;
+      } else if (displayP <= 0.58) {
+        p3Opacity = smoothstep(0.48, 0.58, displayP);
+      } else if (displayP <= 0.70) {
+        p3Opacity = 1;
+      } else if (displayP <= 0.80) {
+        p3Opacity = 1 - smoothstep(0.70, 0.80, displayP);
+      } else {
+        p3Opacity = 0;
+      }
+      phase3.style.opacity = p3Opacity.toFixed(3);
+      phase3.style.transform = `translate3d(0, ${((1 - p3Opacity) * 18).toFixed(1)}px, 0) scale(${(0.96 + p3Opacity * 0.04).toFixed(3)})`;
+      phase3.style.filter = `blur(${((1 - p3Opacity) * 4).toFixed(1)}px)`;
+      phase3.style.pointerEvents = p3Opacity < 0.1 ? 'none' : 'auto';
+    }
+
+    // ── E. FASE 4 REVEAL STAGE (NEGRO TOTAL + LINTERNA ARCOÍRIS CON MARCAS - PEGAJOSO)
+    if (revealStage) {
+      const p4Progress = (stage2State === 'done' || displayP > 0.68) ? smoothstep(0.70, 0.80, displayP) : 0;
+      revealStage.style.opacity = p4Progress.toFixed(3);
+      revealStage.style.transform = `translate3d(0, ${((1 - p4Progress) * 16).toFixed(1)}px, 0) scale(${(0.97 + p4Progress * 0.03).toFixed(3)})`;
+      revealStage.style.filter = `blur(${((1 - p4Progress) * 4).toFixed(1)}px)`;
+      revealStage.style.pointerEvents = p4Progress > 0.3 ? 'auto' : 'none';
+    }
+
+    // ── F. Indicador de Progreso Inferior
+    if (scrollFill) {
+      scrollFill.style.width = `${(displayP * 100).toFixed(1)}%`;
+    }
+    if (scrollLabel) {
+      if (displayP < 0.22) {
+        scrollLabel.textContent = 'Scroll para iniciar refracción';
+      } else if (displayP < 0.48) {
+        scrollLabel.textContent = 'Impacto de luz en prisma (3.0s)';
+      } else if (displayP < 0.70) {
+        scrollLabel.textContent = 'Dispersión de arcoíris (8.5s - 10s)';
+      } else {
+        scrollLabel.textContent = 'Espectro completo • Pasa el cursor';
+      }
+    }
+
+    // ── G. Rainbow Lantern Lerp Interpolation
+    currentMouseX += (targetMouseX - currentMouseX) * 0.12;
+    currentMouseY += (targetMouseY - currentMouseY) * 0.12;
+
+    if (maskedCont) {
+      maskedCont.style.setProperty('--mouse-x', `${currentMouseX.toFixed(1)}px`);
+      maskedCont.style.setProperty('--mouse-y', `${currentMouseY.toFixed(1)}px`);
+      maskedCont.style.maskImage = `radial-gradient(circle ${cfg.lanternSize}px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 40%, transparent 85%)`;
+      maskedCont.style.webkitMaskImage = `radial-gradient(circle ${cfg.lanternSize}px at var(--mouse-x, -500px) var(--mouse-y, -500px), black 40%, transparent 85%)`;
+    }
+
+    if (mouseLight) {
+      mouseLight.style.width = `${cfg.lanternSize * 1.6}px`;
+      mouseLight.style.height = `${cfg.lanternSize * 1.6}px`;
+      mouseLight.style.transform = `translate3d(${currentMouseX.toFixed(1)}px, ${currentMouseY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      mouseLight.style.opacity = (smoothP > (cfg.revealStart - 0.05) && mouseInHero) ? '1' : (mouseInHero ? '0.25' : '0');
+    }
   };
 
-  window.addEventListener('scroll', updateScrollP, { passive: true });
-  window.addEventListener('resize', updateScrollP, { passive: true });
-  updateScrollP();
-  render();
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+  renderPrisma();
+}
+
+/* ── 0. STICKY NAVBAR: Appears smoothly when scrolling past Hero Prisma ───────── */
+function initStickyNavbar() {
+  const navbar = document.getElementById('navbar');
+  const heroPrisma = document.getElementById('hero-prisma');
+  if (!navbar || !heroPrisma) return;
+
+  const onScroll = () => {
+    const heroBottom = heroPrisma.offsetTop + heroPrisma.offsetHeight - window.innerHeight * 0.4;
+    if (window.scrollY >= heroBottom) {
+      navbar.style.transform = 'translateY(0%)';
+      navbar.style.opacity   = '1';
+    } else {
+      navbar.style.transform = 'translateY(-100%)';
+      navbar.style.opacity   = '0';
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 /* ── 4. SCROLL MORPH HERO (3D CIRCLE TO RAINBOW ARC) ─────────────────────── */
@@ -587,24 +1112,48 @@ function initScrollMorphGallery() {
   animateMorph();
 }
 
-/* ── 1. Render Curado de Casos de Éxito (Limpio & sin sobrecargar) ───────── */
-function renderScalableGallery(activeCategory = 'all') {
+/* ── 1. Render Curado de Casos de Éxito con Filtro por Empresa y Ver Todos ─ */
+let currentActiveFilter = 'all';
+let isShowingAllCases = false;
+
+function renderScalableGallery(activeCategory = 'all', showAll = false) {
+  currentActiveFilter = activeCategory;
+  isShowingAllCases = showAll;
+
   const desktopContainer = document.getElementById('casesGridDesktop');
   const mobileContainer = document.getElementById('casesMobileFeed');
+  const verTodosBtn = document.getElementById('btnVerTodosReels');
+  const verTodosWrap = document.getElementById('verTodosContainer');
 
   if (!desktopContainer || !mobileContainer) return;
 
-  // Filtrado inteligente: en 'all' muestra los casos destacados (Spotlight) para no sobrecargar la vista
+  // Filtrado por Empresa o por Categoría / Tipo
   const filtered = videosPortafolio.filter(item => {
-    if (activeCategory === 'all') return item.isHeroSpotlight;
+    if (activeCategory === 'all') return true;
     if (activeCategory === 'viral') return item.isTopViral;
     if (activeCategory === 'informativo') return item.tipo === 'informativo';
     if (activeCategory === 'retorno') return item.tipo === 'retorno';
+    if (item.cliente.toLowerCase() === activeCategory.toLowerCase()) return true;
     return item.categoria === activeCategory;
   });
 
+  // Limitación inicial a 6 videos si no se ha hecho clic en "Ver Todos"
+  const displayList = showAll ? filtered : filtered.slice(0, 6);
+
+  // Control del botón "Ver Todos"
+  if (verTodosWrap && verTodosBtn) {
+    if (filtered.length <= 6) {
+      verTodosWrap.style.display = 'none';
+    } else {
+      verTodosWrap.style.display = 'block';
+      verTodosBtn.innerHTML = showAll 
+        ? `<span>Mostrar Menos</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>`
+        : `<span>Ver Todos los Videos (${filtered.length} Reels)</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>`;
+    }
+  }
+
   // Render Desktop Grid
-  desktopContainer.innerHTML = filtered.map(item => `
+  desktopContainer.innerHTML = displayList.map(item => `
     <div class="reel-card-item" data-id="${item.id}">
       <div class="reel-media-box" onclick="openReelModal(${item.id})">
         <img src="${item.poster}" 
@@ -613,7 +1162,7 @@ function renderScalableGallery(activeCategory = 'all') {
              loading="lazy" 
              onerror="this.onerror=null; this.src='${item.fallbackPoster}';">
         <div class="reel-play-overlay">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
         </div>
         <div class="reel-badge-top">
           <span class="reel-views-pill ${item.vistas.includes('ROAS') || item.vistas.includes('M') ? 'blue' : ''}">${item.vistas}</span>
@@ -629,10 +1178,10 @@ function renderScalableGallery(activeCategory = 'all') {
           </div>
         </div>
         <p class="reel-card-description">${item.descripcion}</p>
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="reel-action-link" onclick="event.stopPropagation();">
-          <span>Ver en Instagram</span>
+        <button type="button" class="reel-action-link" onclick="openReelModal(${item.id})">
+          <span>Reproducir Reel en la Web</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+        </button>
       </div>
     </div>
   `).join('');
@@ -665,10 +1214,10 @@ function renderScalableGallery(activeCategory = 'all') {
         </div>
         <p class="mobile-author-desc">${item.descripcion}</p>
         <div style="display:flex;gap:8px;">
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="mobile-open-btn">
+          <button type="button" class="mobile-open-btn" onclick="openReelModal(${item.id})">
             <span>Ver Reel</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-          </a>
+          </button>
           <a href="https://wa.me/56999967272?text=Hola%20Santiago,%20vi%20el%20caso%20de%20${encodeURIComponent(item.cliente)}%20y%20quiero%20cotizar." target="_blank" rel="noopener noreferrer" class="mobile-open-btn" style="background:#FFFFFF;color:#111827;">
             <span>Cotizar</span>
           </a>
@@ -678,7 +1227,7 @@ function renderScalableGallery(activeCategory = 'all') {
   `).join('');
 }
 
-/* ── 2. Filtros de Galería ───────────────────────────────────────────────── */
+/* ── 2. Filtros de Galería y Botón Ver Todos ─────────────────────────────── */
 function initGalleryFilters() {
   const btns = document.querySelectorAll('.filter-btn');
   btns.forEach(btn => {
@@ -686,9 +1235,18 @@ function initGalleryFilters() {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const filter = btn.dataset.filter;
-      renderScalableGallery(filter);
+      isShowingAllCases = false;
+      renderScalableGallery(filter, false);
     });
   });
+
+  const verTodosBtn = document.getElementById('btnVerTodosReels');
+  if (verTodosBtn) {
+    verTodosBtn.addEventListener('click', () => {
+      isShowingAllCases = !isShowingAllCases;
+      renderScalableGallery(currentActiveFilter, isShowingAllCases);
+    });
+  }
 }
 
 /* ── 3. EFECTO 1: Scroll-Morph 3D Gallery Engine ─────────────────────────── */
@@ -832,38 +1390,54 @@ function initScrollMorphGallery() {
   updateCardTransforms();
 }
 
-/* ── 3.1 EFECTO TIMELINE (Aceternity UI Timeline) ────────────────────────── */
+/* ── 3.1 EFECTO TIMELINE HÍBRIDO (Vertical Nodes 1-2 + Fullscreen Lateral 3-4) ── */
 function initTimelineProgress() {
   const container = document.getElementById('timelineContainer');
   const beam = document.getElementById('timelineBeamProgress');
-  if (!container || !beam) return;
+  const hPin = document.getElementById('timelineHorizontalPin');
+  const hSlider = document.getElementById('timelineHorizontalSlider');
 
-  const handleTimelineScroll = () => {
-    const rect = container.getBoundingClientRect();
-    const vh = window.innerHeight;
+  const handleScroll = () => {
+    // 1. Haz de progreso vertical para Nodes 1 y 2
+    if (container && beam) {
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const totalHeight = rect.height;
+      const startY = vh * 0.55;
+      const scrolled = startY - rect.top;
+      let progress = Math.min(Math.max(scrolled / totalHeight, 0), 1);
+      beam.style.height = (progress * 100).toFixed(1) + '%';
 
-    const totalHeight = rect.height;
-    const startY = vh * 0.75;
-    const scrolled = startY - rect.top;
+      const items = container.querySelectorAll('.timeline-item');
+      items.forEach(item => {
+        const nodeCircle = item.querySelector('.timeline-node-circle');
+        const itemRect = item.getBoundingClientRect();
+        if (itemRect.top < vh * 0.65) {
+          if (nodeCircle) nodeCircle.classList.add('active');
+          item.style.opacity = '1';
+        } else {
+          if (nodeCircle) nodeCircle.classList.remove('active');
+          item.style.opacity = '0.45';
+        }
+      });
+    }
 
-    let progress = Math.min(Math.max(scrolled / totalHeight, 0), 1);
-    beam.style.height = (progress * 100).toFixed(1) + '%';
-
-    const items = container.querySelectorAll('.timeline-item');
-    items.forEach(item => {
-      const nodeCircle = item.querySelector('.timeline-node-circle');
-      if (!nodeCircle) return;
-      const itemRect = item.getBoundingClientRect();
-      if (itemRect.top < vh * 0.75) {
-        nodeCircle.classList.add('active');
-      } else {
-        nodeCircle.classList.remove('active');
+    // 2. Desplazamiento Lateral a Pantalla Completa para Node 2 (+257), Node 3 (ROAS) y Node 4 (+75K)
+    if (hPin && hSlider) {
+      const pinRect = hPin.getBoundingClientRect();
+      const scrollableDist = hPin.offsetHeight - window.innerHeight;
+      if (scrollableDist > 0) {
+        const hProgress = Math.min(Math.max(-pinRect.top / scrollableDist, 0), 1);
+        // Desplaza 2 pantallas completas (de Node 2 a Node 3 y a Node 4)
+        const translateX = -hProgress * (window.innerWidth * 2);
+        hSlider.style.transform = `translate3d(${translateX}px, 0, 0)`;
       }
-    });
+    }
   };
 
-  window.addEventListener('scroll', handleTimelineScroll, { passive: true });
-  handleTimelineScroll();
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
+  handleScroll();
 }
 
 /* ── 3.2 EFECTO CINEMATIC SCROLL (Scroll-Triggered Video Hero) ───────────── */
@@ -876,25 +1450,25 @@ function initCinematicScroll() {
       badge: 'CHAPTER 01',
       title: 'Gestión Estratégica de Redes Sociales',
       desc: 'Manejo integral de Instagram y TikTok con foco en arquitectura de marca, posicionamiento de autoridad y construcción de audiencia compradora.',
-      chips: ['✅ Auditoría de Cuenta', '✅ Calendario Editorial', '✅ Copywriting Persuasivo', '✅ Optimización de Perfil']
+      chips: ['Auditoría de Cuenta', 'Calendario Editorial', 'Copywriting Persuasivo', 'Optimización de Perfil']
     },
     {
       badge: 'CHAPTER 02',
       title: 'Producción Audiovisual 9:16 (Reels/TikTok)',
       desc: 'Creación de contenido de alto impacto: ganchos narrativos virales en los primeros 2 segundos, rodaje profesional en terreno y edición de ritmo ágil.',
-      chips: ['✅ Ganchos Narrativos Virales', '✅ Rodaje 4K en Terreno', '✅ Subtítulos Dinámicos', '✅ Formatos UGC']
+      chips: ['Ganchos Narrativos Virales', 'Rodaje 4K en Terreno', 'Subtítulos Dinámicos', 'Formatos UGC']
     },
     {
       badge: 'CHAPTER 03',
       title: 'Meta Ads & Tráfico de Alto Retorno',
       desc: 'Campañas de adquisición directa, retargeting avanzado y embudos en Shopify diseñados para maximizar el ROAS y rentabilidad comercial.',
-      chips: ['✅ Embudos de Conversión', '✅ Creativos de Respuesta Directa', '✅ Optimización de ROAS', '✅ A/B Testing Continuo']
+      chips: ['Embudos de Conversión', 'Creativos de Respuesta Directa', 'Optimización de ROAS', 'A/B Testing Continuo']
     },
     {
       badge: 'CHAPTER 04',
       title: 'Estrategia 360° & Analítica de ROI',
       desc: 'Auditoría continua de métricas comerciales y optimización en tiempo real para tomar decisiones fundamentadas en facturación y crecimiento sostenible.',
-      chips: ['✅ Reportes de Facturación', '✅ Atribución de Ventas', '✅ Escalado de Presupuesto', '✅ Acompañamiento Directo']
+      chips: ['Reportes de Facturación', 'Atribución de Ventas', 'Escalado de Presupuesto', 'Acompañamiento Directo']
     }
   ];
 
@@ -1103,7 +1677,7 @@ function initRobotCompanion() {
   });
 }
 
-/* ── 5. Modal de Video (Lazy Iframe / Preview) ────────────────────────────── */
+/* ── 5. Modal de Video (Lazy Iframe / Preview & Selector de Empresa) ────────── */
 function openReelModal(id) {
   const item = videosPortafolio.find(v => v.id === id);
   if (!item) return;
@@ -1121,18 +1695,43 @@ function openReelModal(id) {
   const externalBtn = document.getElementById('modalExternalLink');
   if (externalBtn) externalBtn.href = item.url;
 
+  // Inyectar selector de otros reels de la misma empresa
+  const companySelector = document.getElementById('modalCompanySelector');
+  if (companySelector) {
+    const empresaVideos = videosPortafolio.filter(v => v.cliente.toLowerCase() === item.cliente.toLowerCase());
+    companySelector.innerHTML = `
+      <div class="modal-company-selector-header">
+        <span class="modal-company-selector-title">Más reels de ${item.cliente} (${empresaVideos.length})</span>
+        <button type="button" class="modal-company-all-btn" onclick="filterByCompany('${item.cliente}')">
+          <span>Ver catálogo</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="modal-company-reels-row">
+        ${empresaVideos.map(v => `
+          <div class="modal-company-reel-card ${v.id === item.id ? 'active' : ''}" onclick="openReelModal(${v.id})" title="${v.titulo}">
+            <img src="${v.poster}" alt="${v.titulo}" onerror="this.onerror=null; this.src='${v.fallbackPoster}';">
+            <div class="modal-company-reel-overlay">
+              <span class="modal-reel-badge">${v.vistas}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
   const mediaBox = document.getElementById('modalMediaBox');
   if (mediaBox) {
     mediaBox.innerHTML = `
-      <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#0F172A;overflow:hidden;">
-        <img src="${item.poster}" 
-             alt="${item.cliente}" 
-             onerror="this.onerror=null; this.src='${item.fallbackPoster}';" 
-             style="width:100%;height:100%;object-fit:cover;opacity:0.85;">
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="position:absolute;z-index:10;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-          <span>Reproducir en Instagram</span>
-        </a>
+      <div style="position:relative;width:100%;height:100%;min-height:540px;display:flex;align-items:center;justify-content:center;background:#0F172A;border-radius:14px;overflow:hidden;">
+        <iframe 
+          src="https://www.instagram.com/reel/${item.shortcode}/embed/" 
+          style="width:100%;height:100%;min-height:540px;border:none;background:#000000;" 
+          frameborder="0" 
+          scrolling="no" 
+          allowtransparency="true" 
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+        </iframe>
       </div>
     `;
   }
@@ -1140,6 +1739,8 @@ function openReelModal(id) {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
+
+window.openReelModal = openReelModal;
 
 function initVideoModal() {
   const modal = document.getElementById('videoModal');
