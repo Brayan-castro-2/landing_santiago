@@ -3892,12 +3892,12 @@ img, video, iframe {
 
   /* ── Cinematic Services Mobile ── */
   .cinematic-sticky-viewport {
-    padding: 20px 16px !important;
+    padding: 10px 16px !important;
   }
 
   .cinematic-grid-layout {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 12px !important;
     min-width: 0 !important;
     width: 100% !important;
   }
@@ -3908,7 +3908,7 @@ img, video, iframe {
   }
 
   .chapter-active-content {
-    padding: 20px 16px !important;
+    padding: 12px 12px !important;
     min-height: auto !important;
   }
   
@@ -3938,7 +3938,7 @@ img, video, iframe {
   }
 
   .cinematic-screen-frame {
-    height: 240px !important;
+    height: 180px !important;
   }
 
   /* ── Sobre Mí Mobile ── */
