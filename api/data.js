@@ -622,12 +622,24 @@ module.exports = async function handler(req, res) {
       .end();
   }
 
-  // ── GET: Devolver datos públicos ──
+  // ── GET: Devolver datos públicos o historial ──
   if (req.method === 'GET') {
     try {
       const kv = getRedisClient();
       if (!kv) {
         return res.status(200).json(DEFAULT_DATA);
+      }
+
+      // Check if history requested
+      const urlObj = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+      if (urlObj.searchParams.get('history') === 'true') {
+        const password = req.headers['x-admin-password'];
+        const expected = process.env.ADMIN_PASSWORD;
+        if (!expected || password !== expected) {
+          return res.status(401).json({ error: 'Contraseña incorrecta para ver historial.' });
+        }
+        const history = await kv.lrange(KV_KEY + '_history', 0, 14); // get up to 15 items
+        return res.status(200).json(history || []);
       }
       
       let data = await kv.get(KV_KEY);
@@ -644,7 +656,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // ── POST: Guardar datos (protegido) ──
+  // ── POST: Guardar datos (protegido) con Historial ──
   if (req.method === 'POST') {
     const password = req.headers['x-admin-password'];
     const expected = process.env.ADMIN_PASSWORD;
@@ -663,7 +675,21 @@ module.exports = async function handler(req, res) {
       if (!newData || typeof newData !== 'object') {
         return res.status(400).json({ error: 'Datos inválidos' });
       }
+
+      // 1. Obtener datos actuales para guardarlos en el historial
+      const currentData = await kv.get(KV_KEY);
+      if (currentData) {
+        const historyEntry = JSON.stringify({
+          timestamp: Date.now(),
+          data: currentData
+        });
+        await kv.lpush(KV_KEY + '_history', historyEntry);
+        await kv.ltrim(KV_KEY + '_history', 0, 14); // Keep latest 15
+      }
+
+      // 2. Guardar nuevos datos
       await kv.set(KV_KEY, newData);
+      
       return res.status(200).json({ success: true, message: 'Datos guardados correctamente' });
     } catch (err) {
       console.error('KV SET error:', err);

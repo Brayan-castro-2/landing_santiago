@@ -256,6 +256,22 @@
         </div>
       </div>
 
+      <!-- HISTORIAL Y RESPALDOS -->
+      <div class="section-card">
+        <div class="card-header p-3 d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#historySection">
+          <span><i class="bi bi-clock-history me-2"></i>Historial y Respaldos</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div id="historySection" class="collapse">
+          <div class="card-body">
+            <p class="small text-muted mb-3">Aquí puedes restaurar versiones anteriores de tu página. Al restaurar, los datos antiguos llenarán este panel. Debes presionar "Guardar Cambios" para confirmar y publicarlos.</p>
+            <div id="historyContainer" class="list-group list-group-flush">
+              <div class="text-center py-3"><span class="spinner-border spinner-border-sm text-primary"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- SAVE BAR -->
@@ -644,6 +660,66 @@
       markChanged(); renderMetrics();
     });
 
+    // ── HISTORIAL DE CAMBIOS ──
+    async function loadHistory() {
+      const container = document.getElementById('historyContainer');
+      try {
+        const res = await fetch('/api/data?history=true', {
+          headers: { 'X-Admin-Password': adminPassword }
+        });
+        if (!res.ok) throw new Error('Error al cargar historial');
+        const historyData = await res.json();
+        
+        container.innerHTML = '';
+        if (!historyData || historyData.length === 0) {
+          container.innerHTML = '<div class="list-group-item text-muted small text-center">No hay respaldos disponibles.</div>';
+          return;
+        }
+
+        historyData.forEach((itemStr, index) => {
+          try {
+            const entry = JSON.parse(itemStr);
+            const date = new Date(entry.timestamp);
+            const dateStr = date.toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' });
+            
+            const div = document.createElement('div');
+            div.className = 'list-group-item d-flex justify-content-between align-items-center px-0';
+            div.innerHTML = `
+              <div>
+                <h6 class="mb-0 text-sm fw-bold">Respaldo ${index + 1}</h6>
+                <small class="text-muted">${dateStr}</small>
+              </div>
+              <button class="btn btn-sm btn-outline-warning restore-btn" data-history-idx="${index}">
+                <i class="bi bi-arrow-counterclockwise me-1"></i>Restaurar
+              </button>
+            `;
+            
+            div.querySelector('.restore-btn').addEventListener('click', () => {
+              if (confirm('¿Estás seguro de que quieres restaurar este respaldo? Los datos reemplazarán lo que hay en este panel, pero no se publicarán hasta que le des a "Guardar Cambios".')) {
+                siteData = entry.data;
+                populateForm();
+                markChanged();
+                showToast('Respaldo cargado en el formulario. Revisa los datos y haz clic en Guardar Cambios para confirmar.', 'success');
+                // Scroll up
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            });
+
+            container.appendChild(div);
+          } catch (e) {
+            console.error('Error parseando history item', e);
+          }
+        });
+      } catch (err) {
+        container.innerHTML = `<div class="text-danger small">${err.message}</div>`;
+      }
+    }
+
+    // Cargar historial al abrir el colapsable
+    document.getElementById('historySection').addEventListener('show.bs.collapse', () => {
+      loadHistory();
+    });
+
     // ── SAVE ──
     document.getElementById('saveBtn').addEventListener('click', async () => {
       const btn = document.getElementById('saveBtn');
@@ -669,6 +745,11 @@
         document.getElementById('saveStatus').textContent = '✅ Guardado correctamente';
         document.getElementById('saveStatus').style.color = '#4ade80';
         showToast('Datos guardados correctamente. Recarga la landing para ver los cambios.');
+        
+        // Recargar historial si está abierto
+        if (document.getElementById('historySection').classList.contains('show')) {
+          loadHistory();
+        }
       } catch (err) {
         showToast(err.message, 'error');
       } finally {
