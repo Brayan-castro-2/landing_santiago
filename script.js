@@ -543,8 +543,7 @@ function initPrismHero() {
   resizeCanvas();
 
   // 2. Setup Video & In-Memory Instant Idle Cache with Isolated Ghost Extractor
-  const isMobileView = () => window.innerWidth <= 768;
-  const currentVideoSrc = isMobileView() ? 'hero-prisma-video-mobile.mp4' : 'hero-prisma-video.mp4';
+  const currentVideoSrc = 'hero-prisma-video.mp4';
   if (!video.src || !video.src.includes(currentVideoSrc)) {
     video.src = currentVideoSrc;
   }
@@ -580,10 +579,9 @@ function initPrismHero() {
     });
 
     const offCanvas = document.createElement('canvas');
-    const isMob = isMobileView();
-    const vW = ghost.videoWidth > 0 ? ghost.videoWidth : (isMob ? 1080 : 1920);
-    const vH = ghost.videoHeight > 0 ? ghost.videoHeight : (isMob ? 1920 : 1080);
-    const maxDim = 800;
+    const vW = ghost.videoWidth > 0 ? ghost.videoWidth : 1920;
+    const vH = ghost.videoHeight > 0 ? ghost.videoHeight : 1080;
+    const maxDim = 960;
     const scale = Math.min(1, maxDim / Math.max(vW, vH));
     offCanvas.width = Math.round(vW * scale);
     offCanvas.height = Math.round(vH * scale);
@@ -1446,6 +1444,10 @@ function initTimelineProgress() {
 
     // 2. Desplazamiento Lateral a Pantalla Completa para Node 2 (+257), Node 3 (ROAS) y Node 4 (+75K)
     if (hPin && hSlider) {
+      if (window.innerWidth <= 768) {
+        hSlider.style.transform = 'none';
+        return;
+      }
       const pinRect = hPin.getBoundingClientRect();
       const scrollableDist = hPin.offsetHeight - window.innerHeight;
       if (scrollableDist > 0) {
@@ -1462,101 +1464,7 @@ function initTimelineProgress() {
   handleScroll();
 }
 
-/* ── 3.2 EFECTO CINEMATIC SCROLL (Scroll-Triggered Video Hero) ───────────── */
-function initCinematicScroll() {
-  const wrapper = document.getElementById('cinematicStickyWrapper');
-  if (!wrapper) return;
 
-  const chapterData = [
-    {
-      badge: 'CAPÍTULO 01',
-      title: 'Gestión Estratégica de Redes Sociales',
-      desc: 'Manejo integral de Instagram y TikTok con foco en arquitectura de marca, posicionamiento de autoridad y construcción de audiencia compradora.',
-      chips: ['Auditoría de Cuenta', 'Calendario Editorial', 'Copywriting Persuasivo', 'Optimización de Perfil']
-    },
-    {
-      badge: 'CAPÍTULO 02',
-      title: 'Producción Audiovisual 9:16 (Reels/TikTok)',
-      desc: 'Creación de contenido de alto impacto: ganchos narrativos virales en los primeros 2 segundos, rodaje profesional en terreno y edición de ritmo ágil.',
-      chips: ['Ganchos Narrativos Virales', 'Rodaje 4K en Terreno', 'Subtítulos Dinámicos', 'Formatos UGC']
-    },
-    {
-      badge: 'CAPÍTULO 03',
-      title: 'Meta Ads & Tráfico de Alto Retorno',
-      desc: 'Campañas de adquisición directa, retargeting avanzado y embudos en Shopify diseñados para maximizar el ROAS y rentabilidad comercial.',
-      chips: ['Embudos de Conversión', 'Creativos de Respuesta Directa', 'Optimización de ROAS', 'A/B Testing Continuo']
-    },
-    {
-      badge: 'CAPÍTULO 04',
-      title: 'Estrategia 360° & Analítica de ROI',
-      desc: 'Auditoría continua de métricas comerciales y optimización en tiempo real para tomar decisiones fundamentadas en facturación y crecimiento sostenible.',
-      chips: ['Reportes de Facturación', 'Atribución de Ventas', 'Escalado de Presupuesto', 'Acompañamiento Directo']
-    }
-  ];
-
-  let currentChapter = -1;
-
-  const handleCinematicScroll = () => {
-    const rect = wrapper.getBoundingClientRect();
-    const vh = window.innerHeight;
-
-    const totalDist = rect.height - vh;
-    if (totalDist <= 0) return;
-
-    const scrolled = -rect.top;
-    const progress = Math.min(Math.max(scrolled / totalDist, 0), 1);
-
-    const chapterIdx = Math.min(Math.floor(progress * 4), 3);
-
-    const fill = document.getElementById('chapterProgressFill');
-    if (fill) fill.style.width = (progress * 100).toFixed(1) + '%';
-
-    const textCount = document.getElementById('chapterCountText');
-    if (textCount) textCount.textContent = `Capítulo ${chapterIdx + 1} / 4`;
-
-    if (chapterIdx !== currentChapter) {
-      currentChapter = chapterIdx;
-
-      const navItems = wrapper.querySelectorAll('.chapter-nav-item');
-      navItems.forEach((nav, idx) => {
-        if (idx === chapterIdx) nav.classList.add('active');
-        else nav.classList.remove('active');
-      });
-
-      const data = chapterData[chapterIdx];
-      const badgeEl = document.getElementById('chapterBadge');
-      const titleEl = document.getElementById('chapterTitle');
-      const descEl = document.getElementById('chapterDesc');
-      const chipsEl = document.getElementById('chapterChips');
-
-      if (badgeEl) badgeEl.textContent = data.badge;
-      if (titleEl) titleEl.textContent = data.title;
-      if (descEl) descEl.textContent = data.desc;
-      if (chipsEl) {
-        chipsEl.innerHTML = data.chips.map(chip => `<span class="chip-item">${chip}</span>`).join('');
-      }
-
-      const layers = wrapper.querySelectorAll('.cinematic-media-layer');
-      layers.forEach((layer, idx) => {
-        if (idx === chapterIdx) layer.classList.add('active');
-        else layer.classList.remove('active');
-      });
-    }
-  };
-
-  const navItems = wrapper.querySelectorAll('.chapter-nav-item');
-  navItems.forEach((nav, idx) => {
-    nav.addEventListener('click', () => {
-      const vh = window.innerHeight;
-      const totalDist = wrapper.getBoundingClientRect().height - vh;
-      const targetScroll = wrapper.offsetTop + (idx / 4) * totalDist + 50;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    });
-  });
-
-  window.addEventListener('scroll', handleCinematicScroll, { passive: true });
-  handleCinematicScroll();
-}
 
 /* ── 4. EFECTO 2: Robot 3D Companion (Three.js) ──────────────────────────── */
 function initRobotCompanion() {

@@ -3801,15 +3801,41 @@ img, video, iframe {
   }
 
   /* ── Cases Grid / Mobile Feed ── */
-  .cases-grid-desktop {
+  .cases-mobile-feed {
     display: none !important;
   }
 
-  .cases-mobile-feed {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
+  .cases-grid-desktop {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
     width: 100% !important;
+  }
+
+  .reel-card-item {
+    width: 100% !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    background: #FFFFFF !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .reel-media-box {
+    height: 380px !important;
+    width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .reel-cover-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .reel-info-bar {
+    padding: 16px !important;
   }
 
   /* ── Expanding Cards Mobile ── */
@@ -3881,9 +3907,24 @@ img, video, iframe {
   }
 
   /* ── Cinematic Services Mobile ── */
+  .cinematic-sticky-wrapper {
+    height: auto !important;
+  }
+
+  .cinematic-sticky-viewport {
+    position: relative !important;
+    height: auto !important;
+    padding: 30px 16px !important;
+  }
+
   .cinematic-grid-layout {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
+  }
+
+  .chapter-active-content {
+    padding: 20px 16px !important;
+    min-height: auto !important;
   }
 
   .chapter-nav-track {
