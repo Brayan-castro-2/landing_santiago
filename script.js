@@ -481,8 +481,67 @@ window.openEvidenceModal = openEvidenceModal;
 window.closeEvidenceModal = closeEvidenceModal;
 window.filterByCompany = filterByCompany;
 
+/* ── CMS: Carga de datos desde API (/api/data) ────────────────────────── */
+function cmsGetNested(obj, path) {
+  return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : null, obj);
+}
+
+async function loadSiteData() {
+  try {
+    const res = await fetch('/api/data');
+    if (!res.ok) return;
+    const data = await res.json();
+
+    // Inyectar textos simples via data-cms
+    document.querySelectorAll('[data-cms]').forEach(el => {
+      const val = cmsGetNested(data, el.dataset.cms);
+      if (val && typeof val === 'string') el.textContent = val;
+    });
+
+    // Inyectar reveal cards del hero
+    if (data.hero && data.hero.reveal_cards) {
+      const cards = document.querySelectorAll('.prisma-reveal-card');
+      data.hero.reveal_cards.forEach((card, i) => {
+        if (cards[i]) {
+          const numEl = cards[i].querySelector('.prisma-reveal-num');
+          const titleEl = cards[i].querySelector('.prisma-reveal-title');
+          const descEl = cards[i].querySelector('.prisma-reveal-desc');
+          if (numEl) numEl.textContent = card.num;
+          if (titleEl) titleEl.textContent = card.title;
+          if (descEl) descEl.textContent = card.desc;
+        }
+      });
+    }
+
+    // Inyectar testimonios dinámicos
+    if (data.testimonials && data.testimonials.length > 0) {
+      const grid = document.querySelector('.testimonials-grid');
+      if (grid) {
+        grid.innerHTML = data.testimonials.map(t => `
+          <div class="testimonial-card">
+            <div class="stars-row">${'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>'.repeat(5)}</div>
+            <p class="testimonial-text">"${t.text}"</p>
+            <div class="testimonial-author">
+              <img src="${t.avatar}" alt="${t.name}" class="author-avatar">
+              <div>
+                <div class="author-name">${t.name}</div>
+                <div class="author-role">${t.role}</div>
+              </div>
+            </div>
+          </div>`).join('');
+      }
+    }
+
+    console.log('CMS: Datos cargados correctamente');
+  } catch (e) {
+    console.warn('CMS: API no disponible, usando datos estáticos del HTML.', e);
+  }
+}
+
 const initApp = () => {
   const safeInit = (fn, name) => { try { fn(); } catch(e) { console.warn('Init error in ' + name + ':', e); } };
+  // CMS: cargar datos remotos (no bloquea si falla)
+  loadSiteData();
   safeInit(initPrismHero, 'PrismHero');
   safeInit(initStickyNavbar, 'StickyNavbar');
   safeInit(initScrollMorphGallery, 'ScrollMorphGallery');
