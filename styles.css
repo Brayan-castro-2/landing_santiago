@@ -1394,6 +1394,32 @@ img, video, iframe {
   margin-bottom: 8px;
 }
 
+.timeline-fullscreen-slide:first-child .timeline-left-sticky::before {
+  content: '';
+  position: absolute;
+  left: -44px;
+  top: -50vh;
+  height: calc(50% + 50vh);
+  width: 3px;
+  background: linear-gradient(180deg, #2563EB 0%, #38BDF8 100%);
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.timeline-fullscreen-slide:first-child .timeline-left-sticky::after {
+  content: '';
+  position: absolute;
+  left: -44px;
+  top: 50%;
+  width: calc(100% + 60px);
+  height: 3px;
+  background: linear-gradient(90deg, #38BDF8 0%, rgba(56, 189, 248, 0.9) 70%, rgba(37, 99, 235, 0.4) 100%);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+  border-radius: 4px;
+  z-index: 3;
+}
+
 .timeline-node-subtitle {
   font-size: 0.875rem;
   font-weight: 800;
