@@ -1341,16 +1341,17 @@ img, video, iframe {
   padding: 0 40px;
   box-sizing: border-box;
 }
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
-  box-sizing: border-box;
-}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
   gap: 48px;
   align-items: center;
   position: relative;
   padding: 30px 0;
-  scroll-snap-align: center;
+  width: 100%;
+  max-width: 1100px;
+  box-sizing: border-box;
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -3636,6 +3637,14 @@ img, video, iframe {
     overflow-x: hidden !important;
     width: 100% !important;
     max-width: 100vw !important;
+    position: relative;
+  }
+
+  .container {
+    padding: 0 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .nav-menu { display: none; }
@@ -3654,144 +3663,248 @@ img, video, iframe {
   .robot-canvas-container { height: 300px; }
 
   /* ── Pure Mobile Hero Optimization ── */
-  .prisma-top-nav {
-    padding: 14px 20px;
-    width: 100%;
-    box-sizing: border-box;
+  .prisma-hero-pinned {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
   }
 
-  .prisma-nav-menu {
-    display: none;
+  .prisma-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .prisma-top-nav {
+    padding: 16px 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .prisma-top-nav .prisma-nav-link {
+    display: none !important;
+  }
+
+  .prisma-top-nav .prisma-nav-menu {
+    display: flex !important;
+    gap: 0 !important;
+  }
+
+  .prisma-top-nav .prisma-btn-contact {
+    display: inline-flex !important;
+    font-size: 0.75rem !important;
+    padding: 6px 14px !important;
   }
 
   .prisma-content-phase-1,
   .prisma-content-phase-2,
   .prisma-content-phase-3 {
-    left: 20px;
-    right: 20px;
-    width: auto;
-    max-width: calc(100vw - 40px);
-    box-sizing: border-box;
+    left: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+    max-width: calc(100vw - 40px) !important;
+    box-sizing: border-box !important;
   }
 
   .prisma-main-headline {
-    font-size: clamp(2rem, 8vw, 2.6rem);
-    line-height: 1.1;
-    margin-bottom: 12px;
+    font-size: clamp(2rem, 8vw, 2.6rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 12px !important;
   }
 
   .prisma-main-subtitle {
-    font-size: 0.875rem;
-    line-height: 1.45;
-    max-width: 100%;
+    font-size: 0.875rem !important;
+    line-height: 1.45 !important;
+    max-width: 100% !important;
   }
 
   .prisma-reveal-stage {
-    padding: 0 16px;
-    box-sizing: border-box;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
   }
 
   .prisma-masked-content {
-    padding: 0 10px;
-    width: 100%;
-    max-width: 100%;
+    padding: 0 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .prisma-reveal-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 100%;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
   }
 
   .prisma-reveal-card {
-    padding: 14px 12px;
-    border-radius: 12px;
+    padding: 14px 12px !important;
+    border-radius: 12px !important;
   }
 
   .prisma-reveal-num {
-    font-size: 1.5rem;
-    margin-bottom: 2px;
+    font-size: 1.5rem !important;
+    margin-bottom: 2px !important;
   }
 
   .prisma-reveal-title {
-    font-size: 0.75rem;
-    margin-bottom: 4px;
+    font-size: 0.75rem !important;
+    margin-bottom: 4px !important;
   }
 
   .prisma-reveal-desc {
-    font-size: 0.65rem;
-    line-height: 1.35;
+    font-size: 0.65rem !important;
+    line-height: 1.35 !important;
   }
 
   .prisma-reveal-brands-strip {
-    margin-top: 18px;
-    gap: 10px;
+    margin-top: 18px !important;
+    gap: 10px !important;
   }
 
   .prisma-reveal-brands-label {
-    font-size: 9px;
+    font-size: 9px !important;
   }
 
   .prisma-reveal-brands-list {
-    gap: 6px;
+    gap: 6px !important;
   }
 
   .prisma-brand-badge {
-    padding: 5px 10px;
-    font-size: 0.6875rem;
+    padding: 5px 10px !important;
+    font-size: 0.6875rem !important;
   }
 
   .prisma-brand-badge img {
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
   }
 
   /* ── Filter Bar Touch Scroll ── */
   .filter-bar {
-    display: flex;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
-    gap: 8px;
-    width: 100%;
-    scrollbar-width: none;
+    display: flex !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 8px !important;
+    gap: 8px !important;
+    width: 100% !important;
+    scrollbar-width: none !important;
   }
 
   .filter-bar::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
 
   .filter-btn {
-    white-space: nowrap;
-    flex-shrink: 0;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ── Cases Grid / Mobile Feed ── */
+  .cases-grid-desktop {
+    display: none !important;
+  }
+
+  .cases-mobile-feed {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  /* ── Expanding Cards Mobile ── */
+  .expanding-cards-container {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  .expanding-card {
+    height: 120px !important;
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .expanding-card.active {
+    height: 240px !important;
+  }
+
+  /* ── Flujo de Trabajo Timeline Mobile ── */
+  .timeline-horizontal-fullscreen-pin {
+    height: auto !important;
+    margin-top: 0 !important;
+  }
+
+  .timeline-horizontal-sticky-view {
+    position: relative !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .timeline-horizontal-slider {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    gap: 32px !important;
+  }
+
+  .timeline-fullscreen-slide {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    padding: 20px 16px !important;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 0 !important;
+  }
+
+  .timeline-node-title {
+    font-size: 2.2rem !important;
+  }
+
+  .timeline-right-content {
+    padding: 20px 16px !important;
+  }
+
+  .timeline-checklist {
+    grid-template-columns: 1fr !important;
   }
 
   /* ── Cinematic Services Mobile ── */
   .cinematic-grid-layout {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
 
   .chapter-nav-track {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 8px;
-    gap: 6px;
-    scrollbar-width: none;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 8px !important;
+    gap: 6px !important;
+    scrollbar-width: none !important;
   }
 
   .chapter-nav-track::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
 
   .chapter-nav-item {
-    white-space: nowrap;
-    flex-shrink: 0;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
   }
 
   .cinematic-screen-frame {
-    height: 240px;
+    height: 240px !important;
   }
 }
 
