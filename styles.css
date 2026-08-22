@@ -52,19 +52,12 @@ html {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
-  position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -324,8 +317,7 @@ img, video, iframe {
 .prisma-hero-pinned {
   position: sticky;
   top: 0;
-  width: 100%;
-  max-width: 100%;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
   background: #000000;
@@ -1400,6 +1392,32 @@ img, video, iframe {
   line-height: 1.05;
   letter-spacing: -0.04em;
   margin-bottom: 8px;
+}
+
+.timeline-fullscreen-slide:first-child .timeline-left-sticky::before {
+  content: '';
+  position: absolute;
+  left: -44px;
+  top: -50vh;
+  height: calc(50% + 50vh);
+  width: 3px;
+  background: linear-gradient(180deg, #2563EB 0%, #38BDF8 100%);
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.timeline-fullscreen-slide:first-child .timeline-left-sticky::after {
+  content: '';
+  position: absolute;
+  left: -44px;
+  top: 50%;
+  width: calc(100% + 60px);
+  height: 3px;
+  background: linear-gradient(90deg, #38BDF8 0%, rgba(56, 189, 248, 0.9) 70%, rgba(37, 99, 235, 0.4) 100%);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+  border-radius: 4px;
+  z-index: 3;
 }
 
 .timeline-node-subtitle {
