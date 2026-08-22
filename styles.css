@@ -307,7 +307,7 @@ img, video, iframe {
 .prisma-hero-section {
   position: relative;
   width: 100%;
-  height: 320vh;
+  height: 640vh;
   background: #000000;
   color: #fffdf9;
   z-index: 20;
