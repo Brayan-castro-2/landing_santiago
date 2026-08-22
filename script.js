@@ -705,21 +705,6 @@ function initPrismHero() {
     scrollP = clamp(relative / maxScroll, 0, 1);
   };
 
-  // Solo bloquea si el video está reproduciéndose activamente en Fase 2
-  window.addEventListener('wheel', (e) => {
-    const heroBottom = section.offsetTop + section.offsetHeight;
-    if (window.scrollY < heroBottom && stage2State === 'playing' && e.deltaY > 0) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  window.addEventListener('touchmove', (e) => {
-    const heroBottom = section.offsetTop + section.offsetHeight;
-    if (window.scrollY < heroBottom && stage2State === 'playing') {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   window.addEventListener('resize', updateScrollProgress, { passive: true });
 
@@ -2010,4 +1995,105 @@ function initChatWidget() {
 
   const widget = document.getElementById('chatWidget');
   if (widget) io.observe(widget);
+}
+
+/* ── 10. Servicios y Metodología (Pilares de Servicio Interactive Switcher) ── */
+function initCinematicScroll() {
+  const section = document.getElementById('servicios');
+  if (!section) return;
+
+  const navItems = section.querySelectorAll('.chapter-nav-item');
+  const mediaLayers = section.querySelectorAll('.cinematic-media-layer');
+  const badgeEl = document.getElementById('chapterBadge');
+  const titleEl = document.getElementById('chapterTitle');
+  const descEl = document.getElementById('chapterDesc');
+  const chipsEl = document.getElementById('chapterChips');
+  const controlFill = document.getElementById('screenControlFill');
+  const controlLabel = document.getElementById('screenControlLabel');
+
+  const chaptersData = [
+    {
+      badge: 'CAPÍTULO 01',
+      title: 'Gestión Estratégica de Redes Sociales',
+      desc: 'Manejo integral de Instagram y TikTok con foco en arquitectura de marca, posicionamiento de autoridad y construcción de audiencia compradora.',
+      chips: ['Auditoría de Cuenta', 'Calendario Editorial', 'Copywriting Persuasivo', 'Optimización de Perfil']
+    },
+    {
+      badge: 'CAPÍTULO 02',
+      title: 'Producción Audiovisual Vertical 9:16',
+      desc: 'Grabación profesional en terreno con cámaras 4K, iluminación cinematográfica y dirección de escena pensada para retener y viralizar.',
+      chips: ['Rodaje en Terreno', 'Edición Dinámica', 'Subtítulos Animados', 'Ganchos en 3 Segundos']
+    },
+    {
+      badge: 'CAPÍTULO 03',
+      title: 'Meta Ads & Retorno de Inversión (ROI)',
+      desc: 'Estructuración de campañas de tráfico y conversión directa en Meta Ads (Instagram/Facebook) optimizando cada dólar invertido con ROAS comprobado.',
+      chips: ['Segmentación Avanzada', 'Pruebas A/B Creativas', 'Embudos de Conversión', 'Píxel & CAPI Tracking']
+    },
+    {
+      badge: 'CAPÍTULO 04',
+      title: 'Estrategia 360° y Escalado de Negocios',
+      desc: 'Integración total de contenido orgánico, pauta pagada, analítica en tiempo real y optimización continua del embudo para maximizar la rentabilidad.',
+      chips: ['Dashboards de Analítica', 'Consultoría Semanal', 'Estrategia de Oferta', 'Escalabilidad Multiplataforma']
+    }
+  ];
+
+  let currentChapter = 0;
+
+  const setChapter = (idx, shouldScroll = false) => {
+    if (idx < 0 || idx >= chaptersData.length) return;
+    currentChapter = idx;
+    const data = chaptersData[idx];
+
+    navItems.forEach((item, i) => {
+      item.classList.toggle('active', i === idx);
+    });
+
+    mediaLayers.forEach((layer, i) => {
+      layer.classList.toggle('active', i === idx);
+    });
+
+    if (badgeEl) badgeEl.textContent = data.badge;
+    if (titleEl) titleEl.textContent = data.title;
+    if (descEl) descEl.textContent = data.desc;
+    if (chipsEl) {
+      chipsEl.innerHTML = data.chips.map(chip => `<span class="chip-item">${chip}</span>`).join('');
+    }
+    if (controlFill) {
+      controlFill.style.width = `${((idx + 1) / chaptersData.length) * 100}%`;
+    }
+    if (controlLabel) {
+      controlLabel.textContent = `Capítulo ${idx + 1} / ${chaptersData.length}`;
+    }
+
+    if (shouldScroll) {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const scrollTarget = sectionTop + (idx / (chaptersData.length - 1)) * (sectionHeight - window.innerHeight);
+      window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    }
+  };
+
+  navItems.forEach((item, idx) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setChapter(idx, false);
+    });
+  });
+
+  const onServicesScroll = () => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const scrollY = window.scrollY;
+    if (scrollY >= sectionTop - 100 && scrollY <= sectionTop + sectionHeight) {
+      const progress = Math.max(0, Math.min(1, (scrollY - sectionTop) / (sectionHeight - window.innerHeight)));
+      const targetIdx = Math.min(chaptersData.length - 1, Math.floor(progress * chaptersData.length));
+      if (targetIdx !== currentChapter) {
+        setChapter(targetIdx, false);
+      }
+    }
+  };
+
+  window.addEventListener('scroll', onServicesScroll, { passive: true });
 }

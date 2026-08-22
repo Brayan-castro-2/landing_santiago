@@ -2305,6 +2305,177 @@ img, video, iframe {
   }
 }
 
+/* ── 4.5 Evidencias Antes -> Después Section & Analytical KPI Cards ─────── */
+.evidence-full-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.evidence-full-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: grid;
+  grid-template-columns: 1.15fr 1.85fr;
+  gap: 32px;
+  align-items: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.evidence-full-card:hover {
+  border-color: var(--blue-border);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.08);
+}
+
+.evidence-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.e-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.e-brand-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.e-brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-light);
+}
+
+.e-brand-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.e-brand-handle {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.e-metric-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 14px 20px;
+}
+
+.e-stat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.e-stat-lbl {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.e-stat-num {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.e-stat-box.after .e-stat-num {
+  color: var(--blue-primary);
+}
+
+.e-stat-sub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.e-stat-arrow {
+  color: var(--blue-primary);
+}
+
+.e-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.evidence-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.evidence-kpi-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.evidence-kpi-card:hover {
+  background: #FFFFFF;
+  border-color: var(--blue-primary);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  transform: translateY(-2px);
+}
+
+.evidence-kpi-num {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--blue-primary);
+  line-height: 1.1;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.evidence-kpi-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.evidence-kpi-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .evidence-full-card {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .evidence-kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 /* ── 5. Servicios y Metodología (Scroll-Triggered Video Hero) ───────────── */
 .cinematic-services-section {
   position: relative;
