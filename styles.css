@@ -58,7 +58,6 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -3891,17 +3890,8 @@ img, video, iframe {
   }
 
   /* ── Cinematic Services Mobile ── */
-  .cinematic-sticky-wrapper {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-  }
-
   .cinematic-sticky-viewport {
     padding: 10px 16px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
   }
 
   .cinematic-grid-layout {
@@ -3911,9 +3901,13 @@ img, video, iframe {
     width: 100% !important;
   }
 
-  .cinematic-left-panel, .cinematic-right-panel {
+  .cinematic-left-panel {
     min-width: 0 !important;
     width: 100% !important;
+  }
+
+  .cinematic-right-panel {
+    display: none !important;
   }
 
   .chapter-active-content {
