@@ -481,7 +481,7 @@ window.openEvidenceModal = openEvidenceModal;
 window.closeEvidenceModal = closeEvidenceModal;
 window.filterByCompany = filterByCompany;
 
-document.addEventListener('DOMContentLoaded', () => {
+const initApp = () => {
   initPrismHero();
   initStickyNavbar();
   renderScalableGallery('all', false);
@@ -493,7 +493,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initChatWidget();
   initTimelineProgress();
   initCinematicScroll();
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 /* ── 0.0 PRISMA CONFIGURATION & CALIBRATION ENGINE ───────────────────────── */
 window.PRISMA_CFG = {
