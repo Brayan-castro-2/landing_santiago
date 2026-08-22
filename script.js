@@ -553,8 +553,8 @@ function initPrismHero() {
   video.playsInline = true;
   video.preload     = 'auto';
 
-  const IDLE_FRAMES_COUNT = 32;
-  const idleFrames = [];
+  const TOTAL_FRAMES_COUNT = 48;
+  const videoFrames = [];
   let duration = 10.0;
   let isExtracting = false;
   let idleClock = 0;
@@ -563,8 +563,8 @@ function initPrismHero() {
   let pendingTime = null;
   let stage2AutoTime = 3.0;
 
-  // Ghost Video Extractor in Background Thread (Does NOT block main video)
-  const extractIdleFrames = async () => {
+  // Background In-Memory Frame Extraction for 120 FPS Instant Scroll on Mobile & PC
+  const extractAllVideoFrames = async () => {
     if (isExtracting) return;
     isExtracting = true;
 
@@ -581,14 +581,16 @@ function initPrismHero() {
 
     const offCanvas = document.createElement('canvas');
     const isMob = isMobileView();
-    offCanvas.width = isMob ? 540 : 960;
-    offCanvas.height = isMob ? 960 : 540;
+    const vW = ghost.videoWidth > 0 ? ghost.videoWidth : (isMob ? 1080 : 1920);
+    const vH = ghost.videoHeight > 0 ? ghost.videoHeight : (isMob ? 1920 : 1080);
+    const maxDim = 800;
+    const scale = Math.min(1, maxDim / Math.max(vW, vH));
+    offCanvas.width = Math.round(vW * scale);
+    offCanvas.height = Math.round(vH * scale);
     const offCtx = offCanvas.getContext('2d', { alpha: false });
 
-    const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
-
-    for (let i = 0; i < IDLE_FRAMES_COUNT; i++) {
-      const time = (i / (IDLE_FRAMES_COUNT - 1)) * bufferMaxSec;
+    for (let i = 0; i < TOTAL_FRAMES_COUNT; i++) {
+      const time = (i / (TOTAL_FRAMES_COUNT - 1)) * (duration || 10.0);
       ghost.currentTime = time;
 
       await new Promise((resolve) => {
@@ -597,13 +599,18 @@ function initPrismHero() {
           offCtx.drawImage(ghost, 0, 0, offCanvas.width, offCanvas.height);
           if ('createImageBitmap' in window) {
             createImageBitmap(offCanvas).then(bmp => {
-              idleFrames[i] = bmp;
+              videoFrames[i] = bmp;
+              resolve();
+            }).catch(() => {
+              const img = new Image();
+              img.src = offCanvas.toDataURL('image/jpeg', 0.85);
+              videoFrames[i] = img;
               resolve();
             });
           } else {
             const img = new Image();
             img.src = offCanvas.toDataURL('image/jpeg', 0.85);
-            idleFrames[i] = img;
+            videoFrames[i] = img;
             resolve();
           }
         };
@@ -614,7 +621,7 @@ function initPrismHero() {
 
   const onMeta = () => {
     duration = video.duration || 10.0;
-    extractIdleFrames();
+    extractAllVideoFrames();
   };
   video.addEventListener('loadedmetadata', onMeta);
   if (video.readyState >= 1) onMeta();
@@ -654,25 +661,34 @@ function initPrismHero() {
   const renderFrameToCanvas = (sec, isIdleLoop = false) => {
     currentTimeSec = sec;
 
-    if (isIdleLoop && idleFrames.length >= (IDLE_FRAMES_COUNT - 4)) {
-      const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
-      const factor = clamp(sec / bufferMaxSec, 0, 1);
-      const frameIdx = clamp(Math.round(factor * (idleFrames.length - 1)), 0, idleFrames.length - 1);
+    // A. GPU In-Memory Instant Bitmap Buffer (Zero Stutter on Mobile & PC)
+    if (videoFrames.length > 4) {
+      let frameIdx = 0;
+      if (isIdleLoop) {
+        const idleMaxSec = (window.PRISMA_CFG.loopMax || 1.20);
+        const factor = clamp(sec / idleMaxSec, 0, 1);
+        const maxIdleIdx = Math.min(6, videoFrames.length - 1);
+        frameIdx = clamp(Math.round(factor * maxIdleIdx), 0, maxIdleIdx);
+      } else {
+        const factor = clamp(sec / (duration || 10.0), 0, 1);
+        frameIdx = clamp(Math.round(factor * (videoFrames.length - 1)), 0, videoFrames.length - 1);
+      }
 
-      if (idleFrames[frameIdx]) {
-        const img = idleFrames[frameIdx];
+      const img = videoFrames[frameIdx];
+      if (img) {
         const hRatio = canvas.width / img.width;
         const vRatio = canvas.height / img.height;
         const ratio  = Math.max(hRatio, vRatio);
-        const centerShiftX = (canvas.width - img.width * ratio) / 2;
-        const centerShiftY = (canvas.height - img.height * ratio) / 2;
-
-        ctx.drawImage(img, 0, 0, img.width, img.height, centerShiftX, centerShiftY, img.width * ratio, img.height * ratio);
+        const destW = img.width * ratio;
+        const destH = img.height * ratio;
+        const centerShiftX = (canvas.width - destW) / 2;
+        const centerShiftY = (canvas.height - destH) / 2;
+        ctx.drawImage(img, centerShiftX, centerShiftY, destW, destH);
         return;
       }
     }
 
-    // Direct Video Seek Draw
+    // B. Direct Video Seek Draw (Fallback while background extraction runs)
     if (video.readyState >= 1) {
       requestVideoTime(sec);
       const isMob = isMobileView();
@@ -681,9 +697,11 @@ function initPrismHero() {
       const hRatio = canvas.width / vW;
       const vRatio = canvas.height / vH;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - vW * ratio) / 2;
-      const centerShiftY = (canvas.height - vH * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, vW * ratio, vH * ratio);
+      const destW = vW * ratio;
+      const destH = vH * ratio;
+      const centerShiftX = (canvas.width - destW) / 2;
+      const centerShiftY = (canvas.height - destH) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, destW, destH);
     }
   };
 

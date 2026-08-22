@@ -3906,6 +3906,68 @@ img, video, iframe {
   .cinematic-screen-frame {
     height: 240px !important;
   }
+
+  /* ── Sobre Mí Mobile ── */
+  .about-clean-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
+
+  .about-photo-wrap {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .about-photo-img {
+    max-width: 220px !important;
+    margin: 0 auto !important;
+  }
+
+  .about-text-wrap {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* ── Testimonios Mobile ── */
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .testimonial-card {
+    padding: 20px 16px !important;
+  }
+
+  /* ── Footer & Contact Mobile ── */
+  .footer-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .footer-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .footer-buttons .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .footer-contact-links {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    justify-content: flex-start !important;
+  }
+
+  .chat-widget-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -3914,6 +3976,7 @@ img, video, iframe {
   .prisma-reveal-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .prisma-reveal-card { padding: 12px 10px; }
   .prisma-reveal-num { font-size: 1.35rem; }
+  .footer-contact-links { flex-direction: column; align-items: flex-start; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
