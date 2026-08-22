@@ -534,10 +534,23 @@ function initPrismHero() {
 
   const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
 
-  // 1. Setup Canvas Sizing with Retina Resolution
+  // 1. Setup Dynamic Video Source (Mobile vs Desktop) & Canvas Sizing
+  const isMobileView = () => window.innerWidth <= 768;
+  const getVideoSrc = () => isMobileView() ? 'hero-prisma-video-mobile.mp4' : 'hero-prisma-video.mp4';
+
+  const updateVideoSrc = () => {
+    const desired = getVideoSrc();
+    if (!video.src.includes(desired)) {
+      video.src = desired;
+      video.load();
+    }
+  };
+  updateVideoSrc();
+
   const resizeCanvas = () => {
-    canvas.width  = window.innerWidth * Math.min(window.devicePixelRatio, 1.5);
-    canvas.height = window.innerHeight * Math.min(window.devicePixelRatio, 1.5);
+    canvas.width  = window.innerWidth * Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.height = window.innerHeight * Math.min(window.devicePixelRatio || 1, 1.5);
+    updateVideoSrc();
   };
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
@@ -563,7 +576,7 @@ function initPrismHero() {
     isExtracting = true;
 
     const ghost = document.createElement('video');
-    ghost.src = 'hero-prisma-video.mp4';
+    ghost.src = getVideoSrc();
     ghost.muted = true;
     ghost.playsInline = true;
     ghost.preload = 'auto';
@@ -574,8 +587,9 @@ function initPrismHero() {
     });
 
     const offCanvas = document.createElement('canvas');
-    offCanvas.width = 960;
-    offCanvas.height = 540;
+    const isMob = isMobileView();
+    offCanvas.width = isMob ? 540 : 960;
+    offCanvas.height = isMob ? 960 : 540;
     const offCtx = offCanvas.getContext('2d', { alpha: false });
 
     const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
@@ -666,27 +680,33 @@ function initPrismHero() {
     }
 
     // Direct Video Seek Draw
-    if (video.readyState >= 2) {
+    if (video.readyState >= 1) {
       requestVideoTime(sec);
-      const hRatio = canvas.width / (video.videoWidth || 1920);
-      const vRatio = canvas.height / (video.videoHeight || 1080);
+      const isMob = isMobileView();
+      const vWidth = video.videoWidth > 0 ? video.videoWidth : (isMob ? 1080 : 1920);
+      const vHeight = video.videoHeight > 0 ? video.videoHeight : (isMob ? 1920 : 1080);
+      const hRatio = canvas.width / vWidth;
+      const vRatio = canvas.height / vHeight;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
-      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+      const centerShiftX = (canvas.width - vWidth * ratio) / 2;
+      const centerShiftY = (canvas.height - vHeight * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, vWidth * ratio, vHeight * ratio);
     }
   };
 
   // Direct Instant GPU Canvas Drawing (Live Playing Video without seek overhead)
   const drawCurrentVideoDirect = () => {
     currentTimeSec = video.currentTime;
-    if (video.readyState >= 2) {
-      const hRatio = canvas.width / (video.videoWidth || 1920);
-      const vRatio = canvas.height / (video.videoHeight || 1080);
+    if (video.readyState >= 1) {
+      const isMob = isMobileView();
+      const vWidth = video.videoWidth > 0 ? video.videoWidth : (isMob ? 1080 : 1920);
+      const vHeight = video.videoHeight > 0 ? video.videoHeight : (isMob ? 1920 : 1080);
+      const hRatio = canvas.width / vWidth;
+      const vRatio = canvas.height / vHeight;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
-      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+      const centerShiftX = (canvas.width - vWidth * ratio) / 2;
+      const centerShiftY = (canvas.height - vHeight * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, vWidth * ratio, vHeight * ratio);
     }
   };
 
@@ -705,7 +725,7 @@ function initPrismHero() {
     scrollP = clamp(relative / maxScroll, 0, 1);
   };
 
-  // Solo bloquea si el video está reproduciéndose activamente en Fase 2
+  // Solo bloquea si el video está reproduciéndose activamente en Fase 2 en desktop
   window.addEventListener('wheel', (e) => {
     const heroBottom = section.offsetTop + section.offsetHeight;
     if (window.scrollY < heroBottom && stage2State === 'playing' && e.deltaY > 0) {
@@ -713,17 +733,10 @@ function initPrismHero() {
     }
   }, { passive: false });
 
-  window.addEventListener('touchmove', (e) => {
-    const heroBottom = section.offsetTop + section.offsetHeight;
-    if (window.scrollY < heroBottom && stage2State === 'playing') {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   window.addEventListener('resize', updateScrollProgress, { passive: true });
 
-  // 5. Mouse Reveal Lantern Tracking
+  // 5. Mouse & Touch Reveal Lantern Tracking
   let targetMouseX = window.innerWidth / 2;
   let targetMouseY = window.innerHeight / 2;
   let currentMouseX = targetMouseX;
@@ -737,6 +750,18 @@ function initPrismHero() {
       mouseInHero = true;
       targetMouseX = e.clientX;
       targetMouseY = e.clientY - rect.top;
+    } else {
+      mouseInHero = false;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!pinned || e.touches.length === 0) return;
+    const rect = pinned.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      mouseInHero = true;
+      targetMouseX = e.touches[0].clientX;
+      targetMouseY = e.touches[0].clientY - rect.top;
     } else {
       mouseInHero = false;
     }
