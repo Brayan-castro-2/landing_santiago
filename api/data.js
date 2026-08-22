@@ -647,6 +647,18 @@ module.exports = async function handler(req, res) {
         // Primera vez: sembrar datos por defecto
         await kv.set(KV_KEY, DEFAULT_DATA);
         data = DEFAULT_DATA;
+      } else {
+        // Migración de esquema (agregar arrays faltantes si es una BD antigua)
+        let needsUpdate = false;
+        ['reels', 'services', 'metrics', 'profile'].forEach(key => {
+          if (!data[key]) {
+            data[key] = DEFAULT_DATA[key];
+            needsUpdate = true;
+          }
+        });
+        if (needsUpdate) {
+          await kv.set(KV_KEY, data);
+        }
       }
       return res.status(200).json(data);
     } catch (err) {
@@ -662,7 +674,7 @@ module.exports = async function handler(req, res) {
     const expected = process.env.ADMIN_PASSWORD;
 
     if (!expected || password !== expected) {
-      return res.status(401).json({ error: 'Contraseña incorrecta. Asegúrate de configurar ADMIN_PASSWORD en Vercel.' });
+      return res.status(401).json({ error: 'Contraseña incorrecta.' });
     }
 
     try {
