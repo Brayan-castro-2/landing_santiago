@@ -52,12 +52,19 @@ html {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -317,7 +324,8 @@ img, video, iframe {
 .prisma-hero-pinned {
   position: sticky;
   top: 0;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   height: 100vh;
   overflow: hidden;
   background: #000000;
@@ -3511,63 +3519,72 @@ img, video, iframe {
   .logo { font-size: 1.15rem; }
 
   /* 0. Prisma Hero Mobile */
-  .prisma-hero-section { height: 200vh; }
+  .prisma-hero-section { height: 200vh; width: 100%; max-width: 100%; overflow: hidden; }
+  .prisma-hero-pinned { width: 100%; max-width: 100%; overflow: hidden; }
   .prisma-top-nav {
-    padding: 16px;
+    padding: 16px 20px;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
   }
   .prisma-nav-menu { display: none !important; }
-  .prisma-brand-name { font-size: 1.1rem; }
+  .prisma-brand-name { font-size: 1.15rem; }
   .prisma-btn-contact { padding: 6px 14px; font-size: 12px; }
 
   .prisma-content-phase-1,
   .prisma-content-phase-2 {
-    left: 18px;
-    right: 18px;
-    max-width: calc(100vw - 36px);
-    top: 52%;
-    transform: translateY(-50%);
+    left: 20px !important;
+    right: 20px !important;
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
+    top: 50% !important;
+    box-sizing: border-box !important;
   }
 
   .prisma-main-headline {
-    font-size: clamp(2.3rem, 10.5vw, 3.5rem);
-    line-height: 1.02;
-    margin-bottom: 12px;
+    font-size: clamp(2rem, 9vw, 3.2rem) !important;
+    line-height: 1.04 !important;
+    margin-bottom: 12px !important;
+    width: 100% !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .prisma-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    margin-bottom: 10px;
+    font-size: 10.5px !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 8px !important;
   }
 
   .prisma-main-subtitle {
-    font-size: 0.9375rem;
-    line-height: 1.45;
-    max-width: 100%;
-    opacity: 0.9;
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    opacity: 0.9 !important;
   }
 
   .prisma-content-phase-3 {
-    left: 18px;
-    right: 18px;
-    bottom: 24px;
-    max-width: calc(100vw - 36px);
-    text-align: left;
+    left: 20px !important;
+    right: 20px !important;
+    bottom: 24px !important;
+    width: calc(100% - 40px) !important;
+    max-width: calc(100% - 40px) !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
   }
 
   .prisma-content-phase-3 .prisma-main-headline {
-    font-size: clamp(2.1rem, 9.5vw, 3.2rem);
-    text-align: left;
-    align-items: flex-start;
+    font-size: clamp(1.9rem, 8.5vw, 2.8rem) !important;
+    text-align: left !important;
+    align-items: flex-start !important;
   }
 
   .prisma-content-phase-3 .prisma-main-subtitle {
-    font-size: 0.875rem;
-    margin-left: 0;
-    text-align: left;
-    max-width: 100%;
+    font-size: 0.85rem !important;
+    margin-left: 0 !important;
+    text-align: left !important;
+    max-width: 100% !important;
   }
 
   .prisma-reveal-stage .prisma-masked-content {

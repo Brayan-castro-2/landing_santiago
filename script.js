@@ -673,15 +673,18 @@ function initPrismHero() {
       }
     }
 
-    // Direct Video Seek Draw
-    if (video.readyState >= 2) {
+    // Direct Video Seek Draw with Responsive Aspect Ratio Protection
+    if (video.readyState >= 1) {
       requestVideoTime(sec);
-      const hRatio = canvas.width / (video.videoWidth || 1920);
-      const vRatio = canvas.height / (video.videoHeight || 1080);
+      const isMobile = isMobileView();
+      const vWidth = video.videoWidth > 0 ? video.videoWidth : (isMobile ? 1080 : 1920);
+      const vHeight = video.videoHeight > 0 ? video.videoHeight : (isMobile ? 1920 : 1080);
+      const hRatio = canvas.width / vWidth;
+      const vRatio = canvas.height / vHeight;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - (video.videoWidth || 1920) * ratio) / 2;
-      const centerShiftY = (canvas.height - (video.videoHeight || 1080) * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, (video.videoWidth || 1920) * ratio, (video.videoHeight || 1080) * ratio);
+      const centerShiftX = (canvas.width - vWidth * ratio) / 2;
+      const centerShiftY = (canvas.height - vHeight * ratio) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, vWidth * ratio, vHeight * ratio);
     }
   };
 
