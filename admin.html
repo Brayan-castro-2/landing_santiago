@@ -496,7 +496,13 @@
             <div class="col-12"><label class="form-label small fw-semibold">Cita textual</label><textarea class="form-control form-control-sm" rows="2" data-t-idx="${idx}" data-t-field="text">${t.text}</textarea></div>
             <div class="col-md-4"><label class="form-label small">Nombre/Marca</label><input type="text" class="form-control form-control-sm" value="${t.name}" data-t-idx="${idx}" data-t-field="name"></div>
             <div class="col-md-4"><label class="form-label small">Rol / Handle</label><input type="text" class="form-control form-control-sm" value="${t.role}" data-t-idx="${idx}" data-t-field="role"></div>
-            <div class="col-md-4"><label class="form-label small">Avatar (archivo)</label><input type="text" class="form-control form-control-sm" value="${t.avatar}" data-t-idx="${idx}" data-t-field="avatar"></div>
+            <div class="col-md-4">
+              <label class="form-label small">Avatar (archivo/subir)</label>
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="${t.avatar || ''}" data-t-idx="${idx}" data-t-field="avatar" id="tAvatar_${idx}">
+                <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('tAvatar_${idx}').value = base64; siteData.testimonials[${idx}].avatar = base64; markChanged(); })"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
             <div class="col-12 mt-1">
               <button type="button" class="btn btn-outline-secondary btn-sm me-1 move-up-t" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''}><i class="bi bi-arrow-up"></i></button>
               <button type="button" class="btn btn-outline-secondary btn-sm move-down-t" data-idx="${idx}" ${idx === items.length - 1 ? 'disabled' : ''}><i class="bi bi-arrow-down"></i></button>
@@ -559,7 +565,13 @@
           <button type="button" class="btn btn-outline-danger btn-sm testimonial-remove" data-idx="${idx}"><i class="bi bi-trash"></i></button>
           <div class="row g-2">
             <div class="col-md-3"><label class="form-label small fw-semibold">Cliente</label><input type="text" class="form-control form-control-sm" value="${r.cliente || ''}" data-r-idx="${idx}" data-r-field="cliente"></div>
-            <div class="col-md-3"><label class="form-label small fw-semibold">Logo (archivo)</label><input type="text" class="form-control form-control-sm" value="${r.logo || ''}" data-r-idx="${idx}" data-r-field="logo"></div>
+            <div class="col-md-3">
+              <label class="form-label small fw-semibold">Logo (archivo/subir)</label>
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="${r.logo || ''}" data-r-idx="${idx}" data-r-field="logo" id="reelLogo_${idx}">
+                <button class="btn btn-outline-secondary" type="button" onclick="handleImageUpload((base64) => { document.getElementById('reelLogo_${idx}').value = base64; siteData.reels[${idx}].logo = base64; markChanged(); })"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
             <div class="col-md-3"><label class="form-label small fw-semibold">Handle</label><input type="text" class="form-control form-control-sm" value="${r.handle || ''}" data-r-idx="${idx}" data-r-field="handle"></div>
             <div class="col-md-3"><label class="form-label small fw-semibold">Shortcode IG</label><input type="text" class="form-control form-control-sm" value="${r.shortcode || ''}" data-r-idx="${idx}" data-r-field="shortcode"></div>
             <div class="col-md-6"><label class="form-label small">Título del Reel</label><input type="text" class="form-control form-control-sm" value="${r.titulo || ''}" data-r-idx="${idx}" data-r-field="titulo"></div>
