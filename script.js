@@ -587,8 +587,11 @@ function initPrismHero() {
 
     const offCanvas = document.createElement('canvas');
     const isMob = isMobileView();
-    offCanvas.width = isMob ? 480 : 854;
-    offCanvas.height = isMob ? 854 : 480;
+    const vW = ghost.videoWidth > 0 ? ghost.videoWidth : (isMob ? 1080 : 1920);
+    const vH = ghost.videoHeight > 0 ? ghost.videoHeight : (isMob ? 1920 : 1080);
+    const scale = Math.min(1, 960 / Math.max(vW, vH));
+    offCanvas.width = Math.round(vW * scale);
+    offCanvas.height = Math.round(vH * scale);
     const offCtx = offCanvas.getContext('2d', { alpha: false });
 
     for (let i = 0; i < TOTAL_FRAMES_COUNT; i++) {
@@ -671,14 +674,16 @@ function initPrismHero() {
         frameIdx = clamp(Math.round(factor * (videoFrames.length - 1)), 0, videoFrames.length - 1);
       }
 
-      if (videoFrames[frameIdx]) {
-        const img = videoFrames[frameIdx];
+      const img = videoFrames[frameIdx];
+      if (img) {
         const hRatio = canvas.width / img.width;
         const vRatio = canvas.height / img.height;
         const ratio  = Math.max(hRatio, vRatio);
-        const centerShiftX = (canvas.width - img.width * ratio) / 2;
-        const centerShiftY = (canvas.height - img.height * ratio) / 2;
-        ctx.drawImage(img, 0, 0, img.width, img.height, centerShiftX, centerShiftY, img.width * ratio, img.height * ratio);
+        const destW = img.width * ratio;
+        const destH = img.height * ratio;
+        const centerShiftX = (canvas.width - destW) / 2;
+        const centerShiftY = (canvas.height - destH) / 2;
+        ctx.drawImage(img, centerShiftX, centerShiftY, destW, destH);
         return;
       }
     }
@@ -692,9 +697,11 @@ function initPrismHero() {
       const hRatio = canvas.width / vWidth;
       const vRatio = canvas.height / vHeight;
       const ratio  = Math.max(hRatio, vRatio);
-      const centerShiftX = (canvas.width - vWidth * ratio) / 2;
-      const centerShiftY = (canvas.height - vHeight * ratio) / 2;
-      ctx.drawImage(video, centerShiftX, centerShiftY, vWidth * ratio, vHeight * ratio);
+      const destW = vWidth * ratio;
+      const destH = vHeight * ratio;
+      const centerShiftX = (canvas.width - destW) / 2;
+      const centerShiftY = (canvas.height - destH) / 2;
+      ctx.drawImage(video, centerShiftX, centerShiftY, destW, destH);
     }
   };
 

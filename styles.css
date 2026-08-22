@@ -512,34 +512,165 @@ img, video, iframe {
   margin-left: auto;
 }
 
-.prisma-phase3-chips {
+/* Layer 3: Phase 4 Reveal Stage (Absolute Black + Rainbow Lantern) */
+.prisma-reveal-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 25;
+  background: #000000;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity, transform, filter;
+}
+
+.prisma-mouse-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42, 127, 255, 0.45) 0%, rgba(138, 43, 226, 0.25) 40%, rgba(255, 42, 127, 0.12) 65%, transparent 80%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 26;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+.prisma-masked-content {
+  position: relative;
+  z-index: 27;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.prisma-reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.prisma-reveal-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prisma-reveal-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(42, 127, 255, 0.6);
+  box-shadow: 0 12px 32px rgba(42, 127, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+.prisma-reveal-num {
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.prisma-reveal-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.prisma-reveal-desc {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.45;
+}
+
+.prisma-reveal-brands-strip {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.prisma-reveal-brands-label {
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  margin-top: 16px;
-}
-
-.prisma-chip {
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 253, 249, 0.25);
-  border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
-  color: #fffdf9;
-  background: rgba(255, 253, 249, 0.06);
-  backdrop-filter: blur(12px);
-  transition: all 0.3s cubic-bezier(0.52, 0.01, 0, 1);
-  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.prisma-chip:hover {
-  border-color: #2a7fff;
-  background: rgba(42, 127, 255, 0.25);
-  box-shadow: 0 0 16px rgba(42, 127, 255, 0.6);
-  transform: translateY(-2px);
+.prisma-brands-beam-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.prisma-reveal-brands-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.prisma-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.prisma-brand-badge:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #ffffff;
+}
+
+.prisma-brand-badge img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .prisma-eyebrow {
