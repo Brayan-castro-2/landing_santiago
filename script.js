@@ -560,18 +560,17 @@ function initPrismHero() {
   video.playsInline = true;
   video.preload     = 'auto';
 
-  const IDLE_FRAMES_COUNT = 32;
-  const idleFrames = [];
+  const TOTAL_FRAMES_COUNT = 48;
+  const videoFrames = [];
   let duration = 10.0;
   let isExtracting = false;
   let idleClock = 0;
   let currentTimeSec = 0;
   let isSeeking = false;
   let pendingTime = null;
-  let stage2AutoTime = 3.0;
 
-  // Ghost Video Extractor in Background Thread (Does NOT block main video)
-  const extractIdleFrames = async () => {
+  // Ghost Video Extractor in Background Thread (Full 120 FPS In-Memory Buffer)
+  const extractAllVideoFrames = async () => {
     if (isExtracting) return;
     isExtracting = true;
 
@@ -588,14 +587,12 @@ function initPrismHero() {
 
     const offCanvas = document.createElement('canvas');
     const isMob = isMobileView();
-    offCanvas.width = isMob ? 540 : 960;
-    offCanvas.height = isMob ? 960 : 540;
+    offCanvas.width = isMob ? 480 : 854;
+    offCanvas.height = isMob ? 854 : 480;
     const offCtx = offCanvas.getContext('2d', { alpha: false });
 
-    const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
-
-    for (let i = 0; i < IDLE_FRAMES_COUNT; i++) {
-      const time = (i / (IDLE_FRAMES_COUNT - 1)) * bufferMaxSec;
+    for (let i = 0; i < TOTAL_FRAMES_COUNT; i++) {
+      const time = (i / (TOTAL_FRAMES_COUNT - 1)) * (duration || 10.0);
       ghost.currentTime = time;
 
       await new Promise((resolve) => {
@@ -604,13 +601,13 @@ function initPrismHero() {
           offCtx.drawImage(ghost, 0, 0, offCanvas.width, offCanvas.height);
           if ('createImageBitmap' in window) {
             createImageBitmap(offCanvas).then(bmp => {
-              idleFrames[i] = bmp;
+              videoFrames[i] = bmp;
               resolve();
             });
           } else {
             const img = new Image();
             img.src = offCanvas.toDataURL('image/jpeg', 0.85);
-            idleFrames[i] = img;
+            videoFrames[i] = img;
             resolve();
           }
         };
@@ -621,7 +618,7 @@ function initPrismHero() {
 
   const onMeta = () => {
     duration = video.duration || 10.0;
-    extractIdleFrames();
+    extractAllVideoFrames();
   };
   video.addEventListener('loadedmetadata', onMeta);
   if (video.readyState >= 1) onMeta();
@@ -661,25 +658,32 @@ function initPrismHero() {
   const renderFrameToCanvas = (sec, isIdleLoop = false) => {
     currentTimeSec = sec;
 
-    if (isIdleLoop && idleFrames.length >= (IDLE_FRAMES_COUNT - 4)) {
-      const bufferMaxSec = (window.PRISMA_CFG.loopMax || 1.20) * 1.2;
-      const factor = clamp(sec / bufferMaxSec, 0, 1);
-      const frameIdx = clamp(Math.round(factor * (idleFrames.length - 1)), 0, idleFrames.length - 1);
+    // A. GPU In-Memory Instant Bitmap Buffer (Zero Stutter)
+    if (videoFrames.length > 4) {
+      let frameIdx = 0;
+      if (isIdleLoop) {
+        const idleMaxSec = (window.PRISMA_CFG.loopMax || 1.20);
+        const factor = clamp(sec / idleMaxSec, 0, 1);
+        const maxIdleIdx = Math.min(8, videoFrames.length - 1);
+        frameIdx = clamp(Math.round(factor * maxIdleIdx), 0, maxIdleIdx);
+      } else {
+        const factor = clamp(sec / (duration || 10.0), 0, 1);
+        frameIdx = clamp(Math.round(factor * (videoFrames.length - 1)), 0, videoFrames.length - 1);
+      }
 
-      if (idleFrames[frameIdx]) {
-        const img = idleFrames[frameIdx];
+      if (videoFrames[frameIdx]) {
+        const img = videoFrames[frameIdx];
         const hRatio = canvas.width / img.width;
         const vRatio = canvas.height / img.height;
         const ratio  = Math.max(hRatio, vRatio);
         const centerShiftX = (canvas.width - img.width * ratio) / 2;
         const centerShiftY = (canvas.height - img.height * ratio) / 2;
-
         ctx.drawImage(img, 0, 0, img.width, img.height, centerShiftX, centerShiftY, img.width * ratio, img.height * ratio);
         return;
       }
     }
 
-    // Direct Video Seek Draw
+    // B. Direct Video Seek Draw (Fallback while background extraction runs)
     if (video.readyState >= 1) {
       requestVideoTime(sec);
       const isMob = isMobileView();
