@@ -720,7 +720,7 @@ function initPrismHero() {
   video.preload     = 'auto';
   video.play().catch(e => console.warn("Autoplay blocked, waiting for interaction", e));
 
-  const TOTAL_FRAMES_COUNT = 24; // 24 frames extraen en la mitad de tiempo que 48 con calidad visual idéntica
+  const TOTAL_FRAMES_COUNT = 48;
   const videoFrames = [];
   let duration = 10.0;
   let isExtracting = false;
@@ -728,9 +728,8 @@ function initPrismHero() {
   let currentTimeSec = 0;
   let isSeeking = false;
   let pendingTime = null;
-  let framesReady = false; // Flag para saber si tenemos suficientes frames
 
-  // Extracción de frames con prioridad en los primeros frames (para que el scroll inicial sea fluido)
+  // Background In-Memory Frame Extraction for 120 FPS Instant Scroll on Mobile & PC
   const extractAllVideoFrames = async () => {
     if (isExtracting) return;
     isExtracting = true;
@@ -746,27 +745,16 @@ function initPrismHero() {
       ghost.load();
     });
 
-    // Usar resolución menor para extraer más rápido (720px máx)
     const offCanvas = document.createElement('canvas');
     const vW = ghost.videoWidth > 0 ? ghost.videoWidth : 1920;
     const vH = ghost.videoHeight > 0 ? ghost.videoHeight : 1080;
-    const maxDim = 720; // Reducido de 960 para mayor velocidad de extracción
+    const maxDim = 960;
     const scale = Math.min(1, maxDim / Math.max(vW, vH));
     offCanvas.width = Math.round(vW * scale);
     offCanvas.height = Math.round(vH * scale);
     const offCtx = offCanvas.getContext('2d', { alpha: false });
 
-    // Extraer dando prioridad a los frames intermedios primero (0%, 20%, 40%, 60%, 80%, 100%)
-    // para que el scroll sea fluido lo antes posible, luego rellenar los intermedios
-    const priorityOrder = [];
-    const step = Math.max(1, Math.floor(TOTAL_FRAMES_COUNT / 6));
-    for (let i = 0; i < TOTAL_FRAMES_COUNT; i += step) priorityOrder.push(i);
     for (let i = 0; i < TOTAL_FRAMES_COUNT; i++) {
-      if (!priorityOrder.includes(i)) priorityOrder.push(i);
-    }
-
-    for (let pi = 0; pi < priorityOrder.length; pi++) {
-      const i = priorityOrder[pi];
       const time = (i / (TOTAL_FRAMES_COUNT - 1)) * (duration || 10.0);
       ghost.currentTime = time;
 
@@ -777,39 +765,31 @@ function initPrismHero() {
           if ('createImageBitmap' in window) {
             createImageBitmap(offCanvas).then(bmp => {
               videoFrames[i] = bmp;
-              // Marcar como listos tan pronto como tengamos los 6 frames prioritarios
-              if (pi >= 5 && !framesReady) framesReady = true;
               resolve();
             }).catch(() => {
               const img = new Image();
-              img.src = offCanvas.toDataURL('image/jpeg', 0.80);
+              img.src = offCanvas.toDataURL('image/jpeg', 0.85);
               videoFrames[i] = img;
-              if (pi >= 5 && !framesReady) framesReady = true;
               resolve();
             });
           } else {
             const img = new Image();
-            img.src = offCanvas.toDataURL('image/jpeg', 0.80);
+            img.src = offCanvas.toDataURL('image/jpeg', 0.85);
             videoFrames[i] = img;
-            if (pi >= 5 && !framesReady) framesReady = true;
             resolve();
           }
         };
         ghost.addEventListener('seeked', onSeek);
       });
     }
-    framesReady = true;
   };
 
   const onMeta = () => {
     duration = video.duration || 10.0;
     extractAllVideoFrames();
   };
-  // Iniciar extracción lo antes posible - si el video ya tiene metadata, comenzar ya
   video.addEventListener('loadedmetadata', onMeta);
   if (video.readyState >= 1) onMeta();
-  // Si el video no tiene readyState aún, forzar carga
-  else { video.load(); }
 
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -847,8 +827,7 @@ function initPrismHero() {
     currentTimeSec = sec;
 
     // A. GPU In-Memory Instant Bitmap Buffer (Zero Stutter on Mobile & PC)
-    // Usar frames cuando estén listos (umbral reducido de 4 a 3 frames para activar antes)
-    if (framesReady && videoFrames.filter(Boolean).length >= 3) {
+    if (videoFrames.length > 4) {
       let frameIdx = 0;
       if (isIdleLoop) {
         const idleMaxSec = (window.PRISMA_CFG.loopMax || 1.20);
@@ -971,19 +950,12 @@ function initPrismHero() {
       renderFrameToCanvas(cfg.userManualSeek);
       targetEffectiveP = smoothP;
     } else if (smoothP < 0.03) {
-      // REPOSO: Si los frames aún no están listos, reproducir el video en vivo (fluido como seda)
-      // Una vez que los frames están listos, cambiar al sistema de buffer de memoria
-      if (!framesReady) {
-        // Video en reproducción directa — sin seek, sin stutter
-        drawCurrentVideoDirect();
-      } else {
-        // Búfer de memoria a 120 FPS (0.0s -> 1.2s -> 0.0s)
-        idleClock += (cfg.loopSpeed * 0.52);
-        const rawSin = Math.sin(idleClock) * 0.5 + 0.5;
-        const smoothFactor = rawSin * rawSin * (3 - 2 * rawSin);
-        const targetTime = cfg.loopMin + smoothFactor * (cfg.loopMax - cfg.loopMin);
-        renderFrameToCanvas(targetTime, true);
-      }
+      // REPOSO: Búfer de memoria a 120 FPS (0.0s -> 1.2s -> 0.0s)
+      idleClock += (cfg.loopSpeed * 0.52);
+      const rawSin = Math.sin(idleClock) * 0.5 + 0.5;
+      const smoothFactor = rawSin * rawSin * (3 - 2 * rawSin);
+      const targetTime = cfg.loopMin + smoothFactor * (cfg.loopMax - cfg.loopMin);
+      renderFrameToCanvas(targetTime, true);
       targetEffectiveP = 0;
     } else if (smoothP <= 0.22) {
       // ETAPA 1 SCROLL: Avance de 0.0s a 3.0s
