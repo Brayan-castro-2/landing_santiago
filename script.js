@@ -812,6 +812,7 @@ function initPrismHero() {
 
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   window.addEventListener('resize', updateScrollProgress, { passive: true });
+  updateScrollProgress();
 
   // 5. Mouse Reveal Lantern Tracking
   let targetMouseX = window.innerWidth / 2;
@@ -843,12 +844,13 @@ function initPrismHero() {
       overlay.style.background = `radial-gradient(circle at 65% 50%, rgba(0, 0, 0, ${(cfg.darkOverlay * 0.2).toFixed(2)}) 0%, rgba(0, 0, 0, ${cfg.darkOverlay.toFixed(2)}) 100%)`;
     }
 
-    // Natural fast-reacting scroll interpolation
-    smoothP += (scrollP - smoothP) * 0.16;
+    const isMobile = isMobileView();
+
+    // Natural fast-reacting scroll interpolation (responsive tracking on mobile)
+    const lerpSpeed = isMobile ? 0.35 : 0.16;
+    smoothP += (scrollP - smoothP) * lerpSpeed;
 
     let targetEffectiveP = smoothP;
-
-    const isMobile = isMobileView();
 
     // ── A. DETERMINISTIC SCROLL-DRIVEN CANVAS RENDERING ──
     if (cfg.userManualSeek !== null) {
@@ -904,7 +906,8 @@ function initPrismHero() {
     }
 
     // Suavizado del progreso efectivo sin saltos
-    displayP += (targetEffectiveP - displayP) * 0.12;
+    const displayLerp = isMobile ? 0.35 : 0.12;
+    displayP += (targetEffectiveP - displayP) * displayLerp;
 
     // Fade to Black a partir de 0.68
     const fadeToBlackStart = 0.68;
