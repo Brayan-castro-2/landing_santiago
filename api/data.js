@@ -23,10 +23,10 @@ const CORS_HEADERS = {
 // ── Datos iniciales por defecto (se usan si KV está vacío) ──
 const DEFAULT_DATA = {
   "brand": {
-    "name": "Santiago Cerda",
+    "name": "PRYSMA",
     "whatsapp": "56999967272",
     "email": "scerda.scerda@gmail.com",
-    "instagram": "santicerda_w",
+    "instagram": "prysma.cl",
     "linkedin": "santiagocerda",
     "phone": "+56 9 9996 7272"
   },
@@ -82,7 +82,7 @@ const DEFAULT_DATA = {
     "summary": "Especialista en Growth Marketing y producción audiovisual de alto rendimiento. Combino ganchos narrativos virales con estrategias avanzadas en Meta Ads para convertir visualizaciones en facturación real para marcas."
   },
   "profile": {
-    "image": "imaen santiago-Photoroom.png"
+    "image": "santi sin ia.png"
   },
   "testimonials": [
     {
@@ -556,56 +556,112 @@ const DEFAULT_DATA = {
     {
       "logo": "logo-maki-acai.jpg",
       "client": "Maki Açaí",
-      "handle": "@makiacai.cl • Abr – Ago 2025",
+      "handle": "@makiacai.cl • Gastronomía",
       "evidenceUrl": "evidencia-maki.jpg",
       "beforeNum": "0",
       "beforeLabel": "Seguidores",
-      "afterNum": "220.000",
+      "afterNum": "+220.000",
       "afterLabel": "Seguidores Orgánicos",
-      "footerText": "De 0 a 215K nuevos seguidores en 4 meses. Récord histórico con 6.7M de reproducciones y más de 8.3M de vistas acumuladas sin pauta publicitaria.",
+      "footerText": "Crecimiento orgánico sostenido mediante contenido estratégico, reels virales y campañas segmentadas en Meta Ads.",
       "cards": [
         {
-          "num": "+127K",
-          "title": "Seguidores / Mes",
+          "num": "2.17M",
+          "title": "Visualizaciones / Mes",
+          "desc": "Promedio de visualizaciones mensuales sostenidas."
+        },
+        {
+          "num": "+220K",
+          "title": "Seguidores Ganados",
           "desc": "Adquisición 100% orgánica por algoritmo sin inversión en pauta."
         },
         {
-          "num": "6.7M",
-          "title": "Vistas Máximas",
-          "desc": "26 segundos de retención promedio en video estrella de delivery."
-        },
-        {
-          "num": "1.69M",
-          "title": "Cuentas Alcanzadas",
-          "desc": "537K espectadores únicos y salto récord de facturación directa."
+          "num": "+4",
+          "title": "Campañas Meta Ads",
+          "desc": "E-commerce y pedidos de delivery directos en Santiago."
         }
       ]
     },
     {
       "logo": "logo-hotel-gran-pacifico.jpg",
       "client": "Hotel Gran Pacífico",
-      "handle": "@granpacificohotel • Temporada 2024-2025",
+      "handle": "@granpacificohotel • Hotelería & Turismo",
       "evidenceUrl": "evidencia-hotel.jpg",
-      "beforeNum": "2.800",
-      "beforeLabel": "Seguidores",
-      "afterNum": "16.500",
+      "beforeNum": "18.000",
+      "beforeLabel": "Seguidores Iniciales",
+      "afterNum": "+46.000",
       "afterLabel": "Comunidad Activa",
-      "footerText": "Transformación del modelo de adquisición: de depender de Booking a canal de reservas directas. 4.2M de vistas orgánicas posicionando al hotel como líder en el sur de Chile.",
+      "footerText": "Estrategia de contenido enfocada en viralidad turística y apertura de canales de difusión, impulsando reservas directas y posicionamiento del hotel.",
       "cards": [
         {
-          "num": "98%",
-          "title": "Ocupación Directa",
-          "desc": "Evadiendo comisiones de terceros gracias a embudos propios."
+          "num": "921K",
+          "title": "Visualizaciones / Mes",
+          "desc": "Promedio mensual de alcance e impacto en turismo."
+        },
+        {
+          "num": "+28K",
+          "title": "Nuevos Seguidores",
+          "desc": "Crecimiento orgánico de 18.000 a más de 46.000 seguidores."
         },
         {
           "num": "4.2M",
-          "title": "Alcance Turístico",
-          "desc": "Posicionamiento del destino de Puerto Montt a nivel internacional."
+          "title": "Vistas Reel Estrella",
+          "desc": "Experiencia turística inmersiva y reservas directas."
+        }
+      ]
+    },
+    {
+      "logo": "logo-algo-market.jpg",
+      "client": "Algo Market",
+      "handle": "@algo_market_chile • Retail & Supermercados",
+      "evidenceUrl": "evidencia-algo.jpg",
+      "beforeNum": "9.000",
+      "beforeLabel": "Seguidores Iniciales",
+      "afterNum": "+72.000",
+      "afterLabel": "Comunidad Compradora",
+      "footerText": "Estrategia de contenido consistente y productos virales que atrajeron clientes a tienda física y aumentaron las ventas directas.",
+      "cards": [
+        {
+          "num": "654K",
+          "title": "Visualizaciones / Mes",
+          "desc": "Tráfico constante a tienda y pasillos de importación."
         },
         {
-          "num": "-45%",
-          "title": "CPA Reducido",
-          "desc": "Disminución drástica del costo por adquisición en Meta Ads."
+          "num": "+63K",
+          "title": "Nuevos Seguidores",
+          "desc": "Crecimiento total de 9.000 a más de 72.000 seguidores."
+        },
+        {
+          "num": "700K",
+          "title": "Vistas Reel Estrella",
+          "desc": "Storytelling de productos virales de alta rotación."
+        }
+      ]
+    },
+    {
+      "logo": "logo-vitanova.jpg",
+      "client": "VitaNovaCL",
+      "handle": "@vitanovacl • E-Commerce Shopify",
+      "evidenceUrl": "evidencia-vitanova.jpg",
+      "beforeNum": "$656 USD",
+      "beforeLabel": "Pauta Publicitaria",
+      "afterNum": "ROAS ×5.41",
+      "afterLabel": "Retorno de Inversión",
+      "footerText": "Lanzamiento y escalado de tienda e-commerce desde cero con branding, embudos de conversión y campañas rentables de ventas directas en Meta Ads.",
+      "cards": [
+        {
+          "num": "×5.41",
+          "title": "ROAS Máximo",
+          "desc": "Pauta de alta rentabilidad y retorno de inversión comercial."
+        },
+        {
+          "num": "×4.03",
+          "title": "ROAS Campaña 2",
+          "desc": "Consistencia en adquisición con campañas Advantage+."
+        },
+        {
+          "num": "+9",
+          "title": "Campañas Meta Ads",
+          "desc": "Estructura completa de prospección y retargeting."
         }
       ]
     }

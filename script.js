@@ -848,13 +848,22 @@ function initPrismHero() {
 
     let targetEffectiveP = smoothP;
 
+    const isMobile = isMobileView();
+
     // ── A. DETERMINISTIC SCROLL-DRIVEN CANVAS RENDERING ──
     if (cfg.userManualSeek !== null) {
       if (!video.paused) video.pause();
       renderFrameToCanvas(cfg.userManualSeek);
       targetEffectiveP = smoothP;
+    } else if (isMobile) {
+      // CELULAR (OPCIÓN 1): Video continuo a 60 FPS sin sobrecarga de seek
+      if (video.paused) {
+        video.play().catch(() => {});
+      }
+      drawCurrentVideoDirect();
+      targetEffectiveP = smoothP;
     } else if (smoothP < 0.03) {
-      // REPOSO (TOP HERO): Reproducción fluida instantánea en vivo (0.0s -> 1.5s loop)
+      // PC REPOSO (TOP HERO): Reproducción fluida instantánea en vivo (0.0s -> 1.5s loop)
       if (video.paused) {
         video.play().catch(() => {});
       }
@@ -864,7 +873,7 @@ function initPrismHero() {
       drawCurrentVideoDirect();
       targetEffectiveP = 0;
     } else {
-      // SCROLL ACTIVO: Pausar reproducción y controlar fotogramas con el scroll
+      // PC SCROLL ACTIVO: Pausar reproducción y controlar fotogramas con el scroll
       if (!video.paused) {
         video.pause();
       }
