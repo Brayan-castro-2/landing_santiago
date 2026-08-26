@@ -4007,6 +4007,42 @@ img, video, iframe {
     width: 100% !important;
     max-width: 100% !important;
   }
+
+  /* ── Modal Video 9:16 Mobile ── */
+  .video-modal {
+    padding: 10px !important;
+    align-items: center !important;
+  }
+
+  .modal-content {
+    grid-template-columns: 1fr !important;
+    max-height: 92vh !important;
+    width: 100% !important;
+    max-width: 440px !important;
+    border-radius: 18px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .modal-media-box {
+    min-height: 460px !important;
+    height: 460px !important;
+    width: 100% !important;
+    background: #000000 !important;
+  }
+
+  .modal-details {
+    padding: 18px 16px 24px !important;
+  }
+
+  .modal-close {
+    top: 10px !important;
+    right: 10px !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    z-index: 30 !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -4016,6 +4052,11 @@ img, video, iframe {
   .prisma-reveal-card { padding: 12px 10px; }
   .prisma-reveal-num { font-size: 1.35rem; }
   .footer-contact-links { flex-direction: column; align-items: flex-start; }
+
+  .modal-media-box {
+    min-height: 420px !important;
+    height: 420px !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
