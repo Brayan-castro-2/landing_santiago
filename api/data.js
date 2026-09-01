@@ -45,13 +45,13 @@ const DEFAULT_DATA = {
     "phase3_subtitle": "Meta Ads • Producción Vertical 9:16 • Embudos de Adquisición de Alta Rentabilidad.",
     "reveal_cards": [
       {
-        "num": "+29.5M",
+        "num": "+31.5M",
         "title": "Views Orgánicas",
         "desc": "Impacto masivo en audiencias de alto valor con retención 9:16."
       },
       {
-        "num": "5.4x",
-        "title": "ROAS Promedio",
+        "num": "x4.6",
+        "title": "ROAS Publicitario",
         "desc": "Embudos de Meta Ads de conversión directa sin desperdicio de pauta."
       },
       {
@@ -586,7 +586,7 @@ const DEFAULT_DATA = {
       "client": "Hotel Gran Pacífico",
       "handle": "@granpacificohotel • Hotelería & Turismo",
       "evidenceUrl": "evidencia-hotel.jpg",
-      "beforeNum": "18.000",
+      "beforeNum": "30.000",
       "beforeLabel": "Seguidores Iniciales",
       "afterNum": "+46.000",
       "afterLabel": "Comunidad Activa",
@@ -598,9 +598,9 @@ const DEFAULT_DATA = {
           "desc": "Promedio mensual de alcance e impacto en turismo."
         },
         {
-          "num": "+28K",
+          "num": "+16K",
           "title": "Nuevos Seguidores",
-          "desc": "Crecimiento orgánico de 18.000 a más de 46.000 seguidores."
+          "desc": "Crecimiento orgánico de 30.000 a más de 46.000 seguidores."
         },
         {
           "num": "4.2M",
@@ -614,7 +614,7 @@ const DEFAULT_DATA = {
       "client": "Algo Market",
       "handle": "@algo_market_chile • Retail & Supermercados",
       "evidenceUrl": "evidencia-algo.jpg",
-      "beforeNum": "9.000",
+      "beforeNum": "11.000",
       "beforeLabel": "Seguidores Iniciales",
       "afterNum": "+72.000",
       "afterLabel": "Comunidad Compradora",
@@ -626,9 +626,9 @@ const DEFAULT_DATA = {
           "desc": "Tráfico constante a tienda y pasillos de importación."
         },
         {
-          "num": "+63K",
+          "num": "+61K",
           "title": "Nuevos Seguidores",
-          "desc": "Crecimiento total de 9.000 a más de 72.000 seguidores."
+          "desc": "Crecimiento total de 11.000 a más de 72.000 seguidores."
         },
         {
           "num": "700K",
@@ -644,24 +644,24 @@ const DEFAULT_DATA = {
       "evidenceUrl": "evidencia-vitanova.jpg",
       "beforeNum": "$656 USD",
       "beforeLabel": "Pauta Publicitaria",
-      "afterNum": "ROAS ×5.41",
+      "afterNum": "ROAS x4.6",
       "afterLabel": "Retorno de Inversión",
       "footerText": "Lanzamiento y escalado de tienda e-commerce desde cero con branding, embudos de conversión y campañas rentables de ventas directas en Meta Ads.",
       "cards": [
         {
-          "num": "×5.41",
-          "title": "ROAS Máximo",
-          "desc": "Pauta de alta rentabilidad y retorno de inversión comercial."
-        },
-        {
-          "num": "×4.03",
-          "title": "ROAS Campaña 2",
-          "desc": "Consistencia en adquisición con campañas Advantage+."
+          "num": "x4.6",
+          "title": "ROAS Publicitario",
+          "desc": "Retorno de inversión en campañas de ventas directas."
         },
         {
           "num": "+9",
           "title": "Campañas Meta Ads",
           "desc": "Estructura completa de prospección y retargeting."
+        },
+        {
+          "num": "Shopify",
+          "title": "E-Commerce",
+          "desc": "Branding, configuración de tienda y lanzamiento desde cero."
         }
       ]
     }
