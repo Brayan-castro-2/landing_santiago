@@ -887,20 +887,14 @@ function initPrismHero() {
         renderFrameToCanvas(targetTime);
         targetEffectiveP = smoothP;
       } else if (smoothP <= 0.48) {
-        // ETAPA 2: "Refracción que Multiplica" (3.0s -> 8.2s) — PURO SCROLL
+        // ETAPA 2: "Refracción que Multiplica" (3.0s -> 6.8s) — SIN ARCOÍRIS
         const norm = (smoothP - 0.22) / (0.48 - 0.22);
-        const targetTime = clamp(3.0 + norm * (8.2 - 3.0), 3.0, 8.2);
-        renderFrameToCanvas(targetTime);
-        targetEffectiveP = smoothP;
-      } else if (smoothP <= 0.70) {
-        // ETAPA 3: Dispersión de Arcoíris (8.2s -> 10.0s)
-        const norm = (smoothP - 0.48) / (0.70 - 0.48);
-        const targetTime = clamp(8.2 + norm * (duration - 8.2), 8.2, duration);
+        const targetTime = clamp(3.0 + norm * (6.8 - 3.0), 3.0, 6.8);
         renderFrameToCanvas(targetTime);
         targetEffectiveP = smoothP;
       } else {
-        // ETAPA 4: Negro Absoluto para Linterna Interactiva
-        renderFrameToCanvas(duration);
+        // ETAPA 3: Negro Absoluto para Linterna Interactiva (salta arcoíris)
+        renderFrameToCanvas(6.8);
         targetEffectiveP = smoothP;
       }
     }
@@ -909,8 +903,8 @@ function initPrismHero() {
     const displayLerp = isMobile ? 0.35 : 0.12;
     displayP += (targetEffectiveP - displayP) * displayLerp;
 
-    // Fade to Black a partir de 0.68
-    const fadeToBlackStart = 0.68;
+    // Fade to Black a partir de 0.44 (antes del arcoíris)
+    const fadeToBlackStart = 0.44;
     let canvasOpacity = 1;
     if (displayP > fadeToBlackStart) {
       canvasOpacity = clamp(1 - (displayP - fadeToBlackStart) / 0.08, 0, 1);
@@ -937,17 +931,17 @@ function initPrismHero() {
       phase1.style.pointerEvents = p1Opacity < 0.1 ? 'none' : 'auto';
     }
 
-    // ── C. FASE 2 TYPOGRAPHY (3s -> 8s, Left)
+    // ── C. FASE 2 TYPOGRAPHY (3s -> 6.8s, Left)
     if (phase2) {
       let p2Opacity = 0;
       if (displayP < 0.18) {
         p2Opacity = 0;
       } else if (displayP <= 0.26) {
         p2Opacity = smoothstep(0.18, 0.26, displayP);
-      } else if (displayP <= 0.48) {
-        p2Opacity = 1; // 100% nítida y visible sin parpadeos
-      } else if (displayP <= 0.58) {
-        p2Opacity = 1 - smoothstep(0.48, 0.58, displayP); // Desvanecimiento suave y unidireccional
+      } else if (displayP <= 0.40) {
+        p2Opacity = 1;
+      } else if (displayP <= 0.50) {
+        p2Opacity = 1 - smoothstep(0.40, 0.50, displayP);
       } else {
         p2Opacity = 0;
       }
@@ -957,29 +951,16 @@ function initPrismHero() {
       phase2.style.pointerEvents = p2Opacity < 0.1 ? 'none' : 'auto';
     }
 
-    // ── D. FASE 3 TYPOGRAPHY (8.5s -> 10s, Bottom-Right Rainbow Phase)
+    // ── D. FASE 3 (OCULTA: arcoíris eliminado)
     if (phase3) {
-      let p3Opacity = 0;
-      if (displayP < 0.48) {
-        p3Opacity = 0;
-      } else if (displayP <= 0.58) {
-        p3Opacity = smoothstep(0.48, 0.58, displayP);
-      } else if (displayP <= 0.70) {
-        p3Opacity = 1;
-      } else if (displayP <= 0.80) {
-        p3Opacity = 1 - smoothstep(0.70, 0.80, displayP);
-      } else {
-        p3Opacity = 0;
-      }
-      phase3.style.opacity = p3Opacity.toFixed(3);
-      phase3.style.transform = `translate3d(0, ${((1 - p3Opacity) * 18).toFixed(1)}px, 0) scale(${(0.96 + p3Opacity * 0.04).toFixed(3)})`;
-      phase3.style.filter = `blur(${((1 - p3Opacity) * 4).toFixed(1)}px)`;
-      phase3.style.pointerEvents = p3Opacity < 0.1 ? 'none' : 'auto';
+      phase3.style.opacity = '0';
+      phase3.style.display = 'none';
+      phase3.style.pointerEvents = 'none';
     }
 
-    // ── E. FASE 4 REVEAL STAGE (NEGRO TOTAL + LINTERNA ARCOÍRIS CON MARCAS - PEGAJOSO)
+    // ── E. FASE 4 REVEAL STAGE (NEGRO TOTAL + LINTERNA INTERACTIVA — aparece después de Fase 2)
     if (revealStage) {
-      const p4Progress = displayP > 0.68 ? smoothstep(0.70, 0.80, displayP) : 0;
+      const p4Progress = displayP > 0.46 ? smoothstep(0.48, 0.58, displayP) : 0;
       revealStage.style.opacity = p4Progress.toFixed(3);
       revealStage.style.transform = `translate3d(0, ${((1 - p4Progress) * 16).toFixed(1)}px, 0) scale(${(0.97 + p4Progress * 0.03).toFixed(3)})`;
       revealStage.style.filter = `blur(${((1 - p4Progress) * 4).toFixed(1)}px)`;

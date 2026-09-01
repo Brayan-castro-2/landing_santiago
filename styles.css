@@ -583,7 +583,7 @@ img, video, iframe {
   transform-origin: center center;
 }
 
-/* Rainbow Cursor Light Glow (Screen blend mode with expanded halo) */
+/* High-tech Cursor Light Glow (Screen blend mode with expanded halo) */
 .prisma-mouse-light {
   position: absolute;
   top: 0;
@@ -594,7 +594,7 @@ img, video, iframe {
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
-  background: radial-gradient(circle, rgba(42, 127, 255, 0.7) 0%, rgba(255, 42, 127, 0.5) 25%, rgba(255, 220, 0, 0.4) 45%, rgba(42, 255, 127, 0.3) 65%, transparent 85%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(42, 127, 255, 0.60) 25%, rgba(10, 60, 200, 0.35) 55%, transparent 80%);
   filter: blur(50px);
   mix-blend-mode: screen;
   will-change: transform;
