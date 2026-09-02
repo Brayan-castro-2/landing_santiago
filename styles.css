@@ -1312,6 +1312,32 @@ img, video, iframe {
   transform: scale(1.06);
 }
 
+.timeline-card-preview.timeline-card-logo {
+  background: radial-gradient(circle at center, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.timeline-card-preview.timeline-card-logo img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  margin-bottom: 24px;
+  background: #FFFFFF;
+  padding: 3px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.timeline-card-preview.timeline-card-logo:hover img {
+  transform: scale(1.12);
+  border-color: var(--blue-primary);
+}
+
 .timeline-card-badge {
   position: absolute;
   bottom: 8px;
