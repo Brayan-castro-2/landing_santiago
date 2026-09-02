@@ -680,6 +680,7 @@ module.exports = async function handler(req, res) {
 
   // ── GET: Devolver datos públicos o historial ──
   if (req.method === 'GET') {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     try {
       const kv = getRedisClient();
       if (!kv) {
@@ -712,6 +713,12 @@ module.exports = async function handler(req, res) {
             needsUpdate = true;
           }
         });
+        // Si la foto en Redis es la antigua de IA, forzar la actualización a la foto real
+        if (!data.profile || !data.profile.image || data.profile.image.includes('imaen santiago')) {
+          if (!data.profile) data.profile = {};
+          data.profile.image = 'santi sin ia.png';
+          needsUpdate = true;
+        }
         if (needsUpdate) {
           await kv.set(KV_KEY, data);
         }

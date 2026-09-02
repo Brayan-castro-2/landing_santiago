@@ -1267,13 +1267,38 @@ img, video, iframe {
   height: 130px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .timeline-card-preview:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: var(--blue-primary);
-  box-shadow: 0 10px 24px -4px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 12px 28px -4px rgba(37, 99, 235, 0.28);
+}
+
+.timeline-card-preview::after {
+  content: 'Ver videos ↗';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  background: rgba(37, 99, 235, 0.92);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.timeline-card-preview:hover::after {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .timeline-card-preview img {
@@ -1471,6 +1496,7 @@ img, video, iframe {
   height: 125px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 

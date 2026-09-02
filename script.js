@@ -500,8 +500,11 @@ async function loadSiteData() {
 
     // Inyectar imágenes simples via data-cms-img
     document.querySelectorAll('[data-cms-img]').forEach(el => {
-      const val = cmsGetNested(data, el.dataset.cmsImg);
-      if (val && typeof val === 'string') el.src = val;
+      let val = cmsGetNested(data, el.dataset.cmsImg);
+      if (val && typeof val === 'string') {
+        if (val.includes('imaen santiago')) val = 'santi sin ia.png?v=2';
+        el.src = val;
+      }
     });
 
     // Inyectar reveal cards del hero
