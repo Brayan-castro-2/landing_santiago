@@ -584,58 +584,7 @@ async function loadSiteData() {
       }
     }
 
-    // Inyectar Métricas Reales dinámicamente
-    if (data.metrics && data.metrics.length > 0) {
-      const grid = document.querySelector('.evidence-full-grid');
-      if (grid) {
-        grid.innerHTML = data.metrics.map(m => `
-          <div class="evidence-full-card">
-            <div class="evidence-left-col">
-              <div class="e-card-header">
-                <div class="e-brand-info">
-                  <img src="${m.logo}" alt="${m.client}" class="e-brand-logo">
-                  <div>
-                    <h3 class="e-brand-title">${m.client}</h3>
-                    <span class="e-brand-handle">${m.handle}</span>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-secondary btn-sm" onclick="filterByCompany('${m.client}')" style="border-radius:9999px;font-size:0.75rem;padding:6px 14px;">
-                  <span>Ver Reels</span>
-                </button>
-              </div>
-
-              <div class="e-metric-comparison">
-                <div class="e-stat-box before">
-                  <span class="e-stat-lbl">Antes</span>
-                  <span class="e-stat-num">${m.beforeNum}</span>
-                  <span class="e-stat-sub">${m.beforeLabel}</span>
-                </div>
-                <div class="e-stat-arrow">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
-                <div class="e-stat-box after">
-                  <span class="e-stat-lbl">Después</span>
-                  <span class="e-stat-num">${m.afterNum}</span>
-                  <span class="e-stat-sub">${m.afterLabel}</span>
-                </div>
-              </div>
-
-              <p class="e-card-desc">${m.footerText}</p>
-            </div>
-
-            <div class="evidence-kpi-grid">
-              ${(m.cards || []).map(c => `
-                <div class="evidence-kpi-card">
-                  <span class="evidence-kpi-num">${c.num}</span>
-                  <span class="evidence-kpi-title">${c.title}</span>
-                  <span class="evidence-kpi-desc">${c.desc}</span>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
-      }
-    }
+    // Métricas Reales: Preservar el HTML estático curado de index.html (fiel a los datos del cliente)
 
     console.log('CMS: Datos cargados correctamente');
   } catch (e) {

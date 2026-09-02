@@ -565,26 +565,26 @@ const DEFAULT_DATA = {
       "footerText": "Crecimiento orgánico sostenido mediante contenido estratégico, reels virales y campañas segmentadas en Meta Ads.",
       "cards": [
         {
-          "num": "2.17M",
-          "title": "Visualizaciones / Mes",
-          "desc": "Promedio de visualizaciones mensuales sostenidas."
+          "num": "2.174.000",
+          "title": "Reprod. Mensuales Promedio",
+          "desc": "Promedio de reproducciones mensuales sostenidas."
         },
         {
-          "num": "+220K",
-          "title": "Seguidores Ganados",
-          "desc": "Adquisición 100% orgánica por algoritmo sin inversión en pauta."
+          "num": "10.899.400",
+          "title": "Reproducciones Totales",
+          "desc": "Volumen total de reproducciones acumuladas en la cuenta."
         },
         {
-          "num": "+4",
-          "title": "Campañas Meta Ads",
-          "desc": "E-commerce y pedidos de delivery directos en Santiago."
+          "num": "6.9M",
+          "title": "Vistas Máximas",
+          "desc": "Video con mayor alcance orgánico en la cuenta."
         }
       ]
     },
     {
       "logo": "logo-hotel-gran-pacifico.jpg",
       "client": "Hotel Gran Pacífico",
-      "handle": "@granpacificohotel • Hotelería & Turismo",
+      "handle": "@granpacificohotel • Hotelería & Turismo • (Dic 2025 a Ago 2026)",
       "evidenceUrl": "evidencia-hotel.jpg",
       "beforeNum": "30.000",
       "beforeLabel": "Seguidores Iniciales",
@@ -593,26 +593,26 @@ const DEFAULT_DATA = {
       "footerText": "Estrategia de contenido enfocada en viralidad turística y apertura de canales de difusión, impulsando reservas directas y posicionamiento del hotel.",
       "cards": [
         {
-          "num": "921K",
-          "title": "Visualizaciones / Mes",
+          "num": "921.000",
+          "title": "Reprod. Mensuales Promedio",
           "desc": "Promedio mensual de alcance e impacto en turismo."
         },
         {
-          "num": "+16K",
-          "title": "Nuevos Seguidores",
-          "desc": "Crecimiento orgánico de 30.000 a más de 46.000 seguidores."
+          "num": "53%",
+          "title": "Crecimiento",
+          "desc": "Crecimiento porcentual de la cuenta durante la gestión."
         },
         {
-          "num": "4.2M",
-          "title": "Vistas Reel Estrella",
-          "desc": "Experiencia turística inmersiva y reservas directas."
+          "num": "33",
+          "title": "Contenido Producido",
+          "desc": "Piezas audiovisuales producidas para la marca."
         }
       ]
     },
     {
       "logo": "logo-algo-market.jpg",
       "client": "Algo Market",
-      "handle": "@algo_market_chile • Retail & Supermercados",
+      "handle": "@algo_market_chile • Retail & Supermercados • (Dic 2025 a Ago 2026)",
       "evidenceUrl": "evidencia-algo.jpg",
       "beforeNum": "11.000",
       "beforeLabel": "Seguidores Iniciales",
@@ -621,19 +621,19 @@ const DEFAULT_DATA = {
       "footerText": "Estrategia de contenido consistente y productos virales que atrajeron clientes a tienda física y aumentaron las ventas directas.",
       "cards": [
         {
-          "num": "654K",
-          "title": "Visualizaciones / Mes",
+          "num": "712.575",
+          "title": "Reprod. Mensuales Promedio",
           "desc": "Tráfico constante a tienda y pasillos de importación."
         },
         {
-          "num": "+61K",
-          "title": "Nuevos Seguidores",
-          "desc": "Crecimiento total de 11.000 a más de 72.000 seguidores."
+          "num": "554%",
+          "title": "Crecimiento",
+          "desc": "Crecimiento porcentual de la cuenta durante la gestión."
         },
         {
-          "num": "700K",
-          "title": "Vistas Reel Estrella",
-          "desc": "Storytelling de productos virales de alta rotación."
+          "num": "8.550.900",
+          "title": "Reproducciones Totales",
+          "desc": "Volumen total de reproducciones acumuladas en la cuenta."
         }
       ]
     },
@@ -645,7 +645,7 @@ const DEFAULT_DATA = {
       "beforeNum": "$656 USD",
       "beforeLabel": "Pauta Publicitaria",
       "afterNum": "ROAS x4.6",
-      "afterLabel": "Retorno de Inversión",
+      "afterLabel": "Campañas Meta Ads",
       "footerText": "Lanzamiento y escalado de tienda e-commerce desde cero con branding, embudos de conversión y campañas rentables de ventas directas en Meta Ads.",
       "cards": [
         {
@@ -713,6 +713,10 @@ module.exports = async function handler(req, res) {
             needsUpdate = true;
           }
         });
+        // Sincronizar métricas a los valores oficiales del cliente
+        data.metrics = DEFAULT_DATA.metrics;
+        needsUpdate = true;
+        
         // Si la foto en Redis es la antigua de IA, forzar la actualización a la foto real
         if (!data.profile || !data.profile.image || data.profile.image.includes('imaen santiago')) {
           if (!data.profile) data.profile = {};
